@@ -103,10 +103,12 @@
                             <li class="nav-item">
                                     <a class="nav-link" href="#">Agendar Consulta</a>
                             </li>
-                            <li class="nav-item">
-                                <!--<a class="nav-link disabled" href="#">Disabled</a>-->
-                            <a class="nav-link" href="{{route('admin.users.index')}}">Atribruir Perfil</a>
-                            </li>
+                            @can('admin')
+                                <li class="nav-item">
+                                    <!--<a class="nav-link disabled" href="#">Disabled</a>-->
+                                <a class="nav-link" href="{{route('admin.users.index')}}">Atribruir Perfil</a>
+                                </li>
+                            @endcan
                         </ul>
                     </div>
                 </div>

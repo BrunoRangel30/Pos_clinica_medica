@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Perfil;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use Gate;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -64,7 +65,9 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-       
+        if (Gate::denies('admin')) {
+            return redirect()->route('admin.users.index');
+        }
         $roles= Role::all();
         return view('admin.users.editar',
         [
@@ -94,6 +97,11 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (Gate::denies('admin')) {
+            return redirect()->route('admin.users.index');
+        }
+        $user->roles()->detach();
+        $user->delete();
+        return redirect()->route('admin.users.index');
     }
 }
