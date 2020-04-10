@@ -11,7 +11,9 @@
                    {{ method_field('PUT') }}
                    @foreach ($roles as $item)
                     <div class='form-check'>
-                            <input type='checkbox' name='roles[]' value='{{$item->id}}'>
+                            <input type='checkbox' name='roles[]' value='{{$item->id}}'
+                            @if($user->roles->pluck('id')->contains($item->id)) checked @endif
+                            >
                             <label>{{$item->nome}}</label>
                     </div>
                    @endforeach
