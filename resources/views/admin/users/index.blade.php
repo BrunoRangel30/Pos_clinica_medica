@@ -14,6 +14,7 @@
                                       <tr>
                                         <th scope="col">Nome</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Perfil(s)</th>
                                         <th scope="col">Ações</th>
                                       </tr>
                                     </thead>
@@ -22,9 +23,10 @@
                                             <tr>
                                                 <td>{{$item->name}}</td>
                                                 <td>{{$item->email}}</td>
+                                                <td>{{ implode(',', $item->roles()->get()->pluck('nome')->toArray())}}</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-light">Editar</button>
-                                                    <button type="button" class="btn btn-light">Excluir</button>
+                                                <a  href="{{route('admin.users.edit',$item->id)}}"><button type="button" class="btn btn-light">Editar</button></a>
+                                                 <a href="{{route('admin.users.destroy',$item->id)}}"><button type="button" class="btn btn-light">Excluir</button>
                                                 </td>
                                             </tr>
                                         @endforeach
