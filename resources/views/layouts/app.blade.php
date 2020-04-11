@@ -85,7 +85,7 @@
                                     Cadastrar
                                     </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Cadastrar Paciente</a>
+                                    <a class="dropdown-item" href="{{route('cadastro.paciente.index')}}">Cadastrar Paciente</a>
                                     <a class="dropdown-item" href="#">Cadastrar Médico</a>
                                     <a class="dropdown-item" href="#">Cadastrar Recepcionista</a>
                                 </div>
