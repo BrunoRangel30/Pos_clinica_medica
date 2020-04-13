@@ -25,6 +25,7 @@ Route::namespace('Perfil')->prefix('admin')->name('admin.')->middleware('can:adm
 
 Route::namespace('Cadastro')->prefix('cadastro')->name('cadastro.')->middleware('can:admin')->group(function(){
     Route::resource('/paciente', 'PacienteController');
+    Route::resource('/medico', 'MedicoController');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

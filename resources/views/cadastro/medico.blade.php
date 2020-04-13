@@ -4,7 +4,7 @@
     <div class='container'>
         <div class='row'>
             <div class='col-md-6'>
-                <h4> Cadastro Paciente </h4>
+                <h4> Cadastro Médico </h4>
             </div>
         </div>
         <form>
@@ -20,7 +20,11 @@
                   <option>Masculino</option>
                 </select>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-1">
+                <label for="idRg">Nº Conselho</label>
+                <input type="text" class="form-control" id="idRg" placeholder="">
+              </div>
+              <div class="form-group col-md-1">
                 <label for="idRg">N° do RG</label>
                 <input type="text" class="form-control" id="idRg" placeholder="">
               </div>
@@ -53,12 +57,19 @@
                     <input type="" class="form-control" id="idFixo" placeholder="">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="idPro">Profissão</label>
-                    <input type="" class="form-control" id="inputAddress" placeholder="">
+                <label for="idSexo" value="">Especialidade</label>
+                    <select id="idSexo" class="form-control" >
+                      <option>Cardiologia</option>
+                      <option>Cirurgia geral</option>
+                      <option>Dermatologia</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="idPro">N° do Plano de saúde</label>
-                    <input type="" class="form-control" id="inputAddress" placeholder="">
+                    <label for="idSexo" value="">Especialidade Secundária</label>
+                    <select id="idSexo" class="form-control" >
+                      <option>Cardiologia</option>
+                      <option>Dermatologia</option>
+                    </select>
                 </div>
             </div>
             <div class='row'>
