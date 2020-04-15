@@ -13,6 +13,8 @@
     <script src='../assets/fullcalendar/packages/daygrid/main.js'></script>
     <script src='../assets/fullcalendar/packages/timegrid/main.js'></script>
     <script src='../assets/fullcalendar/packages/list/main.js'></script>
+    <script src='../assets/fullcalendar/packages/core/locales/pt-br.js'></script>
+    <script src='../assets/fullcalendar/js/scriptCalendario.js'></script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
