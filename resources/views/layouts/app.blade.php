@@ -1,8 +1,18 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+     <!-- fullcalendar -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='../assets/fullcalendar/packages/core/main.css' rel='stylesheet' />
+    <link href='../assets/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='../assets/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+    <link href='../assets/fullcalendar/packages/list/main.css' rel='stylesheet' />
+    <script src='../assets/fullcalendar/packages/core/main.js'></script>
+    <script src='../assets/fullcalendar/packages/interaction/main.js'></script>
+    <script src='../assets/fullcalendar/packages/daygrid/main.js'></script>
+    <script src='../assets/fullcalendar/packages/timegrid/main.js'></script>
+    <script src='../assets/fullcalendar/packages/list/main.js'></script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,6 +28,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <meta charset='utf-8' />
+    
 </head>
 <body>
     <div id="app">
@@ -92,7 +104,7 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Consultar
+                                Consultas
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Lista de Pacientes</a>
@@ -101,7 +113,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="#">Agendar Consulta</a>
+                                    <a class="nav-link" href="{{route('consulta.agenda.index')}}">Agendar Consulta</a>
                             </li>
                             @can('admin')
                                 <li class="nav-item">

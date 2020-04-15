@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Cadastro;
-namespace App\Http\Controllers\Cadastro;
+
 
 use App\Http\Controllers\Controller;
 use App\User;
