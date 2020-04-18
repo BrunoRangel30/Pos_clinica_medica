@@ -61,6 +61,16 @@
                     <input type="" class="form-control" id="inputAddress" placeholder="">
                 </div>
             </div>
+            <div class='form-row'>
+                <div class="form-group col-md-4">
+                    <label for="idsenha">Senha</label>
+                    <input type="password" class="form-control" id="idsenha" placeholder="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="senhaRepet">Repetir Senha</label>
+                    <input type="password" class="form-control" id="senhaRepet" placeholder="">
+                </div>
+            </div>
             <div class='row'>
                 <div class='col-md-6'>
                     <label> Endereço </label>
@@ -94,7 +104,7 @@
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-10">
-                    <label for="idObservacao">Obervação</label>
+                    <label for="idObservacao">Observação</label>
                     <textarea  type="textArea" class="form-control" id="idObservacao" placeholder=""></textarea>
                 </div>
             </div>

@@ -9,13 +9,18 @@
     <link href='../assets/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
     <link href='../assets/fullcalendar/packages/list/main.css' rel='stylesheet' />
     <script src='../assets/fullcalendar/packages/core/main.js'></script>
-    <script src='../assets/fullcalendar/packages/interaction/main.js'></script>
     <script src='../assets/fullcalendar/packages/daygrid/main.js'></script>
     <script src='../assets/fullcalendar/packages/timegrid/main.js'></script>
     <script src='../assets/fullcalendar/packages/list/main.js'></script>
     <script src='../assets/fullcalendar/packages/core/locales/pt-br.js'></script>
     <script src='../assets/fullcalendar/js/scriptCalendario.js'></script>
-
+    <script src='../assets/fullcalendar/packages/interaction/main.js'></script>
+    <!--DataTable-->
+    <link src='../assets/datatables/datatables.min.css'>
+    <link src='../assets/datatables/tabela/css/dataTables.bootstrap4.min.css'>
+    <!--Font-->
+    <link href="../assets/fontawesome/css/all.css" rel="stylesheet"> 
+    <!--load all styles -->
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -88,7 +93,7 @@
         <div class='pt-1'>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class='container'>
-                    <a class="navbar-brand" href="#"><i class="fas fa-heartbeat"></i></a>
+                    <a class="navbar-brand" href="#"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -117,6 +122,9 @@
                             <li class="nav-item">
                                     <a class="nav-link" href="{{route('consulta.agenda.index')}}">Agendar Consulta</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('consulta.paciente.index')}}">Realizar Consulta</a>
+                        </li>
                             @can('admin')
                                 <li class="nav-item">
                                 <a class="nav-link" href="{{route('admin.users.index')}}">Atribruir Perfil</a>

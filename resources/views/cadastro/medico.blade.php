@@ -72,6 +72,16 @@
                     </select>
                 </div>
             </div>
+            <div class='form-row'>
+                <div class="form-group col-md-4">
+                    <label for="idsenha">Senha</label>
+                    <input type="password" class="form-control" id="idsenha" placeholder="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="senhaRepet">Repetir Senha</label>
+                    <input type="password" class="form-control" id="senhaRepet" placeholder="">
+                </div>
+            </div>
             <div class='row'>
                 <div class='col-md-6'>
                     <label> Endereço </label>

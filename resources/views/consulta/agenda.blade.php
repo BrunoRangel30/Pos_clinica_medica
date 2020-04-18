@@ -105,5 +105,45 @@
                 <div style='clear:both'></div>
         </div>
     <div>
+    <!--Modal-->
+    <div class="modal fade" id="modalAgenda" tabindex="-1" role="dialog" aria-labelledby="tituloAgenda" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tituloAgenda">Agendar uma Consulta</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="nomePaciente" class="col-form-label">Nome do Paciente</label>
+                <input type="text" class="form-control" id="nomePaciente">
+              </div>
+              <div class="form-group">
+                <label for="hora-inicial" class="col-form-label">Inicio da Consulta</label>
+                <input type="text" class="form-control" id="hora-inicial">
+              </div>
+              <div class="form-group">
+                <label for="fim-consulta" class="col-form-label">Fim da Consulta</label>
+                <input type="text" class="form-control" id="fim-consulta">
+              </div>
+              <div class="form-group">
+                <label for="tipo-consulta" value="">Tipo da Consulta</label>
+                  <select id="tipo-consulta" class="form-control" >
+                    <option>Primeira Consulta</option>
+                    <option>Retorno</option>
+                  </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+            <button type="button" class="btn btn-primary">Excluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection
 
