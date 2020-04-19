@@ -15,9 +15,7 @@
     <script src='../assets/fullcalendar/packages/core/locales/pt-br.js'></script>
     <script src='../assets/fullcalendar/js/scriptCalendario.js'></script>
     <script src='../assets/fullcalendar/packages/interaction/main.js'></script>
-    <!--DataTable-->
-    <link src='../assets/datatables/datatables.min.css'>
-    <link src='../assets/datatables/tabela/css/dataTables.bootstrap4.min.css'>
+   
     <!--Font-->
     <link href="../assets/fontawesome/css/all.css" rel="stylesheet"> 
     <!--load all styles -->
