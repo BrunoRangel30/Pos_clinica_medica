@@ -30,6 +30,12 @@ Route::namespace('Cadastro')->prefix('cadastro')->name('cadastro.')->middleware(
 Route::namespace('Consulta')->prefix('consulta')->name('consulta.')->middleware('can:admin')->group(function(){
     Route::resource('/agenda', 'ConsultaController');
     Route::resource('/paciente', 'AtendimentoController');
+    Route::resource('/receita', 'ReceitaController');
+    Route::resource('/exame', 'ExameController');
+    
+});
+Route::namespace('Exame')->prefix('exame')->name('exame.')->middleware('can:admin')->group(function(){
+    Route::resource('/index', 'ExameListController');
     
 });
 

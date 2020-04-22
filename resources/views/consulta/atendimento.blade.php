@@ -41,31 +41,31 @@
                 <thead>
                     <tr>
                         <th>Cod. Paciente</th>
-                        <th>Nome</th>
+                        <th>Horário</th>
+                        <th>Nome do Paciente</th>
                         <th>CPF</th>
                         <th>Data Nascimento</th>
                         <th>Ações</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
-                   
                     <tr>
                         <td>Sonya Frost</td>
+                        <td>09:30 - 10:00</td>
                         <td>Software Engineer</td>
                         <td>Edinburgh</td>
                         <td>23</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
+                            <a href="{{route('consulta.receita.index')}}"><i class="fas fa-first-aid"></i></a>
+                            <a href="{{route('consulta.exame.index')}}"><i class="fas fa-file-medical-alt"></i></a>
+                            <a href="{{route('exame.index.index')}}"><i class="fas fa-file-medical"></i></a>
                             <i class="far fa-hourglass"></i>
                         </td>
-                       
                     </tr>
                     <tr>
                         <td>Jena Gaines</td>
+                        <td>10:30 - 10:00</td>
                         <td>Office Manager</td>
                         <td>London</td>
                         <td>30</td>
@@ -76,10 +76,10 @@
                             <i class="fas fa-file-medical"></i>
                             <i class="far fa-hourglass"></i>
                         </td>
-                       
                     </tr>
                     <tr>
                         <td>Quinn Flynn</td>
+                        <td>11:30 - 10:00</td>
                         <td>Support Lead</td>
                         <td>Edinburgh</td>
                         <td>22</td>
@@ -90,10 +90,10 @@
                             <i class="fas fa-file-medical"></i>
                             <i class="far fa-hourglass"></i>
                         </td>
-                      
                     </tr>
                     <tr>
                         <td>Charde Marshall</td>
+                        <td>11:30 - 10:00</td>
                         <td>Regional Director</td>
                         <td>San Francisco</td>
                         <td>36</td>
@@ -104,10 +104,10 @@
                             <i class="fas fa-file-medical"></i>
                             <i class="far fa-hourglass"></i>
                         </td>
-                       
                     </tr>
                     <tr>
                         <td>Haley Kennedy</td>
+                        <td>11:30 - 10:00</td>
                         <td>Senior Marketing Designer</td>
                         <td>London</td>
                         <td>43</td>
@@ -118,10 +118,10 @@
                             <i class="fas fa-file-medical"></i>
                             <i class="far fa-hourglass"></i>
                         </td>
-                      
                     </tr>
                     <tr>
                         <td>Tatyana Fitzpatrick</td>
+                        <td>11:30 - 10:00</td>
                         <td>Regional Director</td>
                         <td>London</td>
                         <td>19</td>
@@ -132,10 +132,10 @@
                             <i class="fas fa-file-medical"></i>
                             <i class="far fa-hourglass"></i>
                         </td>
-                       
                     </tr>
                     <tr>
                         <td>Michael Silva</td>
+                        <td>11:30 - 10:00</td>
                         <td>Marketing Designer</td>
                         <td>London</td>
                         <td>66</td>
@@ -146,10 +146,10 @@
                             <i class="fas fa-file-medical"></i>
                             <i class="far fa-hourglass"></i>
                         </td>
-                        
                     </tr>
                     <tr>
                         <td>Paul Byrd</td>
+                        <td>11:30 - 10:00</td>
                         <td>Chief Financial Officer (CFO)</td>
                         <td>New York</td>
                         <td>64</td>
@@ -160,10 +160,10 @@
                             <i class="fas fa-file-medical"></i>
                             <i class="far fa-hourglass"></i>
                         </td>
-                        
                     </tr>
                     <tr>
                         <td>Gloria Little</td>
+                        <td>11:30 - 10:00</td>
                         <td>Systems Administrator</td>
                         <td>New York</td>
                         <td>59</td>
@@ -179,6 +179,19 @@
             </table>  
            </div>
        </div> 
+       <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+            </ul>
+        </nav>
     </div>
    
   
