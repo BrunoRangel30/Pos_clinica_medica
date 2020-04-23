@@ -56,7 +56,7 @@
                         <td>Edinburgh</td>
                         <td>23</td>
                         <td>
-                            <i class="far fa-play-circle"></i>
+                            <a href="{{route('realizarConsulta')}}"><i class="far fa-play-circle"></i></a>
                             <a href="{{route('consulta.receita.index')}}"><i class="fas fa-first-aid"></i></a>
                             <a href="{{route('consulta.exame.index')}}"><i class="fas fa-file-medical-alt"></i></a>
                             <a href="{{route('exame.index.index')}}"><i class="fas fa-file-medical"></i></a>

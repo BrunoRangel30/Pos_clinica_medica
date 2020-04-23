@@ -18,6 +18,11 @@ class AtendimentoController extends Controller
         return view('consulta.atendimento');
     }
 
+    public function consulta()
+    {
+        return view('consulta.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

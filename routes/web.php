@@ -32,8 +32,11 @@ Route::namespace('Consulta')->prefix('consulta')->name('consulta.')->middleware(
     Route::resource('/paciente', 'AtendimentoController');
     Route::resource('/receita', 'ReceitaController');
     Route::resource('/exame', 'ExameController');
-    
+   
 });
+
+Route::get('/consuta/index', 'Consulta\AtendimentoController@consulta')->name('realizarConsulta');
+
 Route::namespace('Exame')->prefix('exame')->name('exame.')->middleware('can:admin')->group(function(){
     Route::resource('/index', 'ExameListController');
     
