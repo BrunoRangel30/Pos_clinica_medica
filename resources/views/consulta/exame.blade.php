@@ -16,14 +16,23 @@
             </div>
         </div>
         <form>
-            <fieldset>
-                <legend>Selecione o(s) exame(s)</legend>
-                <label>Sangue</label>
-                <p><input type="checkbox" name="OPCAO" value="op1"> Clicemia de Jejum</p>
-                <p><input type="checkbox" name="OPCAO" value="op2"> Ácidos úricos</p>
-                <p><input type="checkbox" name="OPCAO" value="op3"> Colesterol Total e Frações </p>
-            </fieldset>
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <div class='form-row'>
+                <div class="col-md-5">
+                    <label class="sr-only" for="inlineFormInputGroup">Pesquise o exame</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-search"></i></div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Pesquise o exame">
+                    </div>
+                </div>
+                <div class='col-md-7 shadow-sm  mb-5 bg-white rounded'>
+                    <label> Exames Selecionados </label>
+                    <li> Glicemia </li>
+                    <li> Hemograma </li>
+                    <li> Colesterol </li>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Finalizar Seleção</button>
         </form>
-    </div>
 @endsection

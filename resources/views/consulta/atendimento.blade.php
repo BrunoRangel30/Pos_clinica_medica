@@ -57,10 +57,6 @@
                         <td>23</td>
                         <td>
                             <a href="{{route('realizarConsulta')}}"><i class="far fa-play-circle"></i></a>
-                            <a href="{{route('consulta.receita.index')}}"><i class="fas fa-first-aid"></i></a>
-                            <a href="{{route('consulta.exame.index')}}"><i class="fas fa-file-medical-alt"></i></a>
-                            <a href="{{route('exame.index.index')}}"><i class="fas fa-file-medical"></i></a>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                     <tr>
@@ -71,10 +67,6 @@
                         <td>30</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                     <tr>
@@ -85,10 +77,6 @@
                         <td>22</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                     <tr>
@@ -99,10 +87,6 @@
                         <td>36</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                     <tr>
@@ -113,10 +97,6 @@
                         <td>43</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                     <tr>
@@ -127,10 +107,6 @@
                         <td>19</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                     <tr>
@@ -141,10 +117,6 @@
                         <td>66</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                     <tr>
@@ -155,10 +127,6 @@
                         <td>64</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                     <tr>
@@ -169,10 +137,6 @@
                         <td>59</td>
                         <td>
                             <i class="far fa-play-circle"></i>
-                            <i class="fas fa-first-aid"></i>
-                            <i class="fas fa-file-medical-alt"></i>
-                            <i class="fas fa-file-medical"></i>
-                            <i class="far fa-hourglass"></i>
                         </td>
                     </tr>
                 </tbody>
