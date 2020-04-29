@@ -10,6 +10,6 @@
         <a class="nav-link" href="{{route('exame.index.index')}}"><i class="fas fa-file-medical"></i> Inserir Resultados de Exames</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#"> <i class="far fa-hourglass"></i> Historico do Paciente</a>
+    <a class="nav-link" href="{{route('historico.paciente')}}"> <i class="far fa-hourglass"></i> Historico do Paciente</a>
     </li>
 </ul>

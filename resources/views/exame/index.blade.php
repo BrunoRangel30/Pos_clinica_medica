@@ -1,6 +1,16 @@
 @extends('layouts.app')
 @section('content')
   <div class="container">
+          <div class='row'>
+            <div class='col-md-12 mb-3'>
+                @component('consulta.componentes.dadosPaciente')@endcomponent
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-12 mb-3'>
+                @component('consulta.componentes.menuConsulta')@endcomponent
+            </div>
+        </div>
         <div class="row">
           <div class="col-lg-12">
               <table id="example" class="icone table table-striped table-bordered" style="width:100%">
