@@ -9,36 +9,28 @@
         </div>
         <form>
             <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="nomePaciente">Nome Completo</label>
-                <input type="text" class="form-control" id="nomePaciente" placeholder="">
-              </div>
-              <div class="form-group col-md-2">
-                <label for="idSexo" value="">Sexo</label>
-                <select id="idSexo" class="form-control" >
-                  <option>Feminino</option>
-                  <option>Masculino</option>
-                </select>
-              </div>
-              <div class="form-group col-md-1">
-                <label for="idRg">Nº Conselho</label>
-                <input type="text" class="form-control" id="idRg" placeholder="">
-              </div>
-              <div class="form-group col-md-1">
-                <label for="idRg">N° do RG</label>
-                <input type="text" class="form-control" id="idRg" placeholder="">
-              </div>
-              <div class="form-group col-md-2">
-                <label for="idRg">Órgão emissor</label>
-                <input type="text" class="form-control" id="idRg" placeholder="">
-              </div>
+                <div class="form-group col-md-6">
+                    <label for="nomePaciente">Nome Completo</label>
+                    <input type="text" class="form-control" id="nomePaciente" placeholder="">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="idSexo" value="">Sexo</label>
+                    <select id="idSexo" class="form-control" >
+                    <option>Feminino</option>
+                    <option>Masculino</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="idRg">Nº Conselho</label>
+                    <input type="text" class="form-control" id="idRg" placeholder="">
+                </div>
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-3">
                     <label for="idCPF">CPF</label>
                     <input type="text" class="form-control" id="idCPF" placeholder="">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label for="idNascimento">Data de Nascimento</label>
                     <input type="date" class="form-control" id="idNascimento" placeholder="">
                 </div>
