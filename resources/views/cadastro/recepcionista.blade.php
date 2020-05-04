@@ -4,7 +4,7 @@
     <div class='container'>
         <div class='row'>
             <div class='col-md-6'>
-                <h4> Cadastro Paciente </h4>
+                <h4> Cadastro Recepcionista </h4>
             </div>
         </div>
         <form>
@@ -52,13 +52,9 @@
                     <label for="idFixo">Telefone residencial</label>
                     <input type="" class="form-control" id="idFixo" placeholder="">
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="idPro">Profissão</label>
-                    <input type="" class="form-control" id="inputAddress" placeholder="">
-                </div>
                 <div class="form-group col-md-3">
-                    <label for="idPro">N° do Plano de saúde</label>
-                    <input type="" class="form-control" id="inputAddress" placeholder="">
+                    <label for="idAdmisssao">Data de Admissão</label>
+                    <input type="date" class="form-control" id="idAdmisssao" placeholder="">
                 </div>
             </div>
             <div class='row'>

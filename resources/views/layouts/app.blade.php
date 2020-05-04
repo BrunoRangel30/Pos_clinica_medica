@@ -110,6 +110,7 @@
                                     <a class="dropdown-item" href="{{route('cadastro.paciente.index')}}">Cadastrar Paciente</a>
                                     <a class="dropdown-item" href="{{route('cadastro.medico.index')}}">Cadastrar Médico</a>
                                     <a class="dropdown-item" href="{{route('cadastro.recepcionista.index')}}">Cadastrar Recepcionista</a>
+                                    <a class="dropdown-item" href="{{route('cadastro.medicamento.index')}}">Cadastrar Medicamento</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

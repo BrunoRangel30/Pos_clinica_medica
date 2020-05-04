@@ -1,12 +1,12 @@
 <?php
 
+namespace App\Http\Controllers\medicamento;
 namespace App\Http\Controllers\Cadastro;
-
 use App\Http\Controllers\Controller;
-use App\Recepcionista;
+use App\Medicamento;
 use Illuminate\Http\Request;
 
-class RecepcionistaController extends Controller
+class MedicamentoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class RecepcionistaController extends Controller
      */
     public function index()
     {
-        return view('cadastro.recepcionista');
+        return view('cadastro.medicamento');
     }
 
     /**
@@ -42,10 +42,10 @@ class RecepcionistaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Recepcionista  $recepcionista
+     * @param  \App\Medicamento  $medicamento
      * @return \Illuminate\Http\Response
      */
-    public function show(Recepcionista $recepcionista)
+    public function show(Medicamento $medicamento)
     {
         //
     }
@@ -53,10 +53,10 @@ class RecepcionistaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Recepcionista  $recepcionista
+     * @param  \App\Medicamento  $medicamento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Recepcionista $recepcionista)
+    public function edit(Medicamento $medicamento)
     {
         //
     }
@@ -65,10 +65,10 @@ class RecepcionistaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Recepcionista  $recepcionista
+     * @param  \App\Medicamento  $medicamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recepcionista $recepcionista)
+    public function update(Request $request, Medicamento $medicamento)
     {
         //
     }
@@ -76,10 +76,10 @@ class RecepcionistaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Recepcionista  $recepcionista
+     * @param  \App\Medicamento  $medicamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recepcionista $recepcionista)
+    public function destroy(Medicamento $medicamento)
     {
         //
     }

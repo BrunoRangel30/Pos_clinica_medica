@@ -11,5 +11,7 @@
     </li>
     <li class="nav-item">
     <a class="nav-link" href="{{route('historico.paciente')}}"> <i class="far fa-hourglass"></i> Historico do Paciente</a>
+    <li class="nav-item">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Salvar Consulta</button>
     </li>
 </ul>

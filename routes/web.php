@@ -27,6 +27,7 @@ Route::namespace('Cadastro')->prefix('cadastro')->name('cadastro.')->middleware(
     Route::resource('/paciente', 'PacienteController');
     Route::resource('/medico', 'MedicoController');
     Route::resource('/recepcionista', 'RecepcionistaController');
+    Route::resource('/medicamento', 'MedicamentoController');
 });
 Route::namespace('Consulta')->prefix('consulta')->name('consulta.')->middleware('can:admin')->group(function(){
     Route::resource('/agenda', 'ConsultaController');
