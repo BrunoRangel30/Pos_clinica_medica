@@ -107,20 +107,21 @@
                                     Cadastrar
                                     </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('cadastro.paciente.index')}}">Cadastrar Paciente</a>
-                                    <a class="dropdown-item" href="{{route('cadastro.medico.index')}}">Cadastrar Médico</a>
-                                    <a class="dropdown-item" href="{{route('cadastro.recepcionista.index')}}">Cadastrar Recepcionista</a>
-                                    <a class="dropdown-item" href="{{route('cadastro.medicamento.index')}}">Cadastrar Medicamento</a>
+                                    <a class="dropdown-item" href="{{route('cadastro.paciente.create')}}">Cadastrar Paciente</a>
+                                    <a class="dropdown-item" href="{{route('cadastro.medico.create')}}">Cadastrar Médico</a>
+                                    <a class="dropdown-item" href="{{route('cadastro.recepcionista.create')}}">Cadastrar Recepcionista</a>
+                                    <a class="dropdown-item" href="{{route('cadastro.medicamento.create')}}">Cadastrar Medicamento</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Consultas
+                                Pesquisar
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Lista de Pacientes</a>
-                                <a class="dropdown-item" href="#">Lista de Médicos</a>
-                                <a class="dropdown-item" href="#">Lista de Recepcionista</a>
+                                    <a class="dropdown-item" href="{{route('listar.paciente.index')}}"> Pacientes</a>
+                                    <a class="dropdown-item" href="{{route('listar.medico.index')}}"> Médicos</a>
+                                    <a class="dropdown-item" href="{{route('listar.recepcionista.index')}}"> Recepcionista</a>
+                                    <a class="dropdown-item" href="{{route('listar.medicamento.index')}}"> Medicamentos</a>
                                 </div>
                             </li>
                             <li class="nav-item">

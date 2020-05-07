@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Cadastro;
-
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -16,7 +15,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        return view('cadastro.paciente');
+        return view('pesquisa.paciente');
     }
 
     /**
@@ -26,7 +25,7 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastro.paciente');
     }
 
     /**
@@ -37,7 +36,16 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $data= array();
+        $data['name'] = $request->nomePaciente;
+        $data['email'] = $request->idEmail;
+        $data['password'] = $request->idsenha;
+       // $pacientes = DB::table('users')->insert($data);
+        dd(User::all());
+        return redirect()->route('cadastro.paciente.create');
+        
+
     }
 
     /**

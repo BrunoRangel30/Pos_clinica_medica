@@ -15,7 +15,7 @@ class MedicamentoController extends Controller
      */
     public function index()
     {
-        return view('cadastro.medicamento');
+        return view('pesquisa.medicamento');
     }
 
     /**
@@ -25,7 +25,7 @@ class MedicamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastro.medicamento');
     }
 
     /**

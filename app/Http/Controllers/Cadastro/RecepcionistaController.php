@@ -15,7 +15,7 @@ class RecepcionistaController extends Controller
      */
     public function index()
     {
-        return view('cadastro.recepcionista');
+        return view('pesquisa.recep');
     }
 
     /**
@@ -25,7 +25,7 @@ class RecepcionistaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastro.recepcionista');
     }
 
     /**
