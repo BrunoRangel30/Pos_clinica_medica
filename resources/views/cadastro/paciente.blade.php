@@ -28,8 +28,8 @@
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-3">
-                    <label for="idRg">Órgão emissor</label>
-                    <input type="text" name="idRg" class="form-control" id="idRg" placeholder="">
+                    <label for="idOrg">Órgão emissor</label>
+                    <input type="text" name="idOrg" class="form-control" id="idOrg" placeholder="">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="idCPF">CPF</label>
@@ -58,8 +58,8 @@
                     <input type="" name="idPro" class="form-control" id="inputAddress" placeholder="">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="idPro">N° do Plano de saúde</label>
-                    <input type="" name="idPro" class="form-control" id="inputAddress" placeholder="">
+                    <label for="idPlano">N° do Plano de saúde</label>
+                    <input type="" name="idPlano" class="form-control" id="inputAddress" placeholder="">
                 </div>
             </div>
             <div class='row'>

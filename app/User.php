@@ -60,4 +60,16 @@ class User extends Authenticatable
             return false;
         }
      }
+
+     public function paciente()
+    {
+        return $this->hasOne('App\Paciente','user_id');
+    }
+
+     public function getId($email){
+        $user = User::select('id')
+            ->where('email', '=', $email)
+            ->first();
+        return $user;
+     }
 }

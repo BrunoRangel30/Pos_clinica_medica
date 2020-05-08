@@ -120,46 +120,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Dafine de Castro</td>
-                        <td>834-334-3434-23</td>
-                        <td>23/03/1986</td>
-                        <td>
-                            <a href="{{route('realizarConsulta')}}"><i class="fas fa-edit"></i></a>
-                            <i class="fas fa-calendar-alt"></i>
-                            <i class="fas fa-user-times"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Dafine de Castro</td>
-                        <td>834-334-3434-23</td>
-                        <td>23/03/1986</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                            <i class="fas fa-calendar-alt"></i>
-                            <i class="fas fa-user-times"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Quinn Flynn</td>
-                        <td>112-345-2324-45</td>
-                        <td>223/11/1984</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                            <i class="fas fa-calendar-alt"></i>
-                            <i class="fas fa-user-times"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Charde Marshall</td>
-                        <td>457-234-234-56</td>
-                        <td>31/05/1957</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                            <i class="fas fa-calendar-alt"></i>
-                            <i class="fas fa-user-times"></i>
-                        </td>
-                    </tr>
+                    @foreach ($paciente as $item)
+                        <tr>
+                            <td>{{$item->nome}}</td>
+                            <td>{{$item->cpf}}</td>
+                            <td>{{$item->data_nasc}}</td>
+                                <td>
+                                    <a href="{{route('cadastro.paciente.edit',$item->paciente_id)}}"><i class="fas fa-edit"></i></a>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <i class="fas fa-user-times"></i>
+                                </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>  
            </div>
