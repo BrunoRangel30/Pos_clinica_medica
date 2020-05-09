@@ -7,7 +7,8 @@
                     <h4>Editar Paciente </h4>
             </div>
         </div>
-        <form  method="POST" action="{{ route('cadastro.paciente.store') }}">
+        <form  method="POST" action="{{route('cadastro.paciente.update',$paciente->paciente_id)}}">
+            @method('PATCH')
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">

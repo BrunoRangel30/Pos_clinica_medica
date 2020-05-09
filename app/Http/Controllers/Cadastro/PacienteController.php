@@ -110,9 +110,38 @@ class PacienteController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
-    {
-        dd($user);
+    public function update(Request $request, $id)
+    {  
+       //Recupera o paciente
+        $user = new User;
+        $pacData= Paciente::find($id);
+        //Insere atualizacoes usuário
+        $data['name'] = $request->nomePaciente;
+        $data['email'] = $request->idEmail;
+        //Atualiza usuario
+        $user->getUser($pacData->user_id)->update($data);
+        //Insere dados paciente
+        $pacData->nome = $request->nomePaciente;
+        $pacData->sexo = $request->idSexo;
+        $pacData->rg = $request->idRg;
+        $pacData->org_emissor = $request->idOrg;
+        $pacData->cpf = $request->idCPF;
+        $pacData->data_nasc = $request->idNascimento;
+        $pacData->tele_cel = $request->idCel;
+        $pacData->tele_fixo =  $request->idFixo;
+        $pacData->profissao =  $request->idPro;
+        $pacData->n_plano = $request->idPlano;
+        $pacData->nome_mae = $request->idMae;
+        $pacData->nome_pai = $request->idPai;
+        $pacData->end_rua  = $request->idRua;
+        $pacData->end_nun_casa = $request->idNum;
+        $pacData->end_bairro =  $request->idBairro;
+        $pacData->end_cidade =  $request->idCidade;
+        $pacData->end_estado =  $request->idEstado;
+        $pacData->cep = $request->idCep;
+        $pacData->obervacao =  $request->idObservacao;
+        $pacData->save(); //salva os dados
+        return redirect()->route('cadastro.paciente.index');
     }
 
     /**
