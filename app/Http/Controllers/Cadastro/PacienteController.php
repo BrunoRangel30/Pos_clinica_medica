@@ -27,7 +27,8 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $dataResult['route'] = 'cadastro.paciente.store';
         return view('cadastro.paciente');
     }
 
@@ -96,9 +97,10 @@ class PacienteController extends Controller
         $paciente =  new Paciente;
         $pacientedate= $paciente->getIdPaciente($id);
         $userDate = User::find($pacientedate->user_id);
-
-        dd($userDate, $pacientedate);
-        return view('cadastro.paciente');
+        $dataResult= array();
+        $dataResult['user'] = $userDate;
+        $dataResult['paciente'] = $pacientedate;
+        return view('edicao.paciente',$dataResult);
     }
 
     /**
@@ -110,7 +112,7 @@ class PacienteController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        dd($id);
+        dd($user);
     }
 
     /**
