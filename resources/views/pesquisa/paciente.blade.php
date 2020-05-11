@@ -128,7 +128,8 @@
                                 <td>
                                     <a href="{{route('cadastro.paciente.edit',$item->paciente_id)}}"><i class="fas fa-edit"></i></a>
                                     <i class="fas fa-calendar-alt"></i>
-                                    <i class="fas fa-user-times"></i>
+                                    @method('DELETE')
+                                    <a href="{{route('cadastro.paciente.destroy',$item->paciente_id)}}"><i class="fas fa-user-times"></i></a>
                                 </td>
                         </tr>
                     @endforeach

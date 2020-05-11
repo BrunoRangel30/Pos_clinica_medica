@@ -29,6 +29,7 @@ Route::namespace('Cadastro')->prefix('cadastro')->name('cadastro.')->middleware(
     Route::resource('/recepcionista', 'RecepcionistaController');
     Route::resource('/medicamento', 'MedicamentoController');
 });
+Route::get('paciente/{id}', 'Cadastro\PacienteController@destroy')->name('cadastro.paciente.destroy');
 //Rotas para exibição
 Route::namespace('Cadastro')->prefix('listar')->name('listar.')->middleware('can:admin')->group(function(){
     Route::resource('/paciente', 'PacienteController');

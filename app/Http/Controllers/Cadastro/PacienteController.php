@@ -17,7 +17,9 @@ class PacienteController extends Controller
      */
     public function index()
     {   
-        $paciente = DB::table('pacientes')->paginate(15);
+        $paciente = DB::table('pacientes as p')
+        ->where('p.deleted_at','=', NULL)
+        ->paginate(15);
         return view('pesquisa.paciente',compact('paciente'));
     }
 
@@ -39,7 +41,13 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $validacao = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'sexo' => 'nullable|numeric',
+        ]);
         $user = new User;
         $data= array();
         $data['name'] = $request->nomePaciente;
@@ -150,8 +158,10 @@ class PacienteController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
-    {
-        //
+    public function destroy($id)
+    {   
+        $pacienteDelete = Paciente::find($id);
+        $pacienteDelete->delete();
+        return redirect()->route('cadastro.paciente.index');
     }
 }
