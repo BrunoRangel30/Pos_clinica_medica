@@ -10,32 +10,32 @@
         <form  method="POST" action="{{ route('cadastro.paciente.store') }}">
             @csrf
             <div class="form-row">
-              <div class="form-group col-md-6">
-                    <label for="nome_Paciente">Nome Completo</label>
+                <div class="form-group col-md-6">
+                        <label for="nome_Paciente">Nome Completo</label>
                         <input type="text" name="nome_Paciente" class="form-control @error('nome_Paciente') is-invalid @enderror" id="nome_Paciente" placeholder="" >
                         @error('nome_Paciente')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-              </div>
-              <div class="form-group col-md-2">
-                <label for="sexo" value="">Sexo</label>
-                <select id="sexo" name="sexo"class="form-control @error('sexo') is-invalid @enderror">
-                  <option>Feminino</option>
-                  <option>Masculino</option>
-                  <option selected ></option>
-                </select>
-                @error('sexo')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-              </div>
-              <div class="form-group col-md-3">
-                <label for="idRg">N° do RG</label>
-                <input type="text" name="idRg" class="form-control" id="idRg" placeholder="">
-              </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="sexo" value="">Sexo</label>
+                    <select id="sexo" name="sexo"class="form-control @error('sexo') is-invalid @enderror">
+                        <option>Feminino</option>
+                        <option>Masculino</option>
+                        <option selected ></option>
+                    </select>
+                    @error('sexo')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="idRg">N° do RG</label>
+                    <input type="text" name="idRg" class="form-control" id="idRg" placeholder="">
+                </div>
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-3">
@@ -51,7 +51,7 @@
                             </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="data_de_nascimento">Data de Nascimento</label>
                     <input type="date" name="data_de_nascimento" class="form-control @error('data_de_nascimento') is-invalid @enderror" id="data_de_nascimento" >
                     @error('data_de_nascimento')
@@ -61,13 +61,8 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" >
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <label for="idPlano">N° do Plano de saúde</label>
+                    <input type="" name="idPlano" class="form-control" id="inputAddress" placeholder="">
                 </div>
             </div>
             <div class='form-row'>
@@ -84,13 +79,9 @@
                     <label for="idFixo">Telefone residencial</label>
                     <input type="" name="idFixo" class="form-control" id="idFixo" placeholder="">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="idPro">Profissão</label>
                     <input type="" name="idPro" class="form-control" id="inputAddress" placeholder="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="idPlano">N° do Plano de saúde</label>
-                    <input type="" name="idPlano" class="form-control" id="inputAddress" placeholder="">
                 </div>
             </div>
             <div class='row'>
@@ -114,6 +105,15 @@
                 </div>
             </div>
             <div class='form-row'>
+                <div class="form-group col-md-3">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" >
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
                 <div class="form-group col-md-4">
                     <label for="senha">Senha</label>
                     <input type="password" name="senha" class="form-control @error('senha') is-invalid @enderror" id="senha" placeholder="" >
