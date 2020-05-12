@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Cadastro;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -43,40 +44,58 @@ class PacienteController extends Controller
     public function store(Request $request)
     {   
         $validacao = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'sexo' => 'nullable|numeric',
+            'nome_Paciente' => 'required|max:100',
+            'email' => 'required|unique:users,email|max:100',
+            'sexo' => 'required|max:100',
+            'rg' => 'nullable|max:50',
+            'org_emissor' => 'nullable|max:50',
+            'CPF' => 'required|max:100',
+            'data_de_nascimento' => 'required|max:100',
+            'telefone_celular' => 'required|max:100',
+            'idFixo' => 'nullable|max:100',
+            'idPro' => 'nullable|max:100',
+            'n_plano' => 'nullable|max:100',
+            'nome_da_mae' => 'required|max:100',
+            'idPai' => 'nullable|max:100',
+            'rua' => 'required|max:100',
+            'numero' => 'required|max:100',
+            'bairro' => 'required|max:100',
+            'cidade' => 'required|max:100',
+            'estado' => 'required|max:100',
+            'cep' => 'nullable|size:100|integer',
+            'obervacao' => 'nullable|max:300',
+            'senha' => 'required|max:100',
+            'senha_confirmacao' => 'required|same:senha',
         ]);
         $user = new User;
         $data= array();
-        $data['name'] = $request->nomePaciente;
-        $data['email'] = $request->idEmail;
-        $data['password'] =  Hash::make($request->idsenha);
+        $data['name'] = $request->nome_Paciente;
+        $data['email'] = $request->email;
+        $data['password'] =  Hash::make($request->senha);
         $users = DB::table('users')->insert($data);
         //cria objeto pacientes
         $paciente = new Paciente([
-            'nome' => $request->nomePaciente,
-            'sexo' => $request->idSexo,
+            'nome' => $request->nome_Paciente,
+            'sexo' => $request->sexo,
             'rg' => $request->idRg,
             'org_emissor'=>$request->idOrg,
-            'cpf' => $request->idCPF,
-            'data_nasc' => $request->idNascimento,
-            'tele_cel' => $request->idCel,
+            'cpf' => $request->CPF,
+            'data_nasc' => $request->data_de_nascimento,
+            'tele_cel' => $request->telefone_celular,
             'tele_fixo' => $request->idFixo,
             'profissao' => $request->idPro,
             'n_plano' => $request->idPlano,
-            'nome_mae' => $request->idMae,
+            'nome_mae' => $request->nome_da_mae,
             'nome_pai' => $request->idPai,
-            'end_rua' => $request->idRua,
-            'end_nun_casa' => $request->idNum,
-            'end_bairro' => $request->idBairro,
-            'end_cidade' => $request->idCidade,
-            'end_estado' => $request->idEstado,
-            'cep' => $request->idCep,
-            'obervacao' => $request->idObservacao,
+            'end_rua' => $request->rua,
+            'end_nun_casa' => $request->numero,
+            'end_bairro' => $request->bairro,
+            'end_cidade' => $request->cidade,
+            'end_estado' => $request->estado,
+            'cep' => $request->cep,
+            'obervacao' => $request->obervacao,
         ]);
-        $user->getId($request->idEmail)->paciente()->save($paciente);
+        $user->getId($request->email)->paciente()->save($paciente);
         return redirect()->route('cadastro.paciente.index');
         
 
@@ -123,6 +142,7 @@ class PacienteController extends Controller
        //Recupera o paciente
         $user = new User;
         $pacData= Paciente::find($id);
+
         //Insere atualizacoes usuário
         $data['name'] = $request->nomePaciente;
         $data['email'] = $request->idEmail;

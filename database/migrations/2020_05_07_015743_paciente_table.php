@@ -32,8 +32,8 @@ class PacienteTable extends Migration
             $table->string('end_bairro', 100);
             $table->string('end_cidade', 100);
             $table->string('end_estado', 100);
-            $table->string('cep', 100);
-            $table->longText('obervacao');
+            $table->integer('cep', 100)->nullable();
+            $table->longText('obervacao')>nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
