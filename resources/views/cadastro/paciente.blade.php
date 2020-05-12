@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+<style>
+</style>
 @section('content')
     <div class='container'>
         <div class='row'>
@@ -124,7 +125,7 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="senha_confirmacao ">Repetir Senha</label>
+                    <label for="senha_confirmacao ">Confirmar senha</label>
                     <input type="password" name="senha_confirmacao" value="{{ old('senha_confirmacao')}}" class="form-control @error('senha_confirmacao') is-invalid @enderror" id="senha_confirmacao" placeholder="" >
                     @error('senha_confirmacao')
                         <span class="invalid-feedback" role="alert">

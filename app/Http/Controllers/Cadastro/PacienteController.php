@@ -138,36 +138,57 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {  
-       //Recupera o paciente
+    {     //Recupera o paciente
         $user = new User;
         $pacData= Paciente::find($id);
+        $validacao = $request->validate([
+            'nome_Paciente' => 'required|max:100',
+            'email' => ['required','max:100',Rule::unique('users', 'email')->ignore($pacData->user_id)],
+            'sexo' => 'required|max:100',
+            'rg' => 'nullable|max:50',
+            'org_emissor' => 'nullable|max:50',
+            'CPF' => 'required|max:100',
+            'data_de_nascimento' => 'required|max:100',
+            'telefone_celular' => 'required|max:100',
+            'idFixo' => 'nullable|max:100',
+            'idPro' => 'nullable|max:100',
+            'n_plano' => 'nullable|max:100',
+            'nome_da_mae' => 'required|max:100',
+            'idPai' => 'nullable|max:100',
+            'rua' => 'required|max:100',
+            'numero' => 'required|max:100',
+            'bairro' => 'required|max:100',
+            'cidade' => 'required|max:100',
+            'estado' => 'required|max:100',
+            'cep' => 'nullable|size:100|integer',
+            'obervacao' => 'nullable|max:300',
+        ]);
 
         //Insere atualizacoes usuário
-        $data['name'] = $request->nomePaciente;
-        $data['email'] = $request->idEmail;
+        $data['name'] = $request->nome_Paciente;
+        $data['email'] = $request->email;
         //Atualiza usuario
         $user->getUser($pacData->user_id)->update($data);
         //Insere dados paciente
-        $pacData->nome = $request->nomePaciente;
-        $pacData->sexo = $request->idSexo;
-        $pacData->rg = $request->idRg;
-        $pacData->org_emissor = $request->idOrg;
-        $pacData->cpf = $request->idCPF;
-        $pacData->data_nasc = $request->idNascimento;
-        $pacData->tele_cel = $request->idCel;
+        $pacData->nome = $request->nome_Paciente;
+        $pacData->sexo = $request->sexo;
+        $pacData->rg = $request->rg;
+        $pacData->org_emissor = $request->org_emissor;
+        $pacData->cpf = $request->CPF;
+        $pacData->data_nasc = $request->data_de_nascimento;
+        $pacData->tele_cel = $request->telefone_celular;
         $pacData->tele_fixo =  $request->idFixo;
         $pacData->profissao =  $request->idPro;
-        $pacData->n_plano = $request->idPlano;
-        $pacData->nome_mae = $request->idMae;
+        $pacData->n_plano = $request->n_plano;
+        $pacData->nome_mae = $request->nome_da_mae;
         $pacData->nome_pai = $request->idPai;
-        $pacData->end_rua  = $request->idRua;
-        $pacData->end_nun_casa = $request->idNum;
-        $pacData->end_bairro =  $request->idBairro;
-        $pacData->end_cidade =  $request->idCidade;
-        $pacData->end_estado =  $request->idEstado;
-        $pacData->cep = $request->idCep;
-        $pacData->obervacao =  $request->idObservacao;
+        $pacData->end_rua  = $request->rua;
+        $pacData->end_nun_casa = $request->numero;
+        $pacData->end_bairro =  $request->bairro;
+        $pacData->end_cidade =  $request->cidade;
+        $pacData->end_estado =  $request->estado;
+        $pacData->cep = $request->cep;
+        $pacData->obervacao =  $request->obervacao;
         $pacData->save(); //salva os dados
         return redirect()->route('cadastro.paciente.index');
     }
