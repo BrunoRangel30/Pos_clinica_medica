@@ -20,6 +20,7 @@ class PacienteController extends Controller
     {   
         $paciente = DB::table('pacientes as p')
         ->where('p.deleted_at','=', NULL)
+        ->orderBy('p.created_at','desc')
         ->paginate(15);
         return view('pesquisa.paciente',compact('paciente'));
     }
@@ -62,7 +63,7 @@ class PacienteController extends Controller
             'bairro' => 'required|max:100',
             'cidade' => 'required|max:100',
             'estado' => 'required|max:100',
-            'cep' => 'nullable|size:100|integer',
+            'cep' => 'nullable|max:100',
             'obervacao' => 'nullable|max:300',
             'senha' => 'required|max:100',
             'senha_confirmacao' => 'required|same:senha',
@@ -77,14 +78,14 @@ class PacienteController extends Controller
         $paciente = new Paciente([
             'nome' => $request->nome_Paciente,
             'sexo' => $request->sexo,
-            'rg' => $request->idRg,
-            'org_emissor'=>$request->idOrg,
+            'rg' => $request->rg,
+            'org_emissor'=>$request->org_emissor,
             'cpf' => $request->CPF,
             'data_nasc' => $request->data_de_nascimento,
             'tele_cel' => $request->telefone_celular,
             'tele_fixo' => $request->idFixo,
             'profissao' => $request->idPro,
-            'n_plano' => $request->idPlano,
+            'n_plano' => $request->n_plano,
             'nome_mae' => $request->nome_da_mae,
             'nome_pai' => $request->idPai,
             'end_rua' => $request->rua,
@@ -96,6 +97,7 @@ class PacienteController extends Controller
             'obervacao' => $request->obervacao,
         ]);
         $user->getId($request->email)->paciente()->save($paciente);
+        $request->session()->flash('alert-success', 'Paciente adicionado com sucesso!');
         return redirect()->route('cadastro.paciente.index');
         
 
@@ -138,7 +140,8 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {     //Recupera o paciente
+    {   
+        //Recupera o paciente
         $user = new User;
         $pacData= Paciente::find($id);
         $validacao = $request->validate([
@@ -160,7 +163,7 @@ class PacienteController extends Controller
             'bairro' => 'required|max:100',
             'cidade' => 'required|max:100',
             'estado' => 'required|max:100',
-            'cep' => 'nullable|size:100|integer',
+            'cep' => 'nullable|max:100',
             'obervacao' => 'nullable|max:300',
         ]);
 
@@ -190,6 +193,7 @@ class PacienteController extends Controller
         $pacData->cep = $request->cep;
         $pacData->obervacao =  $request->obervacao;
         $pacData->save(); //salva os dados
+        $request->session()->flash('alert-success', 'Paciente atualizado com sucesso!');
         return redirect()->route('cadastro.paciente.index');
     }
 

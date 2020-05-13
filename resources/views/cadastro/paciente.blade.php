@@ -34,14 +34,14 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="idRg">N° do RG</label>
-                    <input type="text" name="idRg" value="{{ old('idRg') }}" class="form-control" id="idRg" placeholder="">
+                    <label for="rg">N° do RG</label>
+                    <input type="text" name="rg" value="{{ old('rg') }}" class="form-control" id="rg" placeholder="">
                 </div>
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-3">
-                    <label for="idOrg">Órgão emissor</label>
-                    <input type="text" name="idOrg" value="{{ old('idOrg') }}" class="form-control" id="idOrg" placeholder="">
+                    <label for="org_emissor">Órgão emissor</label>
+                    <input type="text" name="org_emissor" value="{{ old('org_emissor') }}" class="form-control" id="org_emissor" placeholder="">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="CPF">CPF</label>
@@ -186,14 +186,14 @@
                      @enderror
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="idCep">Cep</label>
-                    <input type="text" name='idCep' value="{{ old('idCep')}}" class="form-control" id="idCep" placeholder="" >
+                    <label for="cep">Cep</label>
+                    <input type="text" name='cep' value="{{ old('cep')}}" class="form-control" id="cep" placeholder="" >
                 </div>
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-10">
-                    <label for="idObservacao">Observação</label>
-                    <textarea  type="textArea" name="idObservacao" value="{{ old('idObservacao')}}" class="form-control" id="idObservacao" placeholder=""></textarea>
+                    <label for="obervacao">Observação</label>
+                    <textarea  type="textArea" name="obervacao" value="{{ old('obervacao')}}" class="form-control" id="obervacao" placeholder=""></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>

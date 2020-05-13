@@ -33,14 +33,15 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="idRg">N° do RG</label>
-                    <input type="text" name="idRg" value="{{$paciente->rg }}" class="form-control" id="idRg" placeholder="">
+                    <label for="rg">N° do RG</label>
+                    {{$paciente->rg}}
+                    <input type="text" name="rg" value="{{$paciente->rg}}" class="form-control" id="rg" placeholder="">
                 </div>
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-3">
-                    <label for="idOrg">Órgão emissor</label>
-                    <input type="text" name="idOrg" value="{{$paciente->org_emissor}}" class="form-control" id="idOrg" placeholder="">
+                    <label for="org_emissor">Órgão emissor</label>
+                    <input type="text" name="org_emissor" value="{{$paciente->org_emissor}}" class="form-control" id="org_emissor" placeholder="">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="CPF">CPF</label>
@@ -61,8 +62,8 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="idPlano">N° do Plano de saúde</label>
-                    <input type="" name="idPlano" value="{{$paciente->n_plano}}" class="form-control" id="inputAddress" placeholder="">
+                    <label for="n_plano">N° do Plano de saúde</label>
+                    <input type="" name="n_plano" value="{{$paciente->n_plano}}" class="form-control" id="n_plano" placeholder="">
                 </div>
             </div>
             <div class='form-row'>
@@ -165,14 +166,14 @@
                      @enderror
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="idCep">Cep</label>
-                    <input type="text" name='idCep' value="{{$paciente->cep}}" class="form-control" id="idCep" placeholder="" >
+                    <label for="cep">Cep</label>
+                    <input type="text" name='cep' value="{{$paciente->cep}}" class="form-control" id="cep" placeholder="" >
                 </div>
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-10">
-                    <label for="idObservacao">Observação</label>
-                    <textarea  type="textArea" name="idObservacao" value="{{$paciente->obervacao}}" class="form-control" id="idObservacao" placeholder=""></textarea>
+                    <label for="obervacao">Observação</label>
+                    <textarea  type="textArea" name="obervacao"  class="form-control" id="obervacao" placeholder="">{{$paciente->obervacao}}</textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
