@@ -85,6 +85,7 @@
     #custom-search-input .glyphicon-search{
         font-size: 23px;
     }
+    
 </style>
 @section('content')
     
@@ -111,7 +112,7 @@
             </div>
             <div class="row align-items-center">
                 <div class="col-md-6 mt-5 ">
-                    <i class="fas fa-user-plus"></i>
+                <a href="{{route('cadastro.paciente.create')}}"><i class="fas fa-user-plus"></i></a>
                 </div>
             </div>
         </div>
@@ -133,17 +134,107 @@
                             <td>{{$item->cpf}}</td>
                             <td>{{$item->data_nasc}}</td>
                                 <td>
+                                <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->paciente_id}}"></i></a>
                                     <a href="{{route('cadastro.paciente.edit',$item->paciente_id)}}"><i class="fas fa-edit"></i></a>
                                     <i class="fas fa-calendar-alt"></i>
                                     @method('DELETE')
                                     <a href="{{route('cadastro.paciente.destroy',$item->paciente_id)}}"><i class="fas fa-user-times"></i></a>
                                 </td>
                         </tr>
+                          <!-- Modal -->
+                        <div class="modal fade" id="modal-info-paciente-{{$item->paciente_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Mais informações - ({{$item->nome}})</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                            <label>Sexo : <span>{{$item->sexo}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->rg)
+                                                <label>N° do RG : <span>{{$item->rg}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                            @if($item->org_emissor)
+                                                <label>Órgão emissor : <span>{{$item->org_emissor}}</span></label>
+                                            @endif
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->rg)
+                                                <label>N° do Plano de saúde : <span>{{$item->n_plano}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                               <label>Telefone Celular : <span>{{$item->tele_cel}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->tele_fixo)
+                                                <label>Telefone Fixo : <span>{{$item->tele_fixo}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                            @if($item->profissao)
+                                               <label>Profissão : <span>{{$item->profissao}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                               <label>Nome da Mãe : <span>{{$item->nome_mae}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->nome_pai)
+                                               <label>Nome da Pai : <span>{{$item->nome_pai}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                        <label>Rua : <span>{{$item->end_rua}} N° {{$item->end_nun_casa}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->end_bairro)
+                                               <label>Bairro : <span>{{$item->end_bairro}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                        <label>Cidade : <span>{{$item->end_cidade}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->end_estado)
+                                                <label>Estado : <span>{{$item->end_estado}} - CEP: {{$item->cep}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-light"><a href="{{route('cadastro.paciente.edit',$item->paciente_id)}}"><i class="fas fa-edit"></i></a></button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     @endforeach
                 </tbody>
             </table>  
            </div>
        </div> 
+       <!--paginacao-->
        <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
             <li class="page-item disabled">
@@ -158,4 +249,5 @@
             </ul>
         </nav>
     </div>
+  
 @endsection
