@@ -121,7 +121,7 @@
             <div class='form-row'>
                 <div class="form-group col-md-4">
                     <label for="senha">Senha</label>
-                    <input type="password" name="senha" class="form-control  @error('senha') is-invalid @enderror" id="senha" value="{{ old('senha') }} placeholder="">
+                    <input type="password" name="senha" class="form-control  @error('senha') is-invalid @enderror" id="senha" value="{{ old('senha') }}" placeholder="">
                     @error('senha')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
