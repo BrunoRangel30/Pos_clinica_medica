@@ -100,7 +100,6 @@ class PacienteController extends Controller
         $request->session()->flash('alert-success', 'Paciente adicionado com sucesso!');
         return redirect()->route('cadastro.paciente.index');
         
-
     }
 
     /**

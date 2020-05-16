@@ -4,10 +4,11 @@
     <div class='container'>
         <div class='row'>
             <div class='col-md-6'>
-                <h4> Cadastro Médico </h4>
+                <h4> Cadastro Médico</h4>
             </div>
         </div>
-        <form>
+        <form  method="POST" action="{{ route('cadastro.medico.store') }}">
+            @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nomePaciente">Nome Completo</label>
