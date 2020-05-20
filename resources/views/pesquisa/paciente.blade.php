@@ -102,7 +102,7 @@
                 <h3>Pesquise o Paciente</h3>
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
-                        <input type="text" class="form-control input-lg" placeholder="Buscar" />
+                        <input id="search" type="text" class="form-control input-lg" placeholder="Buscar" />
                         <span class="input-group-btn">
                             <button class="btn btn-info btn-lg" type="button">
                             </button>

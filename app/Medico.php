@@ -11,4 +11,11 @@ class Medico extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = [];
     protected $primaryKey = 'medico_id';
+
+    public function getMedico($key){
+        $medico = Medico::where('nome', 'like', '%' . $key . '%')
+        ->get();
+        return $medico;
+    }
+ 
 }

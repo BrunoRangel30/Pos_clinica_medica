@@ -18,7 +18,7 @@
     <script src='../assets/fullcalendar/packages/timegrid/main.js'></script>
     <script src='../assets/fullcalendar/packages/list/main.js'></script>
     <script src='../assets/fullcalendar/packages/core/locales/pt-br.js'></script>
-    <script src='../assets/fullcalendar/js/scriptCalendario.js'></script>
+   
     <script src='../assets/fullcalendar/packages/interaction/main.js'></script>
    
     <!--Font-->
@@ -31,6 +31,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src='../assets/fullcalendar/js/scriptCalendario.js'></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

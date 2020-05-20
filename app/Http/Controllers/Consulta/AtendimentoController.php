@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Consulta;
-
+use Illuminate\Support\Facades\Input;
 use App\Atendimento;
+use App\Medico;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,15 @@ class AtendimentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $request;
+    protected $medico;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+        $medico = new Medico;
+        $this->medico = $medico;
+    }
+
     public function index()
     {
         return view('consulta.atendimento');
@@ -21,6 +31,24 @@ class AtendimentoController extends Controller
     public function consulta()
     {
         return view('consulta.index');
+    }
+
+    function removerAcentos($string){
+        return preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","a A e E i I o O u U n N"),$string);
+    }
+
+    public function pesquisaMedico()
+    {
+        $pala=$this->request->input('key');
+        $pala = $this->removerAcentos($pala);
+        $result = $this->medico->getMedico($pala);
+        return $result;
+    }
+
+    public function atualizarAgenda(){
+       
+        $idMed=$this->request->input('id');
+        return $idMed;
     }
 
     /**
