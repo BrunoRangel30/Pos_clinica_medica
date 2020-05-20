@@ -11,6 +11,15 @@ class Agenda extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = [];
     protected $primaryKey = 'agenda_id';
+    protected $table = 'agenda';
+
+    public function getAgenda($idMed){
+       // dd($idMed);
+        $agenda = Agenda::where('fk_medico','=',$idMed)
+                        ->get();
+                        
+        return $agenda;
+    }
 
     
 }

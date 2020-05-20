@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Consulta;
 use Illuminate\Support\Facades\Input;
 use App\Atendimento;
 use App\Medico;
+use App\Agenda;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -16,11 +17,14 @@ class AtendimentoController extends Controller
      */
     protected $request;
     protected $medico;
+    protected $agenda;
 
     public function __construct(Request $request) {
         $this->request = $request;
         $medico = new Medico;
         $this->medico = $medico;
+        $agenda = new Agenda;
+        $this->agenda = $agenda;
     }
 
     public function index()
@@ -48,7 +52,8 @@ class AtendimentoController extends Controller
     public function atualizarAgenda(){
        
         $idMed=$this->request->input('id');
-        return $idMed;
+        $agendaMed = $this->agenda->getAgenda($idMed);
+        return json_encode($agendaMed);
     }
 
     /**

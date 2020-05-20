@@ -51,12 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         var Calendar = FullCalendar.Calendar
                         var ObjetoCalender
                         var calendarEl = document.getElementById('calendar');
-                        var eventObject = {
-                            "title": result,
-                            "start": "2020-05-19",
-                            "end": "2020-05-19"
-                        };
-
                         ObjetoCalender = new Calendar(calendarEl, {
                                 plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
                                 header: {
@@ -85,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 select: function(event) {
                                     $('#modalAgenda').modal('show')
                                 },
-                                events: [eventObject]
+                                events: result
 
                             }) //Primeiro calendario
                         if ($('#calendar').is(':empty')) {
@@ -94,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             ObjetoCalender.destroy();
                             $('#calendar').html('');
                             ObjetoCalender = new Calendar(calendarEl, {
-
                                 plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
                                 header: {
                                     left: 'prev,next today',
@@ -122,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 select: function(event) {
                                     $('#modalAgenda').modal('show')
                                 },
-                                events: [eventObject]
+                                events: result
 
                             })
                             ObjetoCalender.render();
