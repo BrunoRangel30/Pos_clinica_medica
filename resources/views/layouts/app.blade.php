@@ -13,25 +13,22 @@
     <link href='../assets/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
     <link href='../assets/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
     <link href='../assets/fullcalendar/packages/list/main.css' rel='stylesheet' />
-    <script src='../assets/fullcalendar/packages/core/main.js'></script>
-    <script src='../assets/fullcalendar/packages/daygrid/main.js'></script>
-    <script src='../assets/fullcalendar/packages/timegrid/main.js'></script>
-    <script src='../assets/fullcalendar/packages/list/main.js'></script>
-    <script src='../assets/fullcalendar/packages/core/locales/pt-br.js'></script>
-   
-    <script src='../assets/fullcalendar/packages/interaction/main.js'></script>
+    
+    
    
     <!--Font-->
     <link href="../assets/fontawesome/css/all.css" rel="stylesheet"> 
     <!--load all styles -->
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
     <script src='../assets/fullcalendar/js/scriptCalendario.js'></script>
+    
+  
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -146,5 +143,20 @@
             @yield('content')
         </main>
     </div>
+
+  
+    
+   
+
 </body>
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src='../assets/fullcalendar/packages/core/main.js'></script>
+<script src='../assets/fullcalendar/packages/daygrid/main.js'></script>
+<script src='../assets/fullcalendar/packages/timegrid/main.js'></script>
+<script src='../assets/fullcalendar/packages/list/main.js'></script>
+<script src='../assets/fullcalendar/packages/core/locales/pt-br.js'></script>
+<script src='../assets/fullcalendar/packages/interaction/main.js'></script>
+<script src='../assets/fullcalendar/packages/moment/main.js'></script>
+<script src="../assets/moment/moment.min.js"></script>
+
 </html>

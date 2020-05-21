@@ -10,6 +10,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 import $ from 'jquery';
 import 'datatables.net';
+import 'jquery-mask-plugin';
+
 
 /**
  * The following block of code may be used to automatically register your

@@ -115,43 +115,52 @@
     <div>
     <!--Modal-->
     <div class="modal fade" id="modalAgenda" tabindex="-1" role="dialog" aria-labelledby="tituloAgenda" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="tituloAgenda">Agendar uma Consulta</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="nomePaciente" class="col-form-label">Nome do Paciente</label>
-                <input type="text" class="form-control" id="nomePaciente">
-              </div>
-              <div class="form-group">
-                <label for="hora-inicial" class="col-form-label">Inicio da Consulta</label>
-                <input type="text" class="form-control" id="hora-inicial">
-              </div>
-              <div class="form-group">
-                <label for="fim-consulta" class="col-form-label">Fim da Consulta</label>
-                <input type="text" class="form-control" id="fim-consulta">
-              </div>
-              <div class="form-group">
-                <label for="tipo-consulta" value="">Tipo da Consulta</label>
-                  <select id="tipo-consulta" class="form-control" >
-                    <option>Primeira Consulta</option>
-                    <option>Retorno</option>
-                  </select>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
-            <button type="button" class="btn btn-primary">Excluir</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <h5 class="modal-title" id="tituloAgenda">Agendar uma Consulta</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                     </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                          <h5>Selecione o Paciente</h5>
+                          <div id="custom-search-input">
+                              <div class="input-group col-md-12">
+                                  <input name='nome' type="text"  id="searchPac" class="form-control input-lg" placeholder="Buscar" />
+                                  <span class="input-group-btn">
+                                      <button class="btn btn-info btn-lg" type="button">
+                                      </button>
+                                  </span>
+                              </div>
+                          </div>
+                        </div>
+                        <input type="text" name='id'class="form-control">
+                        <div class="form-group">
+                            <label for="hora-inicial" class="col-form-label">Inicio da Consulta</label>
+                            <input type="text" name='inicio'class="form-control date-time" id="hora-inicial">
+                        </div>
+                        <div class="form-group">
+                            <label for="fim-consulta" class="col-form-label">Fim da Consulta</label>
+                            <input type="text" name='fim' class="form-control date-time" id="fim-consulta">
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo-consulta" value="">Tipo da Consulta</label>
+                             <select name='tipo' id="tipo-consulta" class="form-control" >
+                                <option>Primeira Consulta</option>
+                                <option>Retorno</option>
+                              </select>
+                        </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                    <button type="button" class="btn btn-primary delete-event">Excluir</button>
+                  </div>
+            </div>
         </div>
-      </div>
     </div>
 @endsection
 
