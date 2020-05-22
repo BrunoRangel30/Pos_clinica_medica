@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use App\Atendimento;
 use App\Medico;
 use App\Agenda;
+use App\Paciente;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,7 @@ class AtendimentoController extends Controller
     protected $request;
     protected $medico;
     protected $agenda;
+    protected $paciente;
 
     public function __construct(Request $request) {
         $this->request = $request;
@@ -25,6 +27,8 @@ class AtendimentoController extends Controller
         $this->medico = $medico;
         $agenda = new Agenda;
         $this->agenda = $agenda;
+        $paciente = new Paciente;
+        $this->paciente = $paciente;
     }
 
     public function index()
@@ -46,6 +50,14 @@ class AtendimentoController extends Controller
         $pala=$this->request->input('key');
         $pala = $this->removerAcentos($pala);
         $result = $this->medico->getMedico($pala);
+        return $result;
+    }
+
+    public function pesquisaPaciente()
+    {
+        $pala=$this->request->input('key');
+        $pala = $this->removerAcentos($pala);
+        $result = $this->paciente->getPaciente($pala);
         return $result;
     }
 

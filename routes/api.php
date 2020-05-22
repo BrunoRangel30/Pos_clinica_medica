@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/buscaMedicos', 'Consulta\AtendimentoController@pesquisaMedico');
 Route::post('/atualizarAgenda', 'Consulta\AtendimentoController@atualizarAgenda');
+Route::post('/buscaPaciente', 'Consulta\AtendimentoController@pesquisaPaciente');

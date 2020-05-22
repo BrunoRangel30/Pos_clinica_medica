@@ -90,8 +90,8 @@
             <div class="col-md-6">
                 <h3>Pesquise o Médico</h3>
                 <div id="custom-search-input">
-                    <div class="input-group col-md-12">
-                        <input type="text"  id="searchMed" class="form-control input-lg" placeholder="Buscar" />
+                    <div class="input-group col-md-12" id="inputPesqMed">
+                        <input type="text" name="pesquisaMedico" data-medico="" id="searchMed" class="form-control input-lg" placeholder="Buscar" />
                         <span class="input-group-btn">
                             <button class="btn btn-info btn-lg" type="button">
                             </button>
@@ -124,20 +124,27 @@
                      </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class='formAgenda'>
                         <div class="form-group">
-                          <h5>Selecione o Paciente</h5>
-                          <div id="custom-search-input">
-                              <div class="input-group col-md-12">
-                                  <input name='nome' type="text"  id="searchPac" class="form-control input-lg" placeholder="Buscar" />
-                                  <span class="input-group-btn">
-                                      <button class="btn btn-info btn-lg" type="button">
-                                      </button>
-                                  </span>
-                              </div>
-                          </div>
+                            <h5>Selecione o Paciente</h5>
+                            <div id="custom-search-input">
+                                <div class="input-group col-md-12" id="inputPesqPac">
+                                    <input name='nome' type="text" data-paciente="" id="searchPac" class="form-control input-lg" placeholder="Buscar" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info btn-lg" type="button">
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <input type="text" name='id'class="form-control">
+                        <div class='row'>
+                            <div class='col-md-12'>
+                              <div id="resulPac"></div>
+                            </div>
+                        </div>
+                        <input type="text" name='fk_paciente'class="form-control">
+                        <input type="text" name='fk_medico'class="form-control">
+                        <input type="text" name='id_agenda'class="form-control">
                         <div class="form-group">
                             <label for="hora-inicial" class="col-form-label">Inicio da Consulta</label>
                             <input type="text" name='inicio'class="form-control date-time" id="hora-inicial">
@@ -156,7 +163,7 @@
                     </form>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                    <button type="button" class="btn btn-primary delete-save" data-dismiss="modal">Salvar</button>
                     <button type="button" class="btn btn-primary delete-event">Excluir</button>
                   </div>
             </div>

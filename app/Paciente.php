@@ -16,7 +16,13 @@ class Paciente extends Model
         $paciente = Paciente::where('paciente_id', '=', $id)
                     ->first();
         return $paciente;
-     } 
+     }
+     
+     public function getPaciente($key){
+        $paciente = Paciente::where('nome', 'like', '%' . $key . '%')
+        ->get();
+        return $paciente;
+    }
 
      
 }
