@@ -43,7 +43,9 @@ Route::namespace('Consulta')->prefix('consulta')->name('consulta.')->middleware(
     Route::resource('/paciente', 'AtendimentoController');
     Route::resource('/receita', 'ReceitaController');
     Route::resource('/exame', 'ExameController'); 
+    
 });
+Route::post('consulta/InsereAgenda', 'Consulta\AtendimentoController@store')->middleware('can:admin');
 Route::get('/consuta/index', 'Consulta\AtendimentoController@consulta')->name('realizarConsulta');
 Route::get('/paciente/historico', 'Historico\HistoricoPacienteController@index')->name('historico.paciente');
 //Exames

@@ -6,8 +6,10 @@ use App\Atendimento;
 use App\Medico;
 use App\Agenda;
 use App\Paciente;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AtendimentoController extends Controller
 {
@@ -20,6 +22,8 @@ class AtendimentoController extends Controller
     protected $medico;
     protected $agenda;
     protected $paciente;
+    protected $user;
+
 
     public function __construct(Request $request) {
         $this->request = $request;
@@ -29,10 +33,12 @@ class AtendimentoController extends Controller
         $this->agenda = $agenda;
         $paciente = new Paciente;
         $this->paciente = $paciente;
+        $user = new User;
+        $this->$user = $user; 
     }
 
     public function index()
-    {
+    {   
         return view('consulta.atendimento');
     }
 
@@ -62,7 +68,7 @@ class AtendimentoController extends Controller
     }
 
     public function atualizarAgenda(){
-       
+      
         $idMed=$this->request->input('id');
         $agendaMed = $this->agenda->getAgenda($idMed);
         return json_encode($agendaMed);
@@ -86,7 +92,16 @@ class AtendimentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $dataAgenda=$this->request->all();
+        $dataAgenda['user_log'] = Auth::user()->id;
+        //cadastra no banco 
+        $this->agenda->create($dataAgenda);
+        //resgata para listar
+        //$agendaMed = $this->agenda->getAgenda($dataAgenda['fk_medico']);
+        return $dataAgenda['fk_medico'];
+      
+       
     }
 
     /**
