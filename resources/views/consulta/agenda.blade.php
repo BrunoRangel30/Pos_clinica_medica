@@ -122,13 +122,15 @@
                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                           <span aria-hidden="true">&times;</span>
                      </button>
-                     
                 </div>
                 <div class="modal-body">
                     <form class='formAgenda'>
                         <div class="form-group">
-                          <div class='row'>
-                            <div class="col-md-12" id='messagemError'></div>
+                            <div class='row'>
+                              <div class="col-md-12" id='messagem'></div>
+                            </div>
+                            <div class='row'>
+                              <div class="col-md-12" id='sucess'></div>
                             </div>
                             <h5>Selecione o Paciente</h5>
                             <div id="custom-search-input">
@@ -167,8 +169,9 @@
                     </form>
                   </div>
                   <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="button" class="btn btn-primary delete-save">Salvar</button>
-                    <button type="button" class="btn btn-primary delete-event">Excluir</button>
+                    <button type="button" class="btn btn-warning delete-event">Excluir</button>
                   </div>
             </div>
         </div>

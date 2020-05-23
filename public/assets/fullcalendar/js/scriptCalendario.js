@@ -20,14 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 var Calendar = FullCalendar.Calendar
                 var ObjetoCalender
                 var calendarEl = document.getElementById('calendar');
-                console.log(result, 'resultado')
-                    //1
+                //1
                 ObjetoCalender = new Calendar(calendarEl, {
-                        plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+                        plugins: ['interaction', 'timeGrid', 'list'],
                         header: {
                             left: 'prev,next today',
                             center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                            right: 'timeGridWeek,timeGridDay,listWeek'
                         },
                         locale: 'pt-br',
                         navLinks: true,
@@ -43,14 +42,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         eventClick: function(ele) {
                             resetForm('formAgenda');
+                            $("#messagem").text('');
+                            $("#sucess").text('');
                             $('#modalAgenda').modal('show');
                             $("#modalAgenda #tituloAgenda").text('Remarcar Consulta');
                             $("#modalAgenda button.delete-event").css("display", "flex");
                             let nome = ele.event.title;
                             $("#modalAgenda input[name='nome']").val(nome);
-                            let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm:ss");
+                            let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='inicio']").val(start);
-                            let end = moment(ele.event.end).format("DD/MM/YYYY HH:mm:ss");
+                            let end = moment(ele.event.end).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='fim']").val(end);
                             let tipo = ele.event.extendedProps.tipo_consulta;
                             $("#modalAgenda select[name='tipo'][option]").val(tipo);
@@ -64,17 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         select: function(ele) {
                             resetForm('formAgenda');
+                            $("#messagem").text('');
+                            $("#sucess").text('');
                             $('#modalAgenda').modal('show')
                             $("#modalAgenda #tituloAgenda").text('Agendar Consulta');
                             $("#modalAgenda button.delete-event").css("display", "none");
-                            let start = moment(ele.start).format("DD/MM/YYYY HH:mm:ss");
+                            let start = moment(ele.start).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='inicio']").val(start);
-                            let end = moment(ele.end).format("DD/MM/YYYY HH:mm:ss");
+                            let end = moment(ele.end).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='fim']").val(end);
                             // console.log(result[0].fk_medico);
                             $("#modalAgenda input[name='fk_medico']").val(result[0].fk_medico);
-
-
                         },
                         events: result
 
@@ -88,11 +89,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#calendar').html('');
                     //2
                     ObjetoCalender = new Calendar(calendarEl, {
-                        plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+                        plugins: ['interaction', 'timeGrid', 'list'],
                         header: {
                             left: 'prev,next today',
                             center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                            right: 'timeGridWeek,timeGridDay,listWeek'
                         },
                         locale: 'pt-br',
                         navLinks: true,
@@ -109,13 +110,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         eventClick: function(ele) {
                             resetForm('formAgenda');
+                            $("#messagem").text('');
+                            $("#sucess").text('');
                             $('#modalAgenda').modal('show');
                             $("#modalAgenda #tituloAgenda").text('Remarcar Consulta');
                             let nome = ele.event.title;
                             $("#modalAgenda input[name='nome']").val(nome);
-                            let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm:ss");
+                            let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='inicio']").val(start);
-                            let end = moment(ele.event.end).format("DD/MM/YYYY HH:mm:ss");
+                            let end = moment(ele.event.end).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='fim']").val(end);
                             let tipo = ele.event.extendedProps.tipo_consulta;
                             $("#modalAgenda select[name='tipo']").val(tipo);
@@ -129,12 +132,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         select: function(ele) {
                             resetForm('formAgenda');
+                            $("#messagem").text('');
+                            $("#sucess").text('');
                             $('#modalAgenda').modal('show')
                             $("#modalAgenda #tituloAgenda").text('Agendar Consulta');
                             $("#modalAgenda button.delete-event").css("display", "none");
-                            let start = moment(ele.start).format("DD/MM/YYYY HH:mm:ss");
+                            let start = moment(ele.start).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='inicio']").val(start);
-                            let end = moment(ele.end).format("DD/MM/YYYY HH:mm:ss");
+                            let end = moment(ele.end).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='fim']").val(end);
                             $("#modalAgenda input[name='fk_medico']").val(result[0].fk_medico);
 
@@ -191,7 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             $("#listaPacientes>li").click(function(e) {
                 let idPac = this.id;
-                console.log(idPac);
                 $("#inputPesqPac input[name='nome']").val(e.target.innerText); //insere o resultado  no campo
                 $("#modalAgenda input[name='fk_paciente']").val(idPac);
                 //$('#searchPac').attr('data-paciente', idPac);
@@ -202,15 +206,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function loadErros(response) {
-        let boxAlert = `<div class="alert alert-danger">`
+        $("#sucess").text('');
+        let boxAlert = `<div class="alert alert-danger error">`
         for (let field in response) {
             console.log(field);
-            boxAlert += `<p>${response[field]}</p>`;
+            boxAlert += `<span>${response[field]}</span><br/>`;
         }
         boxAlert += `</div>`
         console.log(boxAlert)
+        return boxAlert.replace(/\,/g, "</br>");
+
+    }
+
+    function loadSave(response) {
+        $("#messagem").text('');
+        let boxAlert = `<div class="alert alert-success success">`
+        boxAlert += `<p>${response}</p>`;
+        boxAlert += `</div>`
+        console.log(boxAlert);
         return boxAlert;
     }
+
     //Salvar consulta/editar
     $(".delete-save").click(function() {
 
@@ -224,8 +240,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         let id = $("#modalAgenda input[name='id_agenda']").val();
         agenda.title = $("#modalAgenda input[name='nome']").val();
-        agenda.start = moment($("#modalAgenda input[name='inicio']").val(), "DD/MM/YYYY HH:mm:ss").format('YYYY/MM/DD HH:mm:ss');
-        agenda.end = moment($("#modalAgenda input[name='fim']").val(), "DD/MM/YYYY HH:mm:ss").format('YYYY/MM/DD HH:mm:ss');
+        agenda.start = moment($("#modalAgenda input[name='inicio']").val(), "DD/MM/YYYY HH:mm").format('YYYY/MM/DD HH:mm');
+        agenda.end = moment($("#modalAgenda input[name='fim']").val(), "DD/MM/YYYY HH:mm").format('YYYY/MM/DD HH:mm');
         agenda.tipo_consulta = $("#modalAgenda select[name='tipo']").val();
         agenda.fk_paciente = $("#modalAgenda input[name='fk_paciente']").val();
         agenda.fk_medico = $("#modalAgenda input[name='fk_medico']").val();
@@ -235,24 +251,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     let data = {
                         id: resp,
                     };
-                    atualizarCalendar(data)
+                    atualizarCalendar(data);
+                    $('#sucess').html(loadSave('A consulta foi agendada com sucesso!'))
                 })
                 .catch(function(data) {
-                    console.log(data.responseJSON)
-                        /// $('#modalAgenda').modal('show');
-                    $('#messagemError').html(loadErros(data.responseJSON.errors));
+                    $('#messagem').html(loadErros(data.responseJSON.errors));
                 });
 
         } else {
             agenda.agenda_id = id;
             agenda._method = "PUT";
             getDataAjax('../consulta/AtualizarAgenda', agenda).then(function(resp) {
-                console.log(resp, 'wewew')
-                let data = {
-                    id: resp,
-                };
-                atualizarCalendar(data)
-            })
+                    console.log(resp, 'wewew')
+                    let data = {
+                        id: resp,
+                    };
+
+                    atualizarCalendar(data)
+                    $('#sucess').html(loadSave('A consulta foi remarcada com sucesso!'))
+                })
+                .catch(function(data) {
+                    $('#messagem').html(loadErros(data.responseJSON.errors));
+                });
 
         }
     });
