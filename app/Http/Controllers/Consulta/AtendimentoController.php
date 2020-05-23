@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Consulta;
 use Illuminate\Support\Facades\Input;
+use App\Http\Requests\AgendaRequest;
 use App\Atendimento;
 use App\Medico;
 use App\Agenda;
@@ -90,15 +91,14 @@ class AtendimentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AgendaRequest $request)
     {
        
-        $dataAgenda=$this->request->all();
+        $dataAgenda= $request->all();
         $dataAgenda['user_log'] = Auth::user()->id;
         //cadastra no banco 
         $this->agenda->create($dataAgenda);
         //resgata para listar
-        //$agendaMed = $this->agenda->getAgenda($dataAgenda['fk_medico']);
         return $dataAgenda['fk_medico'];
       
        
@@ -133,9 +133,13 @@ class AtendimentoController extends Controller
      * @param  \App\Atendimento  $atendimento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Atendimento $atendimento)
+    public function update(AgendaRequest $request, Atendimento $atendimento)
     {
-        //
+       $dataAgenda= $this->agenda->where('agenda_id',$request->agenda_id)->first();
+       $dataAgenda->fill($request->all());
+       $dataAgenda->save();
+       return $request->fk_medico;
+
     }
 
     /**

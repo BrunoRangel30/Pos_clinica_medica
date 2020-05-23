@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });*/
 
     function atualizarCalendar(data) {
-        console.log(data, 'recebendo')
+
         getDataAjax('../api/atualizarAgenda', data).then(function(result) {
                 var Calendar = FullCalendar.Calendar
                 var ObjetoCalender
@@ -71,6 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             $("#modalAgenda input[name='inicio']").val(start);
                             let end = moment(ele.end).format("DD/MM/YYYY HH:mm:ss");
                             $("#modalAgenda input[name='fim']").val(end);
+                            // console.log(result[0].fk_medico);
+                            $("#modalAgenda input[name='fk_medico']").val(result[0].fk_medico);
 
 
                         },
@@ -134,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             $("#modalAgenda input[name='inicio']").val(start);
                             let end = moment(ele.end).format("DD/MM/YYYY HH:mm:ss");
                             $("#modalAgenda input[name='fim']").val(end);
+                            $("#modalAgenda input[name='fk_medico']").val(result[0].fk_medico);
 
                         },
                         events: result
@@ -145,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     //Mascaras para os campos de formulario marcacao de consulta
-    $('.date-time').mask('00/00/0000 00:00');
+    $('.date-time').mask('00 /00 / 0000 00:00');
     //Funcao Ajax
     function getDataAjax(url, data) {
         return new Promise(function(resolve, reject) {
@@ -198,6 +201,16 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     });
 
+    function loadErros(response) {
+        let boxAlert = `<div class="alert alert-danger">`
+        for (let field in response) {
+            console.log(field);
+            boxAlert += `<p>${response[field]}</p>`;
+        }
+        boxAlert += `</div>`
+        console.log(boxAlert)
+        return boxAlert;
+    }
     //Salvar consulta/editar
     $(".delete-save").click(function() {
 
@@ -215,21 +228,32 @@ document.addEventListener('DOMContentLoaded', function() {
         agenda.end = moment($("#modalAgenda input[name='fim']").val(), "DD/MM/YYYY HH:mm:ss").format('YYYY/MM/DD HH:mm:ss');
         agenda.tipo_consulta = $("#modalAgenda select[name='tipo']").val();
         agenda.fk_paciente = $("#modalAgenda input[name='fk_paciente']").val();
-        agenda.fk_medico = $("#searchMed").data('medico');
+        agenda.fk_medico = $("#modalAgenda input[name='fk_medico']").val();
 
         if (id == '') {
-            console.log(agenda, 'afebda')
             getDataAjax('../consulta/InsereAgenda', agenda).then(function(resp) {
+                    let data = {
+                        id: resp,
+                    };
+                    atualizarCalendar(data)
+                })
+                .catch(function(data) {
+                    console.log(data.responseJSON)
+                        /// $('#modalAgenda').modal('show');
+                    $('#messagemError').html(loadErros(data.responseJSON.errors));
+                });
+
+        } else {
+            agenda.agenda_id = id;
+            agenda._method = "PUT";
+            getDataAjax('../consulta/AtualizarAgenda', agenda).then(function(resp) {
+                console.log(resp, 'wewew')
                 let data = {
                     id: resp,
                 };
                 atualizarCalendar(data)
             })
 
-        } else {
-            agenda.id = id;
-            agenda._method = "PUT";
-            url = "";
         }
     });
 
@@ -266,5 +290,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     atualizarCalendar(data);
                 });
             })
+            .catch(function(data) {
+                console.log(data, 'dfd')
+            });
     })
 });

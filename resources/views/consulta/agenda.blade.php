@@ -122,10 +122,14 @@
                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                           <span aria-hidden="true">&times;</span>
                      </button>
+                     
                 </div>
                 <div class="modal-body">
                     <form class='formAgenda'>
                         <div class="form-group">
+                          <div class='row'>
+                            <div class="col-md-12" id='messagemError'></div>
+                            </div>
                             <h5>Selecione o Paciente</h5>
                             <div id="custom-search-input">
                                 <div class="input-group col-md-12" id="inputPesqPac">
@@ -142,9 +146,9 @@
                               <div id="resulPac"></div>
                             </div>
                         </div>
-                        <input type="text" name='fk_paciente'class="form-control">
-                        <input type="text" name='fk_medico'class="form-control">
-                        <input type="text" name='id_agenda'class="form-control">
+                        <input type="hidden" name='fk_paciente'class="form-control">
+                        <input type="hidden" name='fk_medico'class="form-control">
+                        <input type="hidden" name='id_agenda'class="form-control">
                         <div class="form-group">
                             <label for="hora-inicial" class="col-form-label">Inicio da Consulta</label>
                             <input type="text" name='inicio'class="form-control date-time" id="hora-inicial">
@@ -163,7 +167,7 @@
                     </form>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary delete-save" data-dismiss="modal">Salvar</button>
+                    <button type="button" class="btn btn-primary delete-save">Salvar</button>
                     <button type="button" class="btn btn-primary delete-event">Excluir</button>
                   </div>
             </div>
