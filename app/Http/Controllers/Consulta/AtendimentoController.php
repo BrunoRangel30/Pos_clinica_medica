@@ -148,8 +148,11 @@ class AtendimentoController extends Controller
      * @param  \App\Atendimento  $atendimento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Atendimento $atendimento)
+    public function destroy()
     {
-        //
+     
+       $agenda = Agenda::where('agenda_id',$this->request->id_agenda);
+       $agenda->delete();
+       return $this->request->fk_medico;
     }
 }

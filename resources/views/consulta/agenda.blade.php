@@ -82,6 +82,14 @@
     #custom-search-input .glyphicon-search{
         font-size: 23px;
     }
+
+    .success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+        display: none;
+  }
+
   
 </style>
 @section('content')
@@ -105,7 +113,9 @@
             <div id='resultMed'></div>
           </div>
         </div>
-        
+        <div class='row mb-5'>
+            <div class="alert-box success col-md-6">Consulta excluída com sucesso!</div>
+        </div>
         <!-------------Calendario--------------->
         <div id='wrap'>
                 <div id='external-events-list'></div>
@@ -171,7 +181,7 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="button" class="btn btn-primary delete-save">Salvar</button>
-                    <button type="button" class="btn btn-warning delete-event">Excluir</button>
+                    <button type="button" class="btn btn-warning delete-event" data-dismiss="modal">Excluir</button>
                   </div>
             </div>
         </div>

@@ -18,10 +18,11 @@ class Agenda extends Model
        $agenda = DB::table('agenda as ag')
                ->join('pacientes as p', 'p.paciente_id', '=', 'ag.fk_paciente')
                ->join('medicos as m', 'm.medico_id', '=', 'ag.fk_medico')
-               ->where('ag.fk_medico','=',$idMed)
+               ->where([['ag.fk_medico','=',$idMed],['ag.deleted_at','=',NULL]])
                ->select('start','end','p.nome as title','m.nome as medico','ag.tipo_consulta','ag.agenda_id as id','ag.fk_medico','p.paciente_id as fk_paciente')
                ->get(); 
         return $agenda;
+        
     }
 
     

@@ -15,12 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });*/
 
     function atualizarCalendar(data) {
-
+        console.log(data, 'resultado')
         getDataAjax('../api/atualizarAgenda', data).then(function(result) {
                 var Calendar = FullCalendar.Calendar
                 var ObjetoCalender
                 var calendarEl = document.getElementById('calendar');
-                //1
+                console.log(result, 'df')
+                    //1
                 ObjetoCalender = new Calendar(calendarEl, {
                         plugins: ['interaction', 'timeGrid', 'list'],
                         header: {
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             $("#sucess").text('');
                             $('#modalAgenda').modal('show');
                             $("#modalAgenda #tituloAgenda").text('Remarcar Consulta');
-                            $("#modalAgenda button.delete-event").css("display", "flex");
+                            $("#modalAgenda button.delete-event").css("display", "block");
                             let nome = ele.event.title;
                             $("#modalAgenda input[name='nome']").val(nome);
                             let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm");
@@ -226,8 +227,24 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(boxAlert);
         return boxAlert;
     }
-
-    //Salvar consulta/editar
+    //delete elementos
+    $(".delete-event").click(function() {
+            let id = $("#modalAgenda input[name='id_agenda']").val();
+            let fk_medico = $("#modalAgenda input[name='fk_medico']").val();
+            let agenda = {
+                id_agenda: id,
+                _method: 'DELETE',
+                fk_medico: fk_medico
+            }
+            getDataAjax('../consulta/ExcluirAgenda', agenda).then(function(resp) {
+                let data = {
+                    id: resp,
+                };
+                atualizarCalendar(data);
+                $(".success").fadeIn(300).delay(1500).fadeOut(400);
+            })
+        })
+        //Salvar consulta/editar
     $(".delete-save").click(function() {
 
         let agenda = {
