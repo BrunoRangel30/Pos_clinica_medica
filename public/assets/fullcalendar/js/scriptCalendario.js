@@ -1,18 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
-    /*var Calendar = FullCalendar.Calendar;
-    var Draggable = FullCalendarInteraction.Draggable/*
+    //chamada ajax
+    function getDataAjax(url, data) {
 
-    /* initialize the external events
-    -----------------------------------------------------------------
-    var containerEl = document.getElementById('external-events-list');
-    new Draggable(containerEl, {
-        itemSelector: '.fc-event',
-        eventData: function(eventEl) {
-            return {
-                title: eventEl.innerText.trim()
-            }
-        }
-    });*/
+        return new Promise(function(resolve, reject) {
+            return request = $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                dataType: 'json',
+                url: url,
+                data: data,
+                success: resolve,
+                error: reject
+            });
+        });
+    }
+
+    $(".paciente-consulta > i").click(function() {
+        let id = this.id
+        getDataAjax('../consuta/index', id).then(function(result) {
+            console.log('secesso');
+        })
+
+    })
 
     function atualizarCalendar(data) {
         console.log(data, 'resultado')
@@ -155,22 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Mascaras para os campos de formulario marcacao de consulta
     $('.date-time').mask('00 /00 / 0000 00:00');
-    //Funcao Ajax
-    function getDataAjax(url, data) {
-        return new Promise(function(resolve, reject) {
-            return request = $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                dataType: 'json',
-                url: url,
-                data: data,
-                success: resolve,
-                error: reject
-            });
-        });
-    }
+
 
     function resetForm(classe) {
         $(`.${classe}`)[0].reset();
@@ -276,10 +272,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
         } else {
+            console.log('editar')
             agenda.agenda_id = id;
             agenda._method = "PUT";
             getDataAjax('../consulta/AtualizarAgenda', agenda).then(function(resp) {
-                    console.log(resp, 'wewew')
                     let data = {
                         id: resp,
                     };
@@ -297,38 +293,74 @@ document.addEventListener('DOMContentLoaded', function() {
     /*pesquisa medicos*******************************************************************/
     $("#searchMed").keyup(async function() {
 
-        let keys = $('#searchMed').val()
-        data = {
-            key: keys,
-        };
-        getDataAjax('../api/buscaMedicos', data)
-            .then(function(result) {
+            let keys = $('#searchMed').val()
+            data = {
+                key: keys,
+            };
+            getDataAjax('../api/buscaMedicos', data)
+                .then(function(result) {
+                    let input = '';
+                    result.map(function(index) {
+                        input += `<ul id='listaMedicos'>`
+                        input += `<li value='${index.medico_id}' id='${index.medico_id}'>${index.nome}</li>`
+                        input += `</ul>`
+                    })
+                    $("#resultMed").html(input);
+                    //Limpa se não houver resultados
+                    if (keys == '') {
+                        $("#resultMed").html('');
+                    }
+                    //seleciona agenda por medico
+                    $("#listaMedicos>li").click(function(e) {
+                        let idMed = this.id;
+                        data = {
+                            id: idMed,
+                        };
+
+                        $("#inputPesqMed input[name='pesquisaMedico']").val(e.target.innerText); //insere o resultado  no campo
+                        $('#searchMed').attr('data-medico', idMed);
+                        $("#resultMed").html(''); //limpa a div
+                        atualizarCalendar(data);
+                    });
+                })
+                .catch(function(data) {
+                    console.log(data, 'dfd')
+                });
+        })
+        //Pesquisa Medicamento
+    $("#buscaMedicamento").keyup(async function() {
+
+            let keys = $('#buscaMedicamento').val()
+            data = {
+                key: keys,
+            };
+
+            //console.log(data)
+            getDataAjax('../../api/buscaMedicamento', data).then(function(result) {
+                console.log(result, 'fdf')
                 let input = '';
                 result.map(function(index) {
-                    input += `<ul id='listaMedicos'>`
-                    input += `<li value='${index.medico_id}' id='${index.medico_id}'>${index.nome}</li>`
+                    input += `<ul id='listaMedicamentos'>`
+                    input += `<li value='${index.med_id}' id='${index.med_id}'>${index.nome_fabrica}</li>`
                     input += `</ul>`
                 })
-                $("#resultMed").html(input);
-                //Limpa se não houver resultados
+
+                $("#resultMedicamento").html(input);
                 if (keys == '') {
-                    $("#resultMed").html('');
+                    $("#resultMedicamento").html('')
                 }
-                //seleciona agenda por medico
-                $("#listaMedicos>li").click(function(e) {
+                $("#listaMedicamentos>li").click(function(e) {
                     let idMed = this.id;
                     data = {
                         id: idMed,
                     };
 
-                    $("#inputPesqMed input[name='pesquisaMedico']").val(e.target.innerText); //insere o resultado  no campo
-                    $('#searchMed').attr('data-medico', idMed);
-                    $("#resultMed").html(''); //limpa a div
-                    atualizarCalendar(data);
+                    $("#inputPesqMedicamento > #buscaMedicamento").val(e.target.innerText); //insere o resultado  no campo
+                    $("#idMedicamento").val(idMed);
+                    $("#resultMedicamento").html(''); //limpa a div
+
+                    //atualizarCalendar(data);
                 });
             })
-            .catch(function(data) {
-                console.log(data, 'dfd')
-            });
-    })
+        }) //fechamento de busca medicamento
 });

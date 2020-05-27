@@ -1,19 +1,29 @@
 <div class='row'>
     <div class='col-md-4'>
-        <p>Médico(a) : <span> Fátima Nogueira  </span></p>
+        @if(session('medico'))
+            <p>Médico(a) : <span> {{session('medico')}} </span></p>
+        @endif
     </div>
     <div class='col-md-4'>
-        <p>CRM : <span> 12344634  </span></p>
+        @if(session('crm'))
+            <p>CRM : <span>{{session('crm')}}</span></p>
+        @endif
     </div>
 </div>
 <div class='row'>
     <div class='col-md-4'>
-        <p>Paciente : <span> Candece Faria </span></p>
+        @if(session('paciente'))
+            <p>Paciente : <span> {{session('paciente')}} </span></p>
+        @endif
     </div>
     <div class='col-md-4'>
-        <p>CPF : <span>98745837439 </span></p>
+        @if(session('cpf'))
+            <p>CPF : <span>{{session('cpf')}}</span></p>
+        @endif
     </div>
     <div class='col-md-4'>
-        <p>Data de Nascimento : <span>23/12/1967 </span><p>
+        @if(session('data_nasc'))
+             <p>Data de Nascimento : <span>{{session('data_nasc')}}</span><p>
+        @endif
     </div>
 </div>

@@ -88,7 +88,7 @@
         background-color: #dff0d8;
         border-color: #d6e9c6;
         display: none;
-  }
+    }
 
   
 </style>

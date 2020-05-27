@@ -11,6 +11,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 class AtendimentoController extends Controller
 {
@@ -40,11 +41,28 @@ class AtendimentoController extends Controller
 
     public function index()
     {   
-        return view('consulta.atendimento');
+        
+        if(!empty(Auth::user()->id)){
+            $date = date_create(date('Y/m/d'));
+            $dataAtual = date_format($date, 'Y-m-d');
+            $agenda= $this->agenda->getAgendaDiaro($dataAtual);
+        }
+        // dd($agenda);
+        return view('consulta.atendimento',compact('agenda'));
     }
 
     public function consulta()
-    {
+    {  
+        //dd($this->request->all());
+        $consulta = $this->agenda->getPacienteMedico(Auth::user()->id,$this->request['pa'])->first();
+   // dd($consulta);
+        session(['medico' =>  $consulta->medico,
+        'cpf'=> $consulta->cpf,
+        'paciente' => $consulta->nomePaciente,
+        'data_nasc'=> $consulta->data_nasc,
+        'crm'=>$consulta->crm,
+        'idMedico'=> Auth::user()->id,
+        'Idpaciente'=>$this->request['pa']]);
         return view('consulta.index');
     }
 

@@ -13,9 +13,22 @@ class ReceitaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    protected $request;
+    
+   
+
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+        
+    }
+    public function index(Request $request)
     {
-       return view('consulta.receita');
+        $valuePaciente = $request->session()->get('Idpaciente');
+        $valueMedico = $request->session()->get('idMedico');
+        $receita = new Receita;
+        $receitaDados= $receita->getReceita($valuePaciente,$valueMedico);
+       return view('pesquisa.receitaListagem',compact('receitaDados'));
     }
 
     /**
@@ -25,7 +38,7 @@ class ReceitaController extends Controller
      */
     public function create()
     {
-        //
+        return view('consulta.receita');
     }
 
     /**
@@ -36,7 +49,10 @@ class ReceitaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $receita= $request->all();
+        Receita::create($receita);
+        return redirect()->route('consulta.receita.index');
+       
     }
 
     /**

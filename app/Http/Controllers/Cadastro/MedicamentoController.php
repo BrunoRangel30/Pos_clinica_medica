@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\medicamento;
 namespace App\Http\Controllers\Cadastro;
+use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use App\Medicamento;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class MedicamentoController extends Controller
@@ -13,6 +16,17 @@ class MedicamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $request;
+    protected $user;
+    protected $medicamento;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+        $user = new User;
+        $this->$user = $user; 
+        $medicamento = new Medicamento;
+        $this->$medicamento = $medicamento; 
+    }
     public function index()
     {
         return view('pesquisa.medicamento');
@@ -28,6 +42,14 @@ class MedicamentoController extends Controller
         return view('cadastro.medicamento');
     }
 
+    public function buscaMedicamento ()
+    {
+        $med = $this->request->input('key');
+         $medicamento = new Medicamento;
+        $resul = $medicamento->getMedicamento($med);
+        return $resul;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -36,7 +58,14 @@ class MedicamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $medicamentoDate= $request->all();
+        $medicamentoDate['user_log'] = Auth::user()->id;
+        //cadastra no banco 
+        $medicamento = new Medicamento;
+        $medicamento->create($medicamentoDate);
+
+        return redirect()->route('cadastro.medicamento.index');
+      
     }
 
     /**

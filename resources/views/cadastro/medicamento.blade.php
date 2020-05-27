@@ -7,29 +7,30 @@
                 <h4> Cadastro Medicamento </h4>
             </div>
         </div>
-        <form>
+        <form method="POST" action="{{route('cadastro.medicamento.store')}}">
+            @csrf
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="nomeGenerico"> Nome genérico</label>
-                    <input type="text" class="form-control" id="nomePaciente" placeholder="">
+                    <label for="nome_generico"> Nome genérico</label>
+                    <input name='nome_generico' type="text" class="form-control" id="nome_generico" placeholder="">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="nomeFabrica"> Nome de fábrica</label>
-                    <input type="text" class="form-control" id="nomePaciente" placeholder="">
+                    <label for="nome_fabrica"> Nome de fábrica</label>
+                    <input name="nome_fabrica" type="text" class="form-control" id="nome_fabrica" placeholder="">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="idLab">Laboratório</label>
-                    <input type="text" class="form-control" id="idLab" placeholder="">
+                    <label for="laboratorio">Laboratório</label>
+                    <input name="laboratorio" type="text" class="form-control" id="laboratorio" placeholder="">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="idLot">Lote do medicamento</label>
-                    <input type="text" class="form-control" id="idLot" placeholder="">
+                    <label for="lote_med">Lote do medicamento</label>
+                    <input name="lote_med" type="text" class="form-control" id="idLot" placeholder="">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="idTarja" value="">Tarja</label>
-                    <select id="idTarja" class="form-control" >
+                    <label for="tarja" value="">Tarja</label>
+                    <select name="tarja" id="tarja" class="form-control" >
                       <option>Livre</option>
                       <option>Preta</option>
                     </select>
@@ -37,8 +38,8 @@
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-10">
-                    <label for="idDesc">Breve Descrição</label>
-                    <textarea  type="textArea" class="form-control" id="idDesc" placeholder=""></textarea>
+                    <label for="descricao">Breve Descrição</label>
+                    <textarea name="descricao" type="textArea" class="form-control" id="descricao" placeholder=""></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>

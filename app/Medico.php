@@ -17,5 +17,8 @@ class Medico extends Model
         ->get();
         return $medico;
     }
+    public function agendaMedico(){
+        return $this->hasMany('App\Agenda','fk_medico');
+    }
  
 }
