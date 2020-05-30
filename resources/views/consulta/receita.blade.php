@@ -13,8 +13,8 @@
                 @component('consulta.componentes.menuConsulta')@endcomponent
             </div>
         </div>
-        <form method="POST" action="{{ route('consulta.receita.store') }}">
-            @csrf
+        <!--consulta.receita.store-->
+        <form>
             <div class='form-row'>
                 <div class="col-md-5">
                     <label class="sr-only" for="buscaMedicamento">Pesquise o medicamento</label>
@@ -53,9 +53,8 @@
                     <textarea name="procedimento" rows="5" type="textArea" class="form-control" id="idObservacao" placeholder=""></textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-           
         </form>
+        <button type="" id="salvarReceita"class="btn btn-primary">Salvar</button>
         
     </div>
    

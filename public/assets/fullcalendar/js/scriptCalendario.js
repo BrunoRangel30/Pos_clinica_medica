@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     function atualizarCalendar(data) {
-        console.log(data, 'resultado')
         getDataAjax('../api/atualizarAgenda', data).then(function(result) {
+                console.log(result, 'resultado')
                 var Calendar = FullCalendar.Calendar
                 var ObjetoCalender
                 var calendarEl = document.getElementById('calendar');
@@ -86,8 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             $("#modalAgenda input[name='inicio']").val(start);
                             let end = moment(ele.end).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='fim']").val(end);
-                            // console.log(result[0].fk_medico);
-                            $("#modalAgenda input[name='fk_medico']").val(result[0].fk_medico);
+                            let idMedico = $("#medicoSelect input[name='fk_medico']").val();
+                            $("#modalAgenda input[name='fk_medico']").val(idMedico);
                         },
                         events: result
 
@@ -153,7 +153,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             $("#modalAgenda input[name='inicio']").val(start);
                             let end = moment(ele.end).format("DD/MM/YYYY HH:mm");
                             $("#modalAgenda input[name='fim']").val(end);
-                            $("#modalAgenda input[name='fk_medico']").val(result[0].fk_medico);
+                            let idMedico = $("#medicoSelect input[name='fk_medico']").val();
+                            $("#modalAgenda input[name='fk_medico']").val(idMedico);
 
                         },
                         events: result
@@ -318,8 +319,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         };
 
                         $("#inputPesqMed input[name='pesquisaMedico']").val(e.target.innerText); //insere o resultado  no campo
-                        $('#searchMed').attr('data-medico', idMed);
+                        $('#fk_medico').val(idMed);
                         $("#resultMed").html(''); //limpa a div
+                        console.log(data, 'data');
                         atualizarCalendar(data);
                     });
                 })
@@ -363,4 +365,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             })
         }) //fechamento de busca medicamento
+
+    //Post Medicamento
+    $("#salvarReceita").click(function(e) {
+        console.log('salvarCaonsuça');
+        data = {
+            _method: 'POST',
+            qtd: 2,
+            unidade: '100mg',
+            via: 'oral',
+            procedimento: 'tomar de duas em duas horas',
+            fk_paciente: 8,
+            fk_medico: 3,
+            fk_medicamento: 3,
+        };
+        console.log(data);
+        getDataAjax('../receita', data).then(function(result) {
+            console.log('response')
+        })
+
+
+    })
+
 });

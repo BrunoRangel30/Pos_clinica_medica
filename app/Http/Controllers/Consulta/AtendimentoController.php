@@ -8,6 +8,7 @@ use App\Medico;
 use App\Agenda;
 use App\Paciente;
 use App\User;
+use App\Receita;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ class AtendimentoController extends Controller
     protected $agenda;
     protected $paciente;
     protected $user;
+    protected $receita;
 
 
     public function __construct(Request $request) {
@@ -36,7 +38,9 @@ class AtendimentoController extends Controller
         $paciente = new Paciente;
         $this->paciente = $paciente;
         $user = new User;
-        $this->$user = $user; 
+        $this->$user = $user;
+        $receita = new Receita;
+        $this->$receita = $receita; 
     }
 
     public function index()
@@ -51,10 +55,11 @@ class AtendimentoController extends Controller
         return view('consulta.atendimento',compact('agenda'));
     }
 
-    public function consulta()
+    public function consulta( Request $request)
     {  
         //dd($this->request->all());
-        $consulta = $this->agenda->getPacienteMedico(Auth::user()->id,$this->request['pa'])->first();
+        
+        $consulta = $this->agenda->getPacienteMedico(Auth::user()->id,$request['pa'])->first();
    // dd($consulta);
         session(['medico' =>  $consulta->medico,
         'cpf'=> $consulta->cpf,
@@ -63,7 +68,7 @@ class AtendimentoController extends Controller
         'crm'=>$consulta->crm,
         'idMedico'=> Auth::user()->id,
         'Idpaciente'=>$this->request['pa']]);
-        return view('consulta.index');
+         return view('consulta.index');
     }
 
     function removerAcentos($string){

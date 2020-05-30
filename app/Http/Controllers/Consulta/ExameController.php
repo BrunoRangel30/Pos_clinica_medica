@@ -14,7 +14,7 @@ class ExameController extends Controller
      */
     public function index()
     {
-        return view('consulta.exame');
+        return view('pesquisa.exameListagem');
     }
 
     /**
@@ -24,7 +24,7 @@ class ExameController extends Controller
      */
     public function create()
     {
-        //
+        return view('consulta.exame');
     }
 
     /**

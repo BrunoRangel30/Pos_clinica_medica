@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Consulta;
 use App\Http\Controllers\Controller;
 use App\Receita;
 use Illuminate\Http\Request;
+use App\Consulta;
 
 class ReceitaController extends Controller
 {
@@ -28,7 +29,8 @@ class ReceitaController extends Controller
         $valueMedico = $request->session()->get('idMedico');
         $receita = new Receita;
         $receitaDados= $receita->getReceita($valuePaciente,$valueMedico);
-       return view('pesquisa.receitaListagem',compact('receitaDados'));
+        
+        return view('consulta.index',compact('receitaDados'));
     }
 
     /**
@@ -51,7 +53,8 @@ class ReceitaController extends Controller
     {
         $receita= $request->all();
         Receita::create($receita);
-        return redirect()->route('consulta.receita.index');
+
+      //  return redirect()->route('realizarConsulta',['pa'=> $request->session()->get('Idpaciente')]);
        
     }
 
