@@ -37,18 +37,18 @@
                         <div id ="resultMedicamento"class='col-md-5'></div>
                     </div>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2" id="qtd">
                     <input name='qtd' type="number" class="form-control" id="idNum" placeholder="Quantidade">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2" id="unidade">
                     <input name='unidade' type="" class="form-control" id="idNum" placeholder="Unidade">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2" id="via">
                     <input name='via' type="" class="form-control" id="idNum" placeholder="Via">
                 </div>
             </div>
             <div class='form-row'>
-                <div class="form-group col-md-11">
+                <div class="form-group col-md-11" id="procedimento">
                     <label for="idObservacao">Procedimento</label>
                     <textarea name="procedimento" rows="5" type="textArea" class="form-control" id="idObservacao" placeholder=""></textarea>
                 </div>
