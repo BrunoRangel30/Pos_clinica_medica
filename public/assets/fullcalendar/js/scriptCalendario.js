@@ -367,24 +367,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }) //fechamento de busca medicamento
 
     //Post Medicamento
-    $("#salvarReceita").click(function(e) {
-        console.log('salvarCaonsuça');
-        data = {
-            _method: 'POST',
-            qtd: $("#qtd input[name='qtd']").val(),
-            unidade: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
-            via: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
-            procedimento: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
-            fk_paciente: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
-            fk_medico: $("#inputPesqMedicamento input[name='fk_medico']").val(),
-            fk_medicamento: $("#inputPesqMedicamento input[name='fk_medicamento']").val(),
-        };
-        console.log(data, 'fdfdf');
-        getDataAjax('../receita', data).then(function(result) {
-            console.log('response')
-        })
+    /*  $("#salvarReceita").click(function(e) {
+          console.log('salvarCaonsuça');
+          data = {
+              _method: 'POST',
+              qtd: $("#qtd input[name='qtd']").val(),
+              unidade: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
+              via: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
+              procedimento: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
+              fk_paciente: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
+              fk_medico: $("#inputPesqMedicamento input[name='fk_medico']").val(),
+              fk_medicamento: $("#inputPesqMedicamento input[name='fk_medicamento']").val(),
+          };
+          console.log(data, 'fdfdf');
+          getDataAjax('../receita', data).then(function(result) {
+              $("#listagemReceita").append(result);
+          })
 
 
-    })
+      })*/
 
 });

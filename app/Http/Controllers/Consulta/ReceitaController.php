@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Receita;
 use Illuminate\Http\Request;
 use App\Consulta;
+use App\Medicamento;
 
 class ReceitaController extends Controller
 {
@@ -51,12 +52,26 @@ class ReceitaController extends Controller
      */
     public function store(Request $request)
     {
+        //grava a receita no banco
         $receita= $request->all();
-        Receita::create($receita);
-
-      //  return redirect()->route('realizarConsulta',['pa'=> $request->session()->get('Idpaciente')]);
+        $medicamento = new Medicamento;
+        $med = $medicamento->getMedicamentoById($receita['fk_medicamento']);
+        $receita['nome_fabrica']= $med[0]->nome;
+        
+        $request->session()->push('receita', $receita);
+       // $receitaArray = session()->get('receita');
+       //  unset($receitaArray[0]);
+       //  dd($receitaArray);
+       //  session()->forget('receita');
+       //  session()->put('receita', $receitaArray);
+        // dd($receitaArray = session()->get('receita'));
+       //dd( $receitaGet = $request->session()->get('receita'));
+      //  dd($receitaGet);
+         return view('pesquisa.receitaListagem');
        
     }
+
+    
 
     /**
      * Display the specified resource.

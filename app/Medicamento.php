@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Medicamento extends Model
 {
@@ -17,5 +18,12 @@ class Medicamento extends Model
         $medicamento = Medicamento::where('nome_fabrica', 'like', '%' . $key . '%')
         ->get();
         return $medicamento;
+    }
+    public function getMedicamentoById($key){
+        $medicamento = DB::table('medicamento as med')
+                    ->where([['med.med_id','=',$key],['med.deleted_at','=',NULL]])
+                     ->select('med.nome_fabrica as nome')
+                     ->get(); 
+                     return $medicamento;
     }
 }

@@ -68,6 +68,8 @@ class AtendimentoController extends Controller
         'crm'=>$consulta->crm,
         'idMedico'=> Auth::user()->id,
         'Idpaciente'=>$this->request['pa']]);
+        //limpa as receitas armazenadas na cache
+        session()->forget('receita');
          return view('consulta.index');
     }
 

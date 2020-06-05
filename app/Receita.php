@@ -27,4 +27,9 @@ class Receita extends Model
         return $receita;
 
     }
+    public function getReceitaConsulta(){
+      
+        return $this->belongsToMany('App\Receita','consulta_receita','fk_receita','fk_consulta');
+    }
+        
 }

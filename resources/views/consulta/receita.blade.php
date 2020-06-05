@@ -14,7 +14,8 @@
             </div>
         </div>
         <!--consulta.receita.store-->
-        <form>
+        <form method="POST" action="{{route('consulta.receita.store')}}">
+            @csrf
             <div class='form-row'>
                 <div class="col-md-5">
                     <label class="sr-only" for="buscaMedicamento">Pesquise o medicamento</label>
@@ -53,9 +54,8 @@
                     <textarea name="procedimento" rows="5" type="textArea" class="form-control" id="idObservacao" placeholder=""></textarea>
                 </div>
             </div>
+            <button type="submit" id="salvarReceita"class="btn btn-primary">Salvar</button>
         </form>
-        <button type="" id="salvarReceita"class="btn btn-primary">Salvar</button>
-        
     </div>
    
 @endsection
