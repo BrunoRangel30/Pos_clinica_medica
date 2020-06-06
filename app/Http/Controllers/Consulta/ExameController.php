@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Consulta;
 use App\Consulta;
+use App\Exame;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,16 @@ class ExameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $request;
+    protected $exame;
+    
+
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+        $this->exame = new Exame;
+         
+    }
     public function index()
     {
         return view('pesquisa.exameListagem');
@@ -47,6 +58,12 @@ class ExameController extends Controller
     public function show(Consulta $consulta)
     {
         //
+    }
+
+    public function buscaExame()
+    {
+        $pala=$this->request->input('key');
+        return $this->exame->getExame($pala);
     }
 
     /**

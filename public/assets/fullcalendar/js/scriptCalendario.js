@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             //console.log(data)
             getDataAjax('../../api/buscaMedicamento', data).then(function(result) {
-                console.log(result, 'fdf')
+
                 let input = '';
                 result.map(function(index) {
                     input += `<ul id='listaMedicamentos'>`
@@ -365,6 +365,55 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             })
         }) //fechamento de busca medicamento
+
+    $("#pesquisaExame").keyup(async function() {
+
+        $('#resultExames').show();
+        let keys = $('#pesquisaExame').val()
+        data = {
+            key: keys,
+        };
+
+        getDataAjax('../../api/buscaExame', data).then(function(result) {
+
+            let listExames = []
+            let input = '';
+            let li = '';
+
+            result.map(function(index) {
+                input += `<ul id='listaExames'>`
+                input += `<li value='${index.exame_id}' id='${index.exame_id}'>${index.nome_exame}</li>`
+                input += `</ul>`
+            })
+
+            $("#resultExames").html(input);
+            if (keys == '') {
+                $("#resultExames").html('')
+                $('#resultExames').hide();
+            }
+
+            $("#listaExames>li").click(function(e) {
+                li = ''
+                let exame = {
+                    id: this.id,
+                    nome: e.target.innerText
+                }
+                if (!listExames.some(entry => entry.id == this.id)) {
+                    listExames.push(exame)
+                } else {
+                    for (i = 0; i < listExames.length; i++) {
+                        if (listExames[i].id == this.id) {
+                            listExames.splice(i, 1);
+                        }
+                    }
+                }
+                listExames.map(function(item) {
+                    li += `<li>${item.nome}</li>`
+                })
+                $('#examesSelect').html(li)
+            })
+        })
+    });
 
     //Post Medicamento
     /*  $("#salvarReceita").click(function(e) {
