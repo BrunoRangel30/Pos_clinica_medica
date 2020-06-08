@@ -408,9 +408,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 listExames.map(function(item) {
-                    li += `<li>${item.nome}</li>`
+                    li += `<input  type='hidden'name='exames-${item.id}'><li>${item.nome}</li></input>`
                 })
                 $('#examesSelect').html(li)
+                listExames.map(function(item, i) {
+                    $(`#examesrequest input[name='exames-${item.id}']`).val(item.id);
+                })
             })
         })
     });
