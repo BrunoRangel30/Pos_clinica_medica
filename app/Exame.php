@@ -19,4 +19,13 @@ class Exame extends Model
         ->get();
         return $exame;
     }
+    public function getExameId($key){
+       // dd($key);
+        $exame = DB::table('exame as e')
+                    ->where([['e.exame_id','=',$key],['e.nome_exame','!=','IS NULL']])
+                    ->select('nome_exame as nome')
+                     ->get();
+       
+        return $exame;
+    }
 }

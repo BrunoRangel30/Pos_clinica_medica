@@ -70,6 +70,8 @@ class AtendimentoController extends Controller
         'Idpaciente'=>$this->request['pa']]);
         //limpa as receitas armazenadas na cache
         session()->forget('receita');
+        session()->forget('exames');
+
          return view('consulta.index');
     }
 

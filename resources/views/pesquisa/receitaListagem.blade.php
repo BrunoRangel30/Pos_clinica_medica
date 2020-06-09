@@ -25,6 +25,33 @@
                 </table>  
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="example" class="icone table table-striped table-bordered" style="width:100%">
+                    @if(session('exames'))
+                    @inject('exame', 'App\Exame')
+                        <thead>
+                            <tr>
+                                <th>Relação de exames</th>
+                                <th>Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (session('exames') as $item)
+                                    @foreach ($item as $i)
+                                        @foreach($exame->getExameId($i) as $key)
+                                            <tr>
+                                                <td>{{$key->nome}}</td>
+                                                <td></td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+                                @endforeach
+                            </tbody>
+                    @endif
+                </table>  
+            </div>
+        </div>
     </div> 
 @endsection
     
