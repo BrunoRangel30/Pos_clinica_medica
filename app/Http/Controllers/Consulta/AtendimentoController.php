@@ -8,6 +8,7 @@ use App\Medico;
 use App\Agenda;
 use App\Paciente;
 use App\User;
+use App\Consulta;
 use App\Receita;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class AtendimentoController extends Controller
     protected $paciente;
     protected $user;
     protected $receita;
+    protected $consulta;
 
 
     public function __construct(Request $request) {
@@ -40,7 +42,9 @@ class AtendimentoController extends Controller
         $user = new User;
         $this->$user = $user;
         $receita = new Receita;
-        $this->$receita = $receita; 
+        $this->$receita = $receita;
+        $consulta = new Consulta;
+        $this->$consulta = $consulta; 
     }
 
     public function index()
@@ -51,16 +55,13 @@ class AtendimentoController extends Controller
             $dataAtual = date_format($date, 'Y-m-d');
             $agenda= $this->agenda->getAgendaDiaro($dataAtual);
         }
-        // dd($agenda);
+        $consulta = new Consulta;
         return view('consulta.atendimento',compact('agenda'));
     }
 
     public function consulta( Request $request)
-    {  
-        //dd($this->request->all());
-        
+    {   
         $consulta = $this->agenda->getPacienteMedico(Auth::user()->id,$request['pa'])->first();
-   // dd($consulta);
         session(['medico' =>  $consulta->medico,
         'cpf'=> $consulta->cpf,
         'paciente' => $consulta->nomePaciente,
@@ -71,8 +72,7 @@ class AtendimentoController extends Controller
         //limpa as receitas armazenadas na cache
         session()->forget('receita');
         session()->forget('exames');
-
-         return view('consulta.index');
+        return view('consulta.index');
     }
 
     function removerAcentos($string){

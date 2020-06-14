@@ -45,8 +45,12 @@ class ExameController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->session()->push('exames', $request->all());
+    {   
+       
+        $input = array();
+        $input = $request->all();
+        unset($input['_token']); //exlui o token
+        $request->session()->push('exames', $input);
         return view('pesquisa.receitaListagem');
        
     }

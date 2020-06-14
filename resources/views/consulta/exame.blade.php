@@ -28,7 +28,7 @@
                 @component('consulta.componentes.menuConsulta')@endcomponent
             </div>
         </div>
-        <form method="POST" action="{{route('consulta.exame.store'),1212}}">
+        <form method="POST" action="{{route('consulta.exame.store')}}">
             @csrf
             <div class='row'>
                 <div class="col-md-6">

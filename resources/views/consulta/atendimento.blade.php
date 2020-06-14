@@ -39,7 +39,6 @@
             <table id="example" class="icone table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                       
                         <th>Horário</th>
                         <th>Nome do Paciente</th>
                         <th>CPF</th>
@@ -48,16 +47,60 @@
                     </tr>
                 </thead>
                 <tbody>
+                @inject('consulta', 'App\Consulta')
                 @foreach ($agenda as $item)
                     <tr>
                         <td>{{$item->nomePaciente}}</td>
                         <td>{{$item->start}} - {{$item->end}}</td>
                         <td>{{$item->cpf}}</td>
                         <td>{{$item->data_nasc}}</td>
+                     
                         <td>
-                        <a href={{route('realizarConsulta',['pa'=>$item->paciente_id])}}><i class="far fa-play-circle"></i></a>
+                            <a href={{route('realizarConsulta',['pa'=>$item->paciente_id])}}><i class="far fa-play-circle"></i></a>
+                            @if($consulta->possuiConsulta($item->fk_paciente)->total > 0)
+                                <a data-toggle="modal" data-target="#consulta-{{$item->fk_paciente}}"><i class="far fa-eye"></i></a>
+                            @endif
                         </td>
+                        
                     </tr>
+                    <div class="modal fade" id="consulta-{{$item->fk_paciente}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                             <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>-->
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    @if(sizeof($consulta->getReceitaPaciente($item->fk_paciente))!==0)
+                                        <h4>Receitas</h4>
+                                        <ul>
+                                            @foreach ($consulta->getReceitaPaciente($item->fk_paciente) as $item)
+                                                <li>Nome Medicamento: {{$item->nome_fabrica}}</li>
+                                                <li>Quantidade: {{$item->qtd}}</li>
+                                                <li>Unidade: {{$item->unidade}}</li>
+                                                <li>Via: {{$item->via}}</li>
+                                                <li>Procedimento: {{$item->procedimento}}</li>
+                                                <hr/>
+                                            @endforeach
+                                        </ul>
+                                        
+                                    @endif
+                                    
+                                </div>
+                                <h4>Exames</h4>
+                               
+                               
+                                
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
                 @endforeach
                 </tbody>
             </table>  

@@ -17,6 +17,10 @@ class Consulta extends Model
     public function getConsultaReceita(){
         return $this->belongsToMany('App\Receita','consulta_receita','fk_consulta','fk_receita');
     }
+
+    public function getConsultaExame(){
+        return $this->belongsToMany('App\Exame','consulta_exame','fk_consulta','fk_exame');
+    }
     public function idConsulta(){
         $consulta = DB::table('consulta as c')
                      ->select('c.consulta_id')
@@ -24,4 +28,36 @@ class Consulta extends Model
                      ->first(); 
                      return $consulta;
     }
+      public function possuiConsulta($key){
+        $consulta = DB::table('consulta as c')
+                     ->where('c.fk_paciente','=',$key)
+                     ->select(DB::raw('COUNT(c.fk_paciente) as total'))
+                     ->first();
+                     return $consulta;
+    }
+
+    public function getReceitaPaciente($id){
+        $pacienteConsulta = DB::table('consulta as c')
+                            ->join('consulta_receita as rc','c.consulta_id','=','rc.fk_consulta')
+                            ->join('receita as re','re.receita_id','=','rc.fk_receita')
+                            ->join('medicamento as m','re.fk_medicamento','=','m.med_id')
+                            ->where('c.fk_paciente','=',$id)
+                            ->select('re.qtd','m.nome_fabrica','re.via','re.procedimento','re.unidade')
+                            ->get();
+       return $pacienteConsulta;
+    }
+
+    public function getExamePaciente($id){
+        $pacienteExame = DB::table('consulta as c')
+                            ->join('consulta_exame as ce','c.consulta_id','=','ce.fk_consulta')
+                            ->join('exame as e','e.exame_id','=','ce.fk_exame')
+                            ->where('c.fk_paciente','=',$id)
+                            ->select('e.nome_exame')
+                            ->get();
+       /// dd($pacienteExame);
+       return $pacienteExame;
+      
+    }
+    
+
 }

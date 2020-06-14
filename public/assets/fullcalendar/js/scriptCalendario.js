@@ -417,6 +417,9 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
     });
+    $("#resumoConsulta").click(function(e) {
+        console.log('beatiful');
+    })
 
     //Post Medicamento
     /*  $("#salvarReceita").click(function(e) {
