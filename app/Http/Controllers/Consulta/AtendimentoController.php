@@ -56,6 +56,7 @@ class AtendimentoController extends Controller
             $agenda= $this->agenda->getAgendaDiaro($dataAtual);
         }
         $consulta = new Consulta;
+       // dd($agenda);
         return view('consulta.atendimento',compact('agenda'));
     }
 
