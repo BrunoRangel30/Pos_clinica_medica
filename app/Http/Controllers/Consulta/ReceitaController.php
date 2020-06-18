@@ -95,6 +95,10 @@ class ReceitaController extends Controller
         //
     }
 
+    public function pdfReceita(Request $request){
+        dd($request);
+    }
+
     /**
      * Update the specified resource in storage.
      *

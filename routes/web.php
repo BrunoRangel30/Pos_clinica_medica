@@ -59,3 +59,6 @@ Route::namespace('Exame')->prefix('exame')->name('exame.')->middleware('can:admi
 });
 //Home
 Route::get('/home', 'HomeController@index')->name('home');
+//Impressão de PDF
+Route::get('pdfExame/', 'Consulta\ExameController@ExamePdf')->name('pdfExame');
+Route::post('/pdfReceita', 'ReceitaController@ReceitaPdf')->name('pdfReceita');

@@ -50,12 +50,30 @@ class Consulta extends Model
     public function getExamePaciente($id){
         $pacienteExame = DB::table('consulta as c')
                             ->join('consulta_exame as ce','c.consulta_id','=','ce.fk_consulta')
-                            ->join('exame as e','e.exame_id','=','ce.fk_exame')
+                            ->orderBy('c.created_at','desc')
                             ->where('c.fk_paciente','=',$id)
-                            ->select('e.nome_exame')
+                            ->select('ce.fk_consulta')
+                            ->groupBy('ce.fk_consulta')
                             ->get();
-       /// dd($pacienteExame);
+                           
+                            
+                           
+                            
+        // dd($pacienteExame);
        return $pacienteExame;
+      
+    }
+
+    public function nomeExame($id){
+        $NomeExame = DB::table('consulta_exame as ce')
+                            ->join('exame as e','e.exame_id','=','ce.fk_exame')
+                            ->select('e.nome_exame as exame')
+                            ->where([['ce.fk_consulta','=',$id]])
+                            ->get();
+                            
+        // dd($NomeExame);
+       return $NomeExame;
+      // dd($NomeExame);
       
     }
     

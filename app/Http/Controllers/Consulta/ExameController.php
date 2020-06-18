@@ -82,7 +82,9 @@ class ExameController extends Controller
     {
         //
     }
-
+    public function ExamePdf(Request $request){
+        dd( $request);
+    }
     /**
      * Update the specified resource in storage.
      *

@@ -67,22 +67,24 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                             <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>-->
                             </div>
                             <div class="modal-body">
                                 @if(sizeof($consulta->getExamePaciente($item->fk_paciente))!==0)
                                     <div>
                                         <h4>Exames solicitados</h4>
+                                        <h4>Data da consulta</h4>
                                         <ul>
                                             @foreach ($consulta->getExamePaciente($item->fk_paciente) as $key)
-                                                <li>{{$key->nome_exame}}</li>
+                                                <hr/>
+                                                    @foreach ($consulta->nomeExame($key->fk_consulta) as $j)
+                                                        <li>{{$key->fk_consulta}}</li>
+                                                        <li>{{$j->exame}}</li>
+                                                    @endforeach
+                                                <hr/>
+                                                <button type="button" class="btn btn-primary"><a  href={{route('pdfExame',['idConsulta'=>$key->fk_consulta, 'idPaciente'=>$item->fk_paciente])}}>Imprimir</a></button>
+                                               
                                             @endforeach
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Imprimir</button>
                                         </ul>
-                                        
                                     </div>
                                     <hr/>
                                 @endif
