@@ -42,7 +42,7 @@ class Consulta extends Model
                             ->join('receita as re','re.receita_id','=','rc.fk_receita')
                             ->join('medicamento as m','re.fk_medicamento','=','m.med_id')
                             ->where('c.fk_paciente','=',$id)
-                            ->select('re.qtd','m.nome_fabrica','re.via','re.procedimento','re.unidade')
+                            ->select('re.qtd','m.nome_fabrica','re.via','re.procedimento','re.unidade','c.consulta_id as id')
                             ->get();
        return $pacienteConsulta;
     }
@@ -52,16 +52,11 @@ class Consulta extends Model
                             ->join('consulta_exame as ce','c.consulta_id','=','ce.fk_consulta')
                             ->orderBy('c.created_at','desc')
                             ->where('c.fk_paciente','=',$id)
-                            ->select('ce.fk_consulta')
-                            ->groupBy('ce.fk_consulta')
+                            ->select('ce.fk_consulta','c.created_at')
+                            ->groupBy('ce.fk_consulta','c.created_at')
                             ->get();
-                           
-                            
-                           
-                            
-        // dd($pacienteExame);
        return $pacienteExame;
-      
+
     }
 
     public function nomeExame($id){
@@ -70,11 +65,17 @@ class Consulta extends Model
                             ->select('e.nome_exame as exame')
                             ->where([['ce.fk_consulta','=',$id]])
                             ->get();
-                            
-        // dd($NomeExame);
        return $NomeExame;
-      // dd($NomeExame);
-      
+    }
+
+    public function getReceita($id){
+        $NomeReceita = DB::table('consulta_receita as rc')
+                            ->join('receita as re','re.receita_id','=','rc.fk_receita')
+                            ->join('medicamento as m','re.fk_medicamento','=','m.med_id')
+                            ->select('re.qtd','m.nome_fabrica','re.via','re.procedimento','re.unidade')
+                            ->where([['rc.fk_consulta','=',$id]])
+                            ->get();
+       return $NomeReceita;
     }
     
 

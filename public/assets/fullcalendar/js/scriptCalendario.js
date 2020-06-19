@@ -366,6 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         }) //fechamento de busca medicamento
 
+    let listExames = [];
     $("#pesquisaExame").keyup(async function() {
 
         $('#resultExames').show();
@@ -376,7 +377,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         getDataAjax('../../api/buscaExame', data).then(function(result) {
 
-            let listExames = []
             let input = '';
             let li = '';
 
@@ -407,6 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 }
+                console.log(listExames, 'listaRxames')
                 listExames.map(function(item) {
                     li += `<input  type='hidden'name='exames-${item.id}'><li>${item.nome}</li></input>`
                 })
@@ -417,9 +418,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
     });
-    $("#resumoConsulta").click(function(e) {
-        console.log('beatiful');
-    })
+
 
     //Post Medicamento
     /*  $("#salvarReceita").click(function(e) {

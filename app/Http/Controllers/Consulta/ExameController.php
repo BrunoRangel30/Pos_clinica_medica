@@ -5,6 +5,7 @@ use App\Consulta;
 use App\Exame;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use PDF;
 
 class ExameController extends Controller
 {
@@ -15,12 +16,15 @@ class ExameController extends Controller
      */
     protected $request;
     protected $exame;
+    protected $consulta;
     
 
 
     public function __construct(Request $request) {
         $this->request = $request;
         $this->exame = new Exame;
+        $consulta = new Consulta;
+        $this->consulta = $consulta;
          
     }
     public function index()
@@ -83,7 +87,11 @@ class ExameController extends Controller
         //
     }
     public function ExamePdf(Request $request){
-        dd( $request);
+      
+       $exame = $this->consulta->nomeExame( $request['idConsulta']);
+       $pdf = PDF::loadView('consulta.componentes.examesPDF',compact('exame'));
+       return $pdf->setPaper('a5')->stream();
+
     }
     /**
      * Update the specified resource in storage.

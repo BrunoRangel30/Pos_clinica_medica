@@ -7,6 +7,7 @@ use App\Receita;
 use Illuminate\Http\Request;
 use App\Consulta;
 use App\Medicamento;
+use PDF;
 
 class ReceitaController extends Controller
 {
@@ -16,12 +17,15 @@ class ReceitaController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $request;
+    protected $consulta;
     
    
 
 
     public function __construct(Request $request) {
         $this->request = $request;
+        $consulta = new Consulta;
+        $this->consulta = $consulta;
         
     }
     public function index(Request $request)
@@ -95,8 +99,11 @@ class ReceitaController extends Controller
         //
     }
 
-    public function pdfReceita(Request $request){
-        dd($request);
+    public function ReceitaPdf(Request $request){
+      
+        $receita = $this->consulta->getReceita($request['idConsulta']);
+        $pdf = PDF::loadView('consulta.componentes.receitasPDF',compact('receita'));
+        return $pdf->setPaper('a5')->stream();
     }
 
     /**

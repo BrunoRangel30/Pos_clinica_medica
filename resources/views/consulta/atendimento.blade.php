@@ -72,17 +72,15 @@
                                 @if(sizeof($consulta->getExamePaciente($item->fk_paciente))!==0)
                                     <div>
                                         <h4>Exames solicitados</h4>
-                                        <h4>Data da consulta</h4>
                                         <ul>
                                             @foreach ($consulta->getExamePaciente($item->fk_paciente) as $key)
+                                                <h5>Data da consulta {{$key->created_at}}</h5>
                                                 <hr/>
-                                                    @foreach ($consulta->nomeExame($key->fk_consulta) as $j)
-                                                        <li>{{$key->fk_consulta}}</li>
-                                                        <li>{{$j->exame}}</li>
-                                                    @endforeach
+                                                @foreach ($consulta->nomeExame($key->fk_consulta) as $j)
+                                                    <li>{{$j->exame}}</li>
+                                                @endforeach
                                                 <hr/>
-                                                <button type="button" class="btn btn-primary"><a  href={{route('pdfExame',['idConsulta'=>$key->fk_consulta, 'idPaciente'=>$item->fk_paciente])}}>Imprimir</a></button>
-                                               
+                                                <a target="_blank" href={{route('pdfExame',['idConsulta'=>$key->fk_consulta])}}><button type="button" class="btn btn-primary">Imprimir</button></a>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -98,7 +96,7 @@
                                                 <li>Unidade: {{$item->unidade}}</li>
                                                 <li>Via: {{$item->via}}</li>
                                                 <li>Procedimento: {{$item->procedimento}}</li>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Imprimir</button>
+                                                <a target="_blank" href={{route('pdfReceita',['idConsulta'=>$item->id])}}><button type="button" class="btn btn-primary">Imprimir</button></a>
                                                 <hr/>
                                             @endforeach
                                         </ul>
