@@ -18,7 +18,10 @@
                                     <tr>
                                         <td>{{$item['nome_fabrica']}}
                                         <div class="collapse" id="collapseExample-{{$loop->index}}">
-                                            <p><span>Via</span> {{$item['via']}}</p>
+                                            <p><span>Quantidade:</span> {{$item['qtd']}}</p>
+                                            <p><span>Via:</span> {{$item['via']}}</p>
+                                            <p><span>Unidade:</span> {{$item['unidade']}}</p>
+                                            <p><span>Procedimento:</span> {{$item['procedimento']}}</p>
                                         </div>
                                     </td>
                                         <td>

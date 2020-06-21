@@ -130,6 +130,7 @@ class ReceitaController extends Controller
                 $receita[$i]['fk_medicamento']= $request['fk_medicamento'];
                 $receita[$i]['fk_paciente']= $request['fk_paciente'];
                 $receita[$i]['qtd']= $request['qtd'];
+                $receita[$i]['via']= $request['via'];
                 $receita[$i]['unidade']= $request['unidade'];
                 $receita[$i]['procedimento']= $request['procedimento'];
                 $receita[$i]['nome_fabrica']= $request['nome_fabrica'];
