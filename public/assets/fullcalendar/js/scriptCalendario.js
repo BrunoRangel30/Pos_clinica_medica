@@ -366,6 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         }) //fechamento de busca medicamento
 
+
     let listExames = [];
     $("#pesquisaExame").keyup(async function() {
 

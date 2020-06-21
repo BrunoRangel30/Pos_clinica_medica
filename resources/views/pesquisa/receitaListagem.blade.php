@@ -16,8 +16,17 @@
                             <tbody>
                                 @foreach (session('receita') as $item)
                                     <tr>
-                                        <td>{{$item['nome_fabrica']}}</td>
-                                        <td></td>
+                                        <td>{{$item['nome_fabrica']}}
+                                        <div class="collapse" id="collapseExample-{{$loop->index}}">
+                                            <p><span>Via</span> {{$item['via']}}</p>
+                                        </div>
+                                    </td>
+                                        <td>
+                                            <a href="{{route('editarReceita',[ 'key'=> $loop->index])}}"><i class="fas fa-edit"></i></a>
+                                            <a href="{{route('excluirReceita',[ 'key'=> $loop->index])}}"><i class="fas fa-trash-alt"></i></a>
+                                        <a data-toggle="collapse" data-target="#collapseExample-{{$loop->index}}" ><i class="fas fa-plus-square"></i></a>
+                                        </td>
+                                     
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -42,7 +51,11 @@
                                         @foreach($exame->getExameId($i) as $key)
                                             <tr>
                                                 <td>{{$key->nome}}</td>
-                                                <td></td>
+                                                <td>
+                                                    @method('DELETE')
+                                                    <a href=""><i class="fas fa-trash-alt"></i></a>
+                                                    <a><i class="fas fa-plus-square"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endforeach

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Consulta;
 use App\Medicamento;
 use PDF;
+use Session;
 
 class ReceitaController extends Controller
 {
@@ -61,17 +62,9 @@ class ReceitaController extends Controller
         $medicamento = new Medicamento;
         $med = $medicamento->getMedicamentoById($receita['fk_medicamento']);
         $receita['nome_fabrica']= $med[0]->nome;
-        
         $request->session()->push('receita', $receita);
-       // $receitaArray = session()->get('receita');
-       //  unset($receitaArray[0]);
-       //  dd($receitaArray);
-       //  session()->forget('receita');
-       //  session()->put('receita', $receitaArray);
-        // dd($receitaArray = session()->get('receita'));
-       //dd( $receitaGet = $request->session()->get('receita'));
-      //  dd($receitaGet);
-         return view('pesquisa.receitaListagem');
+        //dd($receita);
+        return view('pesquisa.receitaListagem');
        
     }
 
@@ -94,9 +87,22 @@ class ReceitaController extends Controller
      * @param  \App\Receita  $receita
      * @return \Illuminate\Http\Response
      */
-    public function edit(Receita $receita)
+    public function edit(Request $request)
     {
-        //
+        $request['key'];
+        $receita = array();
+        $receita = $request->session()->get('receita');
+        $data = array();
+       
+        for($i=0;$i<= count($receita);$i++) {
+            if($i ==  (int) $request['key']){
+                $data=$receita[$i];
+                $data['id']=$i;
+            }
+        }
+     
+     
+        return view('edicao.receita_edicao',compact('data'));
     }
 
     public function ReceitaPdf(Request $request){
@@ -113,9 +119,26 @@ class ReceitaController extends Controller
      * @param  \App\Receita  $receita
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Receita $receita)
+    public function update(Request $request)
     {
-        //
+       // dd($request);
+        $receita = $request->session()->get('receita');
+       
+        for($i=0;$i<= count($receita);$i++) {
+            if($i == $request['id']){
+                $receita[$i]['fk_medico']= $request['fk_medico'];
+                $receita[$i]['fk_medicamento']= $request['fk_medicamento'];
+                $receita[$i]['fk_paciente']= $request['fk_paciente'];
+                $receita[$i]['qtd']= $request['qtd'];
+                $receita[$i]['unidade']= $request['unidade'];
+                $receita[$i]['procedimento']= $request['procedimento'];
+                $receita[$i]['nome_fabrica']= $request['nome_fabrica'];
+            }
+        }
+        $request->session()->forget('receita');
+        Session::put('receita', $receita);
+        return view('pesquisa.receitaListagem');
+       
     }
 
     /**
@@ -124,8 +147,17 @@ class ReceitaController extends Controller
      * @param  \App\Receita  $receita
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Receita $receita)
+    public function destroy(Request $request)
     {
-        //
+        $receita = $request->session()->get('receita');
+        for($i=0;$i<= count($receita);$i++) {
+            if($i ==   (int) $request['key']){
+                unset($receita[$i]);
+                array_unshift($receita);
+            }
+        }
+        $request->session()->forget('receita');
+        Session::put('receita', $receita);
+        return view('pesquisa.receitaListagem');
     }
 }

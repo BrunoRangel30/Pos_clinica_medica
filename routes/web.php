@@ -45,6 +45,8 @@ Route::namespace('Consulta')->prefix('consulta')->name('consulta.')->middleware(
     Route::resource('/exame', 'ExameController'); 
     
 });
+Route::get('editar/receita/{key}', 'Consulta\ReceitaController@edit')->name('editarReceita');
+Route::get('excluir/receita/{key}', 'Consulta\ReceitaController@destroy')->name('excluirReceita');
 Route::get('consuta/resumoConsulta', 'Consulta\ConsultaController@show')->name('resumoConsulta');
 Route::get('consuta/salvarConsulta', 'Consulta\ConsultaController@store')->name('salvarConsulta');
 Route::post('consulta/InsereAgenda', 'Consulta\AtendimentoController@store')->middleware('can:admin');
