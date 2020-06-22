@@ -368,6 +368,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     let listExames = [];
+
+
     $("#pesquisaExame").keyup(async function() {
 
         $('#resultExames').show();
@@ -383,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             result.map(function(index) {
                 input += `<ul id='listaExames'>`
-                input += `<li value='${index.exame_id}' id='${index.exame_id}'>${index.nome_exame}</li>`
+                input += `<li value='${index.exame_id}' id='${index.exame_id}'>  ${index.nome_exame}</li>`
                 input += `</ul>`
             })
 
@@ -394,6 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             $("#listaExames>li").click(function(e) {
+
                 li = ''
                 let exame = {
                     id: this.id,
@@ -408,17 +411,34 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 }
-                console.log(listExames, 'listaRxames')
+                // li += `<div class='exclusao-exame'>`
                 listExames.map(function(item) {
-                    li += `<input  type='hidden'name='exames-${item.id}'><li>${item.nome}</li></input>`
-                })
+
+                        li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
+
+
+                    })
+                    //  li += `</div>`
                 $('#examesSelect').html(li)
+
+                // console.log('dsds')
+                // var listaExames = li.querySelectorAll("#examesSelect>li>i");
+                // console.log(listaExames);
                 listExames.map(function(item, i) {
                     $(`#examesrequest input[name='exames-${item.id}']`).val(item.id);
+
                 })
+
+
             })
         })
     });
+    document.getElementById("examesSelect").addEventListener("click", function(e) {
+        //document.getElementById("demo").innerHTML = "Hello World";
+        console.log(listExames)
+        console.log(e.target.childNodes[1].id);
+    });
+
 
 
     //Post Medicamento
