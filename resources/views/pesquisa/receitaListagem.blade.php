@@ -44,8 +44,11 @@
                     @inject('exame', 'App\Exame')
                         <thead>
                             <tr>
-                                <th>Relação de exames</th>
-                                <th>Ações</th>
+                                
+                                <th>Relação de exames
+                                    <a href="{{route('editarExame',[ 'key'=> 1])}}"><i class="fas fa-edit"></i></a>
+                                </th>
+                                
                             </tr>
                             </thead>
                             <tbody>
@@ -54,11 +57,7 @@
                                         @foreach($exame->getExameId($i) as $key)
                                             <tr>
                                                 <td>{{$key->nome}}</td>
-                                                <td>
-                                                    @method('DELETE')
-                                                    <a href=""><i class="fas fa-trash-alt"></i></a>
-                                                    <a><i class="fas fa-plus-square"></i></a>
-                                                </td>
+            
                                             </tr>
                                         @endforeach
                                     @endforeach

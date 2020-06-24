@@ -22,12 +22,22 @@ class Exame extends Model
     public function getExameId($key){
         $exame = DB::table('exame as e')
                     ->where([['e.exame_id','=',$key],['e.nome_exame','!=','IS NULL']])
-                    ->select('nome_exame as nome')
+                    ->select('nome_exame as nome','exame_id as id')
                      ->get();
         return $exame;
     }
     public function getReceitaExame(){
       
         return $this->belongsToMany('App\Exame','consulta_exame','fk_exame','fk_consulta');
+    }
+    public function getExamePaciente($idPaciente){
+        $exame = DB::table('consulta as c')
+            ->join('consulta_exame as ag', 'ag.fk_consulta', '=', 'c.consulta_id')
+            ->join('exame as e', 'e.exame_id', '=', 'ag.fk_exame')
+            ->join('medicos as m', 'm.medico_id', '=', 'c.fk_medico')
+            ->where('c.fk_paciente','=',$idPaciente)
+            ->select('e.exame_id','e.nome_exame','c.created_at as dataSolici','m.crm','m.nome as medico')
+            ->get(); 
+        return $exame;
     }
 }

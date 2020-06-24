@@ -136,7 +136,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('consulta.paciente.index')}}">Realizar Consulta</a>
-                        </li>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('resultadosExames')}}">Resultados de Exames</a>
+                            </li>
                             @can('admin')
                                 <li class="nav-item">
                                 <a class="nav-link" href="{{route('admin.users.index')}}">Atribruir Perfil</a>

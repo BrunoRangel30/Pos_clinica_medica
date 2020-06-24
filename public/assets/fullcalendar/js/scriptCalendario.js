@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                dataType: 'json',
+                // dataType: 'json',
                 url: url,
                 data: data,
                 success: resolve,
@@ -200,6 +200,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 $("#resulPac").html(''); //limpa a div
             })
 
+        })
+    });
+    //Busca Paciente Exame
+    $("#searchPacExame").keyup(async function() {
+
+        let keys = $('#searchPacExame').val()
+            // console.log(keys)
+        let data = {
+            key: keys,
+        };
+        //  console.log(data, 'data');
+        getDataAjax('api/buscaPaciente', data).then(function(result) {
+
+            let input = '';
+            result.map(function(index) {
+                input += `<ul id='listaPacientesExame'>`
+                input += `<li value='${index.paciente_id}' id='${index.paciente_id}'>${index.nome}</li>`
+                input += `</ul>`
+            })
+            $("#resulPacExame").html(input);
+            if (keys == '') {
+                $("#resulPacExame").html('');
+            }
+            $("#listaPacientesExame>li").click(function() {
+                let dados = {
+                    id: this.id,
+                };
+                $("#resulPacExame").html(''); //limpa a div
+                getDataAjax('buscaResultados', dados).then(function(result) {
+                    $('#resultadosExames').html(result);
+                })
+            })
         })
     });
 
@@ -414,11 +446,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // li += `<div class='exclusao-exame'>`
                 listExames.map(function(item) {
 
-                        li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
+                    li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
 
 
-                    })
-                    //  li += `</div>`
+                })
+                li += '';
                 $('#examesSelect').html(li)
 
                 // console.log('dsds')
@@ -426,17 +458,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 // console.log(listaExames);
                 listExames.map(function(item, i) {
                     $(`#examesrequest input[name='exames-${item.id}']`).val(item.id);
-
                 })
 
 
             })
         })
     });
+
     document.getElementById("examesSelect").addEventListener("click", function(e) {
-        //document.getElementById("demo").innerHTML = "Hello World";
-        console.log(listExames)
-        console.log(e.target.childNodes[1].id);
+        li = '';
+        listExames.map(function(valor, i) {
+            if (valor.id == e.target.childNodes[1].id) {
+                listExames.splice(i, 1);
+            }
+        })
+        listExames.map(function(item) {
+            li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
+        })
+        $('#examesSelect').html(li)
+            //console.log(listExames, 'final')
+            //console.log(e.target.childNodes[1].id);
     });
 
 

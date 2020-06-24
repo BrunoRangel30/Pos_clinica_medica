@@ -6,6 +6,7 @@ use App\Exame;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PDF;
+use Session;
 
 class ExameController extends Controller
 {
@@ -31,6 +32,19 @@ class ExameController extends Controller
     {
         return view('pesquisa.exameListagem');
     }
+
+    public function listagemResultados()
+    {
+       // return view('pesquisa.exameListagem');
+       return view('consulta.consultaListagem');
+    }
+
+    public function getExamesPedidos(Request $request)
+    {
+       $exames = $this->exame->getExamePaciente($request['id']);
+       return view('consulta.componentes.resultadosExames', compact('exames'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -82,16 +96,17 @@ class ExameController extends Controller
      * @param  \App\Consulta  $consulta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Consulta $consulta)
+    public function edit(Request $request)
     {
-        //
+        $exames = $request->session()->get('exames');
+        return view('edicao.exame_edicao',compact('exames'));
     }
     public function ExamePdf(Request $request){
-      
-       $exame = $this->consulta->nomeExame( $request['idConsulta']);
-       $pdf = PDF::loadView('consulta.componentes.examesPDF',compact('exame'));
-       return $pdf->setPaper('a5')->stream();
-
+        
+        $exame = $this->consulta->nomeExame( $request['idConsulta']);
+        $pdf = PDF::loadView('consulta.componentes.examesPDF',compact('exame'));
+        return $pdf->setPaper('a5')->stream();
+        
     }
     /**
      * Update the specified resource in storage.
@@ -103,6 +118,7 @@ class ExameController extends Controller
     public function update(Request $request, Consulta $consulta)
     {
         //
+        $exames = $request->session()->get('exames');
     }
 
     /**
@@ -111,8 +127,27 @@ class ExameController extends Controller
      * @param  \App\Consulta  $consulta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Consulta $consulta)
+    public function destroy(Request $request)
     {
-        //
+        $teste;
+       // dd($exames[1]);
+       //dd($exames);
+    //  dd($request['key']);
+       foreach($exames as $j => $item){
+          
+          foreach($item as $i => $key){
+              //dd($i);
+            if( (int) $item[$i] ==   (int) $request['key']){
+              //  dd($i);
+              array_diff_key($item, $i);
+                //array_unshift($item);
+              
+            }
+          }
+       }
+     //  dd($exames);
+        $request->session()->forget('exames');
+        Session::put('exames', $exames);
+        return view('pesquisa.receitaListagem');
     }
 }
