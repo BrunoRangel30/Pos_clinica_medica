@@ -36,7 +36,7 @@ class Exame extends Model
             ->join('exame as e', 'e.exame_id', '=', 'ag.fk_exame')
             ->join('medicos as m', 'm.medico_id', '=', 'c.fk_medico')
             ->where('c.fk_paciente','=',$idPaciente)
-            ->select('e.exame_id','e.nome_exame','c.created_at as dataSolici','m.crm','m.nome as medico')
+            ->select('e.exame_id','e.nome_exame','c.created_at as dataSolici', 'c.consulta_id as id','m.crm','m.nome as medico','c.fk_medico')
             ->get(); 
         return $exame;
     }

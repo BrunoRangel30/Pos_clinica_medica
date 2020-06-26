@@ -48,6 +48,9 @@ Route::namespace('Consulta')->prefix('consulta')->name('consulta.')->middleware(
 //Resultados exames
 Route::get('resultadosExames', 'Consulta\ExameController@listagemResultados')->name('resultadosExames');
 Route::post('buscaResultados', 'Consulta\ExameController@getExamesPedidos');
+Route::post('uploadResultados', 'Consulta\ExameController@uploadArquivos')->name('uploadResultados');
+Route::get('listarResultadosExames', 'Consulta\ExameController@listarResultadosExames')->name('listarResultadosExames');
+Route::post('VisualizarResultadosMenu', 'Consulta\ExameController@listarResultadosExamesMenu')->name('listarResultadosExamesMenu');
 
 Route::get('editar/receita/{key}', 'Consulta\ReceitaController@edit')->name('editarReceita');
 Route::get('excluir/receita/{key}', 'Consulta\ReceitaController@destroy')->name('excluirReceita');

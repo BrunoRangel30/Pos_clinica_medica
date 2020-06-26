@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     function atualizarCalendar(data) {
+        console.log(data, 'dddd')
         getDataAjax('../api/atualizarAgenda', data).then(function(result) {
                 console.log(result, 'resultado')
                 var Calendar = FullCalendar.Calendar
@@ -202,6 +203,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         })
     });
+
+    function menuResultadoExame(dadosId) {
+        console.log('aqui ja existe o meu')
+        let dados = {
+            id: dadosId,
+        };
+        $("#inserirResultadosExames").click(function() {
+            getDataAjax('buscaResultados', dados).then(function(result) {
+                $('#resultadosExames').html(result);
+                $(`#fk_paciente_exame`).val(dados.id)
+                menuResultadoExame(dados.id);
+            })
+        })
+        $("#VisualizarResultadosExames").click(function() {
+                getDataAjax('VisualizarResultadosMenu', dados).then(function(result) {
+                    $('#resultadosExames').html(result);
+                    $(`#fk_paciente_exame`).val(dados.id)
+                    menuResultadoExame(dados.id);
+                })
+            })
+            //VisualizarResultadosMenu
+    }
     //Busca Paciente Exame
     $("#searchPacExame").keyup(async function() {
 
@@ -227,13 +250,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 let dados = {
                     id: this.id,
                 };
+                // alert(dados.id)
                 $("#resulPacExame").html(''); //limpa a div
                 getDataAjax('buscaResultados', dados).then(function(result) {
                     $('#resultadosExames').html(result);
+                    // console.log(dados.id, 'dados.id')
+                    // $("#modalAgenda input[name='fk_paciente']").val(idPac);
+                    $(`#fk_paciente_exame`).val(dados.id)
+                    menuResultadoExame(dados.id)
                 })
             })
         })
     });
+
 
     function loadErros(response) {
         $("#sucess").text('');
@@ -353,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         $("#inputPesqMed input[name='pesquisaMedico']").val(e.target.innerText); //insere o resultado  no campo
                         $('#fk_medico').val(idMed);
                         $("#resultMed").html(''); //limpa a div
-                        console.log(data, 'data');
+                        /// console.log(data, 'data');
                         atualizarCalendar(data);
                     });
                 })
@@ -457,6 +486,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // var listaExames = li.querySelectorAll("#examesSelect>li>i");
                 // console.log(listaExames);
                 listExames.map(function(item, i) {
+
                     $(`#examesrequest input[name='exames-${item.id}']`).val(item.id);
                 })
 

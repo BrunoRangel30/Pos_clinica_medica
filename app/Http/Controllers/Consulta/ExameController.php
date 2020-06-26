@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Consulta;
+use Illuminate\Support\Facades\DB;
 use App\Consulta;
 use App\Exame;
+use App\resultado_exames;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PDF;
@@ -32,11 +34,32 @@ class ExameController extends Controller
     {
         return view('pesquisa.exameListagem');
     }
+    
+    public function listarResultadosExames(Request $request){
+        $resultado_exames = new resultado_exames;
+        $idpaciente = $request->session()->get('fk_paciente_exame');
+        $resultado = $resultado_exames->getResultados($idpaciente);
+      //  dd( $idpaciente);
+      return view('pesquisa.resultadoExameListagem', compact('resultado'));
+
+        //dd($idpaciente);
+    }
+    public function listarResultadosExamesMenu(Request $request){
+        $resultado_exames = new resultado_exames;
+       // $idpaciente = $request->session()->get('fk_paciente_exame');
+       //$exames = $this->exame->getExamePaciente($request['id']);
+    //   dd($request['id']);
+        $resultado = $resultado_exames->getResultados($request['id']);
+      //  dd( $idpaciente);
+      return view('consulta.componentes.resultadoExamesSubmenu', compact('resultado'));
+
+        //dd($idpaciente);
+    }
 
     public function listagemResultados()
     {
        // return view('pesquisa.exameListagem');
-       return view('consulta.consultaListagem');
+       return view('consulta.consultaExameIndex');
     }
 
     public function getExamesPedidos(Request $request)
@@ -107,6 +130,27 @@ class ExameController extends Controller
         $pdf = PDF::loadView('consulta.componentes.examesPDF',compact('exame'));
         return $pdf->setPaper('a5')->stream();
         
+    }
+
+    public function uploadArquivos(Request $request){
+         session()->forget('fk_paciente_exame');
+    //   dd($request->allfiles());
+        for($i=0 ; $i < count($request->id); $i++){
+            if(isset($request->allfiles()['exames'][$i])){
+                $file = $request->allfiles()['exames'][$i];
+                $data['path'] =  $file->store('exames');
+                $data['fk_exame'] = $request->id[$i];
+                $data['fk_medico'] = $request->fk_medico; //tem que ser o medico autenticado  mudar
+                $data['fk_paciente'] = $request->fk_paciente_exame;
+                $data['publicar'] = true;
+                $data['fk_consulta'] = $request->consulta[$i];
+                var_dump($data);
+                session(['fk_paciente_exame' =>  $request->fk_paciente_exame]);
+                DB::table('resultado_exames')->insert($data);
+            }else{
+            };
+        }
+       return redirect()->route('listarResultadosExames');
     }
     /**
      * Update the specified resource in storage.
