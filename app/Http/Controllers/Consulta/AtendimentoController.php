@@ -96,10 +96,13 @@ class AtendimentoController extends Controller
         return $result;
     }
 
-    public function atualizarAgenda(){
-      
-        $idMed=$this->request->input('id');
-        $agendaMed = $this->agenda->getAgenda($idMed);
+    public function atualizarAgenda(Request $request){
+       // dd($request);()
+        $start = (!empty($request->start)) ? ($request->start) : ('');
+        $end = (!empty($request->end)) ? ($request->end) : ('');
+        $idMed= $request->data;
+        $agendaMed = $this->agenda->getAgenda($idMed,$start,$end);
+        //var_dump($agendaMed);
         return json_encode($agendaMed);
     }
 
@@ -162,10 +165,21 @@ class AtendimentoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(AgendaRequest $request, Atendimento $atendimento)
-    {
+    {  //dd( $request->agenda_id);
        $dataAgenda= $this->agenda->where('agenda_id',$request->agenda_id)->first();
-       $dataAgenda->fill($request->all());
+       
+       $dataAgenda->start = $request->start;
+       $dataAgenda->end = $request->end;
+       $dataAgenda->title = $request->title;
+       $dataAgenda->tipo_consulta = $request->tipo_consulta;
+       $dataAgenda->fk_paciente = $request->fk_paciente;
+       $dataAgenda->fk_medico = $request->fk_medico;
+       $dataAgenda->user_log =  Auth::user()->id;
+       //$dataAgenda->fill($request->all());
        $dataAgenda->save();
+       $dataAgenda= $this->agenda->where('agenda_id',$request->agenda_id)->first();
+      // dd($dataAgenda);
+
        return $request->fk_medico;
 
     }

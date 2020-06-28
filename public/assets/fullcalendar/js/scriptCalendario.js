@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     //chamada ajax
+
     function getDataAjax(url, data) {
 
         return new Promise(function(resolve, reject) {
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
     $(".paciente-consulta > i").click(function() {
         let id = this.id
         getDataAjax('../consuta/index', id).then(function(result) {
@@ -26,144 +28,167 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     function atualizarCalendar(data) {
-        console.log(data, 'dddd')
-        getDataAjax('../api/atualizarAgenda', data).then(function(result) {
-                console.log(result, 'resultado')
-                var Calendar = FullCalendar.Calendar
-                var ObjetoCalender
-                var calendarEl = document.getElementById('calendar');
-                console.log(result, 'df')
-                    //1
-                ObjetoCalender = new Calendar(calendarEl, {
-                        plugins: ['interaction', 'timeGrid', 'list'],
-                        header: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'timeGridWeek,timeGridDay,listWeek'
-                        },
-                        locale: 'pt-br',
-                        navLinks: true,
-                        selectable: true,
-                        editable: false,
-                        droppable: false, // this allows things to be dropped onto the calendar
-                        drop: function(arg) {
-                            // is the "remove after drop" checkbox checked?
-                            if (document.getElementById('drop-remove').checked) {
-                                // if so, remove the element from the "Draggable Events" list
-                                arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-                            }
-                        },
-                        eventClick: function(ele) {
-                            resetForm('formAgenda');
-                            $("#messagem").text('');
-                            $("#sucess").text('');
-                            $('#modalAgenda').modal('show');
-                            $("#modalAgenda #tituloAgenda").text('Remarcar Consulta');
-                            $("#modalAgenda button.delete-event").css("display", "block");
-                            let nome = ele.event.title;
-                            $("#modalAgenda input[name='nome']").val(nome);
-                            let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm");
-                            $("#modalAgenda input[name='inicio']").val(start);
-                            let end = moment(ele.event.end).format("DD/MM/YYYY HH:mm");
-                            $("#modalAgenda input[name='fim']").val(end);
-                            let tipo = ele.event.extendedProps.tipo_consulta;
-                            $("#modalAgenda select[name='tipo'][option]").val(tipo);
-                            let fk_paciente = ele.event.extendedProps.fk_paciente;
-                            // $('#searchPac').attr('data-paciente', fk_paciente);
-                            $("#modalAgenda input[name='fk_paciente']").val(fk_paciente);
-                            let id = ele.event.id;
-                            $("#modalAgenda input[name='id_agenda']").val(id);
-                            let fk_medico = ele.event.extendedProps.fk_medico;
-                            $("#modalAgenda input[name='fk_medico']").val(fk_medico);
-                        },
-                        select: function(ele) {
-                            resetForm('formAgenda');
-                            $("#messagem").text('');
-                            $("#sucess").text('');
-                            $('#modalAgenda').modal('show')
-                            $("#modalAgenda #tituloAgenda").text('Agendar Consulta');
-                            $("#modalAgenda button.delete-event").css("display", "none");
-                            let start = moment(ele.start).format("DD/MM/YYYY HH:mm");
-                            $("#modalAgenda input[name='inicio']").val(start);
-                            let end = moment(ele.end).format("DD/MM/YYYY HH:mm");
-                            $("#modalAgenda input[name='fim']").val(end);
-                            let idMedico = $("#medicoSelect input[name='fk_medico']").val();
-                            $("#modalAgenda input[name='fk_medico']").val(idMedico);
-                        },
-                        events: result
 
-                    }) //Primeiro calendario
-                    //Veridica se ja existe um objeto calendar
-                if ($('#calendar').is(':empty')) {
-                    ObjetoCalender.render();
-                } else {
-                    //Cria e destroi novamente calendar
-                    ObjetoCalender.destroy();
-                    $('#calendar').html('');
-                    //2
-                    ObjetoCalender = new Calendar(calendarEl, {
-                        plugins: ['interaction', 'timeGrid', 'list'],
-                        header: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'timeGridWeek,timeGridDay,listWeek'
+        var Calendar = FullCalendar.Calendar
+        var calendarEl = document.getElementById('calendar');
+        //1
+        ObjetoCalender = new Calendar(calendarEl, {
+                plugins: ['interaction', 'timeGrid', 'list'],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay,listWeek'
+                },
+                locale: 'pt-br',
+                minTime: "07:00:00",
+                maxTime: "22:00:00",
+                contentHeight: 'auto',
+                navLinks: true,
+                selectable: true,
+                editable: false,
+                droppable: false, // this allows things to be dropped onto the calendar
+                drop: function(arg) {
+                    // is the "remove after drop" checkbox checked?
+                    if (document.getElementById('drop-remove').checked) {
+                        // if so, remove the element from the "Draggable Events" list
+                        arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                    }
+                },
+                //Ja possui algo
+                eventClick: function(ele) {
+                    ObjetoCalender.refetchEvents()
+                    console.log('clicou 1');
+                    resetForm('formAgenda');
+                    $('#modalAgendaEdicao').modal('show');
+                    $("#messagemEdicao").text('');
+                    $("#modalAgenda #tituloAgenda").text('Remarcar Consulta');
+                    //  $("#modalAgenda button.delete-event").css("display", "block");
+                    let nome = ele.event.title;
+                    $("#modalAgendaEdicao input[name='nome']").val(nome);
+                    let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm");
+                    $("#modalAgendaEdicao input[name='inicio']").val(start);
+                    let end = moment(ele.event.end).format("DD/MM/YYYY HH:mm");
+                    $("#modalAgendaEdicao input[name='fim']").val(end);
+                    let tipo = ele.event.extendedProps.tipo_consulta;
+                    $("#modalAgendaEdicao select[name='tipo'][option]").val(tipo);
+                    let fk_paciente = ele.event.extendedProps.fk_paciente;
+                    // $('#searchPac').attr('data-paciente', fk_paciente);
+                    $("#modalAgendaEdicao input[name='fk_paciente']").val(fk_paciente);
+                    let id = ele.event.id;
+                    $("#modalAgendaEdicao input[name='id_agenda']").val(id);
+                    let fk_medico = ele.event.extendedProps.fk_medico;
+                    $("#modalAgendaEdicao input[name='fk_medico']").val(fk_medico);
+                },
+                //Clica em lugar vazio
+                select: function(ele) {
+                    ObjetoCalender.refetchEvents()
+                    resetForm('formAgenda');
+                    // $("#messagemEdicao").text('');
+                    //$("#sucess").text('');
+                    $('#modalAgenda').modal('show')
+                    $("#modalAgenda #tituloAgenda").text('Agendar Consulta');
+                    // $("#modalAgenda button.delete-event").css("display", "none");
+                    let start = moment(ele.start).format("DD/MM/YYYY HH:mm");
+                    $("#modalAgenda input[name='inicio']").val(start);
+                    let end = moment(ele.end).format("DD/MM/YYYY HH:mm");
+                    $("#modalAgenda input[name='fim']").val(end);
+                    let idMedico = $("#medicoSelect input[name='fk_medico']").val();
+                    $("#modalAgenda input[name='fk_medico']").val(idMedico);
+                },
+                eventSources: [{
+                        url: '../atualizarAgenda',
+                        extraParams: {
+                            data: data.id,
                         },
-                        locale: 'pt-br',
-                        navLinks: true,
-                        selectable: true,
-                        editable: false,
-                        disableDragging: true,
-                        droppable: false, // this allows things to be dropped onto the calendar
-                        drop: function(arg) {
-                            // is the "remove after drop" checkbox checked?
-                            if (document.getElementById('drop-remove').checked) {
-                                // if so, remove the element from the "Draggable Events" list
-                                arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-                            }
-                        },
-                        eventClick: function(ele) {
-                            resetForm('formAgenda');
-                            $("#messagem").text('');
-                            $("#sucess").text('');
-                            $('#modalAgenda').modal('show');
-                            $("#modalAgenda #tituloAgenda").text('Remarcar Consulta');
-                            let nome = ele.event.title;
-                            $("#modalAgenda input[name='nome']").val(nome);
-                            let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm");
-                            $("#modalAgenda input[name='inicio']").val(start);
-                            let end = moment(ele.event.end).format("DD/MM/YYYY HH:mm");
-                            $("#modalAgenda input[name='fim']").val(end);
-                            let tipo = ele.event.extendedProps.tipo_consulta;
-                            $("#modalAgenda select[name='tipo']").val(tipo);
-                            let fk_paciente = ele.event.extendedProps.fk_paciente;
-                            $('#searchPac').attr('data-paciente', fk_paciente);
-                            $("#modalAgenda input[name='fk_paciente']").val(fk_paciente);
-                            let id = ele.event.id;
-                            $("#modalAgenda input[name='id_agenda']").val(id);
-                            let fk_medico = ele.event.extendedProps.fk_medico;
-                            $("#modalAgenda input[name='fk_medico']").val(fk_medico);
-                        },
-                        select: function(ele) {
-                            resetForm('formAgenda');
-                            $("#messagem").text('');
-                            $("#sucess").text('');
-                            $('#modalAgenda').modal('show')
-                            $("#modalAgenda #tituloAgenda").text('Agendar Consulta');
-                            $("#modalAgenda button.delete-event").css("display", "none");
-                            let start = moment(ele.start).format("DD/MM/YYYY HH:mm");
-                            $("#modalAgenda input[name='inicio']").val(start);
-                            let end = moment(ele.end).format("DD/MM/YYYY HH:mm");
-                            $("#modalAgenda input[name='fim']").val(end);
-                            let idMedico = $("#medicoSelect input[name='fk_medico']").val();
-                            $("#modalAgenda input[name='fk_medico']").val(idMedico);
+                        color: '#183153',
+                    },
 
-                        },
-                        events: result
+                ],
+            }) //Primeiro calendario
+            //Veridica se ja existe um objeto calendar
+        if ($('#calendar').is(':empty')) {
+            ObjetoCalender.render();
+        } else {
+            //Cria e destroi novamente calendar
+            ObjetoCalender.destroy();
+            $('#calendar').html('');
+            //2*************************************************************22222222*********************************************
+            ObjetoCalender = new Calendar(calendarEl, {
+                plugins: ['interaction', 'timeGrid', 'list'],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay,listWeek'
+                },
+                locale: 'pt-br',
+                minTime: "07:00:00",
+                maxTime: "22:00:00",
+                contentHeight: 'auto',
+                handleWindowResize: true,
+                navLinks: true,
+                hiddenDays: [0],
+                selectable: true,
+                editable: false,
+                disableDragging: true,
+                droppable: false, // this allows things to be dropped onto the calendar
+                drop: function(arg) {
+                    // is the "remove after drop" checkbox checked?
+                    if (document.getElementById('drop-remove').checked) {
+                        // if so, remove the element from the "Draggable Events" list
+                        arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                    }
+                },
+                eventClick: function(ele) {
+                    // console.log('clicou 1');
+                    resetForm('formAgenda');
+                    $("#messagemEdicao").text('');
+                    $('#modalAgendaEdicao').modal('show');
+                    $("#modalAgenda #tituloAgenda").text('Remarcar Consulta');
+                    //  $("#modalAgenda button.delete-event").css("display", "block");
+                    let nome = ele.event.title;
+                    $("#modalAgendaEdicao input[name='nome']").val(nome);
+                    let start = moment(ele.event.start).format("DD/MM/YYYY HH:mm");
+                    $("#modalAgendaEdicao input[name='inicio']").val(start);
+                    let end = moment(ele.event.end).format("DD/MM/YYYY HH:mm");
+                    $("#modalAgendaEdicao input[name='fim']").val(end);
+                    let tipo = ele.event.extendedProps.tipo_consulta;
+                    $("#modalAgendaEdicao select[name='tipo'][option]").val(tipo);
+                    let fk_paciente = ele.event.extendedProps.fk_paciente;
+                    // $('#searchPac').attr('data-paciente', fk_paciente);
+                    $("#modalAgendaEdicao input[name='fk_paciente']").val(fk_paciente);
+                    let id = ele.event.id;
+                    $("#modalAgendaEdicao input[name='id_agenda']").val(id);
+                    let fk_medico = ele.event.extendedProps.fk_medico;
+                    $("#modalAgendaEdicao input[name='fk_medico']").val(fk_medico);
+                },
+                //quando não tem nada
+                select: function(ele) {
+                    resetForm('formAgenda');
+                    $("#messagem").text('');
+                    $("#sucess").text('');
+                    $('#modalAgenda').modal('show')
+                    $("#modalAgenda #tituloAgenda").text('Agendar Consulta');
+                    $("#modalAgenda button.delete-event").css("display", "none");
+                    let start = moment(ele.start).format("DD/MM/YYYY HH:mm");
+                    $("#modalAgenda input[name='inicio']").val(start);
+                    let end = moment(ele.end).format("DD/MM/YYYY HH:mm");
+                    $("#modalAgenda input[name='fim']").val(end);
+                    let idMedico = $("#medicoSelect input[name='fk_medico']").val();
+                    $("#modalAgenda input[name='fk_medico']").val(idMedico);
 
-                    })
-                    ObjetoCalender.render();
-                }
-            }) //fim do ajax
+                },
+                eventSources: [{
+                    url: '../atualizarAgenda',
+                    extraParams: {
+                        data: data.id,
+                    },
+                    color: '#183153',
+                }],
+            })
+
+            ObjetoCalender.render();
+        }
+        // }) //fim do ajax
     }
 
     //Mascaras para os campos de formulario marcacao de consulta
@@ -175,30 +200,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     //busca paciente
-    $("#searchPac").keyup(async function() {
+    $(".searchPac").keyup(async function() {
 
-        let keys = $('#searchPac').val()
+        let keys = $('.searchPac').val()
         data = {
             key: keys,
         };
         getDataAjax('../api/buscaPaciente', data).then(function(result) {
             let input = '';
-            console.log(keys, 'tamanho')
+            //  console.log(keys, 'tamanho')
             result.map(function(index) {
                 input += `<ul id='listaPacientes'>`
                 input += `<li value='${index.paciente_id}' id='${index.paciente_id}'>${index.nome}</li>`
                 input += `</ul>`
             })
-            $("#resulPac").html(input);
+            $(".resulPac").html(input);
             if (keys == '') {
-                $("#resulPac").html('');
+                $(".resulPac").html('');
             }
             $("#listaPacientes>li").click(function(e) {
                 let idPac = this.id;
                 $("#inputPesqPac input[name='nome']").val(e.target.innerText); //insere o resultado  no campo
                 $("#modalAgenda input[name='fk_paciente']").val(idPac);
                 //$('#searchPac').attr('data-paciente', idPac);
-                $("#resulPac").html(''); //limpa a div
+                $(".resulPac").html(''); //limpa a div
+            })
+
+        })
+    });
+    //Edicao  Agenda
+    $(".searchPacEdicao").keyup(async function() {
+
+        let keys = $('.searchPacEdicao').val()
+        data = {
+            key: keys,
+        };
+        getDataAjax('../api/buscaPaciente', data).then(function(result) {
+            let input = '';
+            result.map(function(index) {
+                input += `<ul id='listaPacientes'>`
+                input += `<li value='${index.paciente_id}' id='${index.paciente_id}'>${index.nome}</li>`
+                input += `</ul>`
+            })
+            $(".resulPacEdicao").html(input);
+            if (keys == '') {
+                $(".resulPacEdicao").html('');
+            }
+            $("#listaPacientes>li").click(function(e) {
+                let idPac = this.id;
+                $("#inputPesqPac input[name='nome']").val(e.target.innerText); //insere o resultado  no campo
+                $("#modalAgenda input[name='fk_paciente']").val(idPac);
+                //$('#searchPacEdicao').attr('data-paciente', idPac);
+                $(".resulPacEdicao").html(''); //limpa a div
             })
 
         })
@@ -229,11 +282,10 @@ document.addEventListener('DOMContentLoaded', function() {
     $("#searchPacExame").keyup(async function() {
 
         let keys = $('#searchPacExame').val()
-            // console.log(keys)
+
         let data = {
             key: keys,
         };
-        //  console.log(data, 'data');
         getDataAjax('api/buscaPaciente', data).then(function(result) {
 
             let input = '';
@@ -250,12 +302,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 let dados = {
                     id: this.id,
                 };
-                // alert(dados.id)
                 $("#resulPacExame").html(''); //limpa a div
                 getDataAjax('buscaResultados', dados).then(function(result) {
                     $('#resultadosExames').html(result);
-                    // console.log(dados.id, 'dados.id')
-                    // $("#modalAgenda input[name='fk_paciente']").val(idPac);
                     $(`#fk_paciente_exame`).val(dados.id)
                     menuResultadoExame(dados.id)
                 })
@@ -263,48 +312,42 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     });
 
-
-    function loadErros(response) {
-        $("#sucess").text('');
+    //Controle de erros da agenda
+    function loadErros(div, response) {
+        $(`${div}`).text('');
+        console.log(response);
         let boxAlert = `<div class="alert alert-danger error">`
         for (let field in response) {
-            console.log(field);
+
             boxAlert += `<span>${response[field]}</span><br/>`;
         }
         boxAlert += `</div>`
-        console.log(boxAlert)
+            // console.log(boxAlert)
         return boxAlert.replace(/\,/g, "</br>");
 
     }
 
-    function loadSave(response) {
-        $("#messagem").text('');
-        let boxAlert = `<div class="alert alert-success success">`
-        boxAlert += `<p>${response}</p>`;
-        boxAlert += `</div>`
-        console.log(boxAlert);
-        return boxAlert;
-    }
     //delete elementos
-    $(".delete-event").click(function() {
-            let id = $("#modalAgenda input[name='id_agenda']").val();
-            let fk_medico = $("#modalAgenda input[name='fk_medico']").val();
-            let agenda = {
-                id_agenda: id,
-                _method: 'DELETE',
-                fk_medico: fk_medico
-            }
-            getDataAjax('../consulta/ExcluirAgenda', agenda).then(function(resp) {
-                let data = {
-                    id: resp,
-                };
-                atualizarCalendar(data);
-                $(".success").fadeIn(300).delay(1500).fadeOut(400);
-            })
+    $("#excluirAgenda").click(function() {
+        let id = $("#modalAgendaEdicao input[name='id_agenda']").val();
+        let fk_medico = $("#modalAgendaEdicao input[name='fk_medico']").val();
+        let agenda = {
+            id_agenda: id,
+            _method: 'DELETE',
+            fk_medico: fk_medico
+        }
+        getDataAjax('../consulta/ExcluirAgenda', agenda).then(function(resp) {
+            let data = {
+                id: resp,
+            };
+            $('#modalAgendaEdicao').modal('hide')
+            atualizarCalendar(data);
+            $(".success").fadeIn(300).delay(1500).fadeOut(400);
         })
-        //Salvar consulta/editar
-    $(".delete-save").click(function() {
+    })
 
+    //Salvar consulta
+    $(".saveConsulta").click(function() {
         let agenda = {
             title: '',
             start: '',
@@ -313,7 +356,6 @@ document.addEventListener('DOMContentLoaded', function() {
             fk_paciente: '',
             fk_medico: ''
         }
-        let id = $("#modalAgenda input[name='id_agenda']").val();
         agenda.title = $("#modalAgenda input[name='nome']").val();
         agenda.start = moment($("#modalAgenda input[name='inicio']").val(), "DD/MM/YYYY HH:mm").format('YYYY/MM/DD HH:mm');
         agenda.end = moment($("#modalAgenda input[name='fim']").val(), "DD/MM/YYYY HH:mm").format('YYYY/MM/DD HH:mm');
@@ -321,41 +363,59 @@ document.addEventListener('DOMContentLoaded', function() {
         agenda.fk_paciente = $("#modalAgenda input[name='fk_paciente']").val();
         agenda.fk_medico = $("#modalAgenda input[name='fk_medico']").val();
 
-        if (id == '') {
-            getDataAjax('../consulta/InsereAgenda', agenda).then(function(resp) {
-                    let data = {
-                        id: resp,
-                    };
-                    atualizarCalendar(data);
-                    $('#sucess').html(loadSave('A consulta foi agendada com sucesso!'))
-                })
-                .catch(function(data) {
-                    $('#messagem').html(loadErros(data.responseJSON.errors));
-                });
+        getDataAjax('../consulta/InsereAgenda', agenda).then(function(resp) {
+                let data = {
+                    id: resp,
+                };
+                atualizarCalendar(data);
+                $('#modalAgenda').modal('hide');
+                $(".success").fadeIn(300).delay(1500).fadeOut(400);
 
-        } else {
-            console.log('editar')
-            agenda.agenda_id = id;
-            agenda._method = "PUT";
-            getDataAjax('../consulta/AtualizarAgenda', agenda).then(function(resp) {
-                    let data = {
-                        id: resp,
-                    };
-
-                    atualizarCalendar(data)
-                    $('#sucess').html(loadSave('A consulta foi remarcada com sucesso!'))
-                })
-                .catch(function(data) {
-                    $('#messagem').html(loadErros(data.responseJSON.errors));
-                });
-
-        }
+            })
+            .catch(function(data) {
+                $('#messagem').html(loadErros('#sucess', data.responseJSON.errors));
+            });
     });
+
+    $(".atualizarConsulta").click(function() {
+        let id = $("#modalAgendaEdicao input[name='id_agenda']").val();
+        let url;
+        let agenda = {
+            title: '',
+            start: '',
+            end: '',
+            tipo_consulta: '',
+            fk_paciente: '',
+            fk_medico: ''
+        }
+        agenda.title = $("#modalAgendaEdicao input[name='nome']").val();
+        agenda.start = moment($("#modalAgendaEdicao input[name='inicio']").val(), "DD/MM/YYYY HH:mm").format('YYYY/MM/DD HH:mm');
+        agenda.end = moment($("#modalAgendaEdicao input[name='fim']").val(), "DD/MM/YYYY HH:mm").format('YYYY/MM/DD HH:mm');
+        agenda.tipo_consulta = $("#modalAgendaEdicao select[name='tipo']").val();
+        agenda.fk_paciente = $("#modalAgendaEdicao input[name='fk_paciente']").val();
+        agenda.fk_medico = $("#modalAgendaEdicao input[name='fk_medico']").val();
+        console.log(id);
+        agenda.agenda_id = id;
+        agenda._method = "PUT";
+        console.log(agenda)
+        getDataAjax('../consulta/AtualizarAgendaEdicao', agenda).then(function(resp) {
+                let data = {
+                    id: resp,
+                };
+                $('#modalAgendaEdicao').modal('hide')
+                atualizarCalendar(data);
+            })
+            .catch(function(data) {
+                console.log(data);
+                $('#messagemEdicao').html(loadErros('#sucessEdicao', data.responseJSON.errors));
+            });
+    })
 
     /*pesquisa medicos*******************************************************************/
     $("#searchMed").keyup(async function() {
 
             let keys = $('#searchMed').val()
+            let url
             data = {
                 key: keys,
             };
@@ -364,13 +424,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     let input = '';
                     result.map(function(index) {
                         input += `<ul id='listaMedicos'>`
-                        input += `<li value='${index.medico_id}' id='${index.medico_id}'>${index.nome}</li>`
+                        input += `<li value='${index.medico_id}' id='${index.medico_id}'> <i class="far fa-circle"></i>  ${index.nome}</li>`
                         input += `</ul>`
                     })
                     $("#resultMed").html(input);
                     //Limpa se não houver resultados
+                    $('.resultadoMedicos').show(); //mostra a div com a pesquisa
                     if (keys == '') {
                         $("#resultMed").html('');
+                        $('.resultadoMedicos').hide()
                     }
                     //seleciona agenda por medico
                     $("#listaMedicos>li").click(function(e) {
@@ -382,7 +444,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         $("#inputPesqMed input[name='pesquisaMedico']").val(e.target.innerText); //insere o resultado  no campo
                         $('#fk_medico').val(idMed);
                         $("#resultMed").html(''); //limpa a div
-                        /// console.log(data, 'data');
+                        $('.resultadoMedicos').hide()
+                            /// console.log(data, 'data');
+                            // url = '../atualizarAgenda',
                         atualizarCalendar(data);
                     });
                 })
@@ -481,10 +545,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 li += '';
                 $('#examesSelect').html(li)
-
-                // console.log('dsds')
-                // var listaExames = li.querySelectorAll("#examesSelect>li>i");
-                // console.log(listaExames);
                 listExames.map(function(item, i) {
 
                     $(`#examesrequest input[name='exames-${item.id}']`).val(item.id);
@@ -506,31 +566,9 @@ document.addEventListener('DOMContentLoaded', function() {
             li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
         })
         $('#examesSelect').html(li)
-            //console.log(listExames, 'final')
-            //console.log(e.target.childNodes[1].id);
     });
 
 
 
-    //Post Medicamento
-    /*  $("#salvarReceita").click(function(e) {
-          console.log('salvarCaonsuça');
-          data = {
-              _method: 'POST',
-              qtd: $("#qtd input[name='qtd']").val(),
-              unidade: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
-              via: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
-              procedimento: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
-              fk_paciente: $("#inputPesqMedicamento input[name='fk_paciente']").val(),
-              fk_medico: $("#inputPesqMedicamento input[name='fk_medico']").val(),
-              fk_medicamento: $("#inputPesqMedicamento input[name='fk_medicamento']").val(),
-          };
-          console.log(data, 'fdfdf');
-          getDataAjax('../receita', data).then(function(result) {
-              $("#listagemReceita").append(result);
-          })
-
-
-      })*/
 
 });

@@ -58,7 +58,8 @@ Route::get('editar/exame/{key}', 'Consulta\ExameController@edit')->name('editarE
 Route::get('consuta/resumoConsulta', 'Consulta\ConsultaController@show')->name('resumoConsulta');
 Route::get('consuta/salvarConsulta', 'Consulta\ConsultaController@store')->name('salvarConsulta');
 Route::post('consulta/InsereAgenda', 'Consulta\AtendimentoController@store')->middleware('can:admin');
-Route::put('consulta/AtualizarAgenda', 'Consulta\AtendimentoController@update')->middleware('can:admin');
+Route::put('consulta/AtualizarAgendaEdicao', 'Consulta\AtendimentoController@update')->middleware('can:admin');
+Route::get('/atualizarAgenda', 'Consulta\AtendimentoController@atualizarAgenda')->middleware('can:admin');;
 Route::get('consuta/index/', 'Consulta\AtendimentoController@consulta')->name('realizarConsulta');
 Route::get('/paciente/historico', 'Historico\HistoricoPacienteController@index')->name('historico.paciente');
 Route::delete('/consulta/ExcluirAgenda', 'Consulta\AtendimentoController@destroy')->middleware('can:admin');
