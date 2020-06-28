@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 locale: 'pt-br',
                 minTime: "07:00:00",
                 maxTime: "22:00:00",
+                hiddenDays: [0],
                 contentHeight: 'auto',
                 navLinks: true,
                 selectable: true,
