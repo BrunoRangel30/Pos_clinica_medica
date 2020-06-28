@@ -209,14 +209,16 @@ document.addEventListener('DOMContentLoaded', function() {
         getDataAjax('../api/buscaPaciente', data).then(function(result) {
             let input = '';
             //  console.log(keys, 'tamanho')
+            input += `<ul id='listaPacientes'>`
             result.map(function(index) {
-                input += `<ul id='listaPacientes'>`
                 input += `<li value='${index.paciente_id}' id='${index.paciente_id}'>${index.nome}</li>`
-                input += `</ul>`
             })
+            input += `</ul>`
             $(".resulPac").html(input);
+            $(".resulPac").show();
             if (keys == '') {
                 $(".resulPac").html('');
+                $(".resulPac").hide();
             }
             $("#listaPacientes>li").click(function(e) {
                 let idPac = this.id;
@@ -224,6 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 $("#modalAgenda input[name='fk_paciente']").val(idPac);
                 //$('#searchPac').attr('data-paciente', idPac);
                 $(".resulPac").html(''); //limpa a div
+                $(".resulPac").hide();
             })
 
         })
