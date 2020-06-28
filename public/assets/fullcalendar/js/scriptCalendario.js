@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
             //  console.log(keys, 'tamanho')
             input += `<ul id='listaPacientes'>`
             result.map(function(index) {
-                input += `<li value='${index.paciente_id}' id='${index.paciente_id}'>${index.nome}</li>`
+                input += `<li value='${index.paciente_id}' id='${index.paciente_id}'> <i class="far fa-circle"></i> ${index.nome} </li>`
             })
             input += `</ul>`
             $(".resulPac").html(input);

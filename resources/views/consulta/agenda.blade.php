@@ -70,75 +70,86 @@
         font-size: 23px;
     }*/
 
-    .success {
-        color: #3c763d;
-        background-color: #dff0d8;
-        border-color: #d6e9c6;
-        display: none;
-    }
-    .success-cadastro{
-        color: #3c763d;
-        background-color: #dff0d8;
-        border-color: #d6e9c6;
-        display: none;
-    }
-
-    .cssCustomCalendar .fc-time-grid .fc-slats td{
-        height: 4.5em;
-        padding:2px;
+  .success {
+      color: #3c763d;
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+      display: none;
+  }
+  .success-cadastro{
+      color: #3c763d;
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+      display: none;
+  }
+  /*configurações do calendario*/
+  .cssCustomCalendar .fc-time-grid .fc-slats td{
+      height: 4.5em;
+      padding:2px;
        /* background-color: #183153;*/
        
-    }
-    .cssCustomCalendar .fc-content .fc-time{
-        font-weight: bold;
-    }
-   .cssCustomCalendar .fc-unthemed td.fc-today {
-        background: #63e6be6e;
-    }
+  }
+  .cssCustomCalendar .fc-content .fc-time{
+      font-weight: bold;
+  }
+
+  .cssCustomCalendar .fc-unthemed td.fc-today {
+      background: #63e6be6e;
+  }
+
     /*CSS botão de pesquisa*/
-    #custom-search-input{
-        padding: 3px;
-        border: solid 1px #183153;
-        border-radius: 8px;
-        background-color: #fff;
-        color: #183153;
-        -webkit-box-shadow: 0 0.375em 0 currentColor;
-    }
-    .resultadoMedicos{
-        border: solid 1px #183153;
-        border-radius: 8px;
-        display:none;
-    }
-    .cssCustomCalendar .fc-time-grid-event .fc-time, .fc-time-grid-event .fc-title {
-        color:white;
-        font-size:1.2em;
-        padding:2px;
+  #custom-search-input{
+      padding: 3px;
+      border: solid 1px #183153;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #183153;
+      -webkit-box-shadow: 0 0.375em 0 currentColor;
+  }
+  .cssCustomCalendar .fc-time-grid-event .fc-time, .fc-time-grid-event .fc-title {
+      color:white;
+      font-size:1.2em;
+      padding:2px;
        /*font-family: 'TypeMatesCeraRoundProMedium', "HelveticaNeueBold"*/  
-    }
+  }
+  /*barra com resultados de pesquisa*/
+  .resultadoMedicos{
+      border: solid 1px #183153;
+      border-radius: 8px;
+      display:none;
+  }
     
-    .bordaPesq .col-md-6{
-       padding-left: 0px !important;
-       padding-right: 0px !important;
-    }
-    .resultadoMedicos #resultMed ul li{
-        list-style-type: none;
-        padding-top: 2px;
-    }
-    .resultadoMedicos #resultMed ul li i{
-        font-size:9px;
-    }
-    .resultadoMedicos #resultMed ul{
-        padding: 0px;
-    }
-    .titulosPesquisas h4{
-        color: #183153;
-    }
-    /*modal Agenda Insercao*/
-    .modalCamposInsercao{
+  .bordaPesq .col-md-6{
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+  }
+
+  .resultadoMedicos #resultMed ul li{
+      list-style-type: none;
+      padding-top: 2px;
+  }
+   /*medicos*/
+  .resultadoMedicos #resultMed ul li i{
+      font-size:9px;
+  }
+
+  /*pacientes*/
+  .resulPac  ul li i{
+      font-size:9px !important;
+  }
+
+  .resultadoMedicos #resultMed ul{
+      padding: 0px;
+  }
+
+  .titulosPesquisas h4{
+      color: #183153;
+  }
+  /*modal Agenda Insercao*/
+  .modalCamposInsercao{
       z-index: 0;
       position: relative;
-    
-    }
+  }
   .resulPac{
       z-index: 999999;
       position: absolute !important;
@@ -154,7 +165,7 @@
   .resulPac ul li {
       padding: 0px;
       list-style-type: none;
-    }
+  }
 
   .resulPac ul{
       padding: 0px;
@@ -163,6 +174,15 @@
     /*bordas formulario*/
   .bordas{
        border: solid 1px #183153 !important;
+  }
+  .subtitulosForm{
+     color: #183153;
+     font-weight: 500;
+  }
+
+  .TitulosForm{
+     color: #183153;
+     font-weight: 700;
   }
 
   .sombraBotao{
@@ -289,7 +309,7 @@
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                   <h5 class="modal-title" id="tituloAgenda">Remarcar uma Consulta</h5>
+                   <h5 class="modal-title TitulosForm" id="tituloAgenda">Remarcar uma Consulta</h5>
                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                    </button>
@@ -303,7 +323,7 @@
                           <div class='row'>
                             <div class="col-md-12" id='sucessEdicao'></div>
                           </div>
-                          <label>Selecione o Paciente</label>
+                          <label class='subtitulosForm'>Selecione o Paciente</label>
                           <div class='col-md-12'id="custom-search-input">
                               <div class="input-group" id="inputPesqPac">
                                   <input name='nome' type="text"   class="form-control input-lg searchPac" placeholder="Buscar" />
@@ -322,15 +342,15 @@
                         <input type="hidden" name='fk_medico'class="form-control">
                         <input type="hidden" name='id_agenda'class="form-control">
                         <div class="form-group">
-                            <label for="hora-inicial" class="col-form-label">Inicio da Consulta</label>
+                            <label for="hora-inicial" class="col-form-label subtitulosForm">Inicio da Consulta</label>
                             <input type="text" name='inicio'class="form-control date-time bordas" id="hora-inicial">
                         </div>
                         <div class="form-group">
-                            <label for="fim-consulta" class="col-form-label">Fim da Consulta</label>
+                            <label for="fim-consulta" class="col-form-label subtitulosForm">Fim da Consulta</label>
                             <input type="text" name='fim' class="form-control date-time bordas" id="fim-consulta">
                         </div>
                         <div class="form-group">
-                            <label for="tipo-consulta" value="">Tipo da Consulta</label>
+                            <label for="tipo-consulta" class='subtitulosForm' value="">Tipo da Consulta</label>
                             <select name='tipo' id="tipo-consulta" class="form-control bordas" >
                                 <option>Primeira Consulta</option>
                                 <option>Retorno</option>
