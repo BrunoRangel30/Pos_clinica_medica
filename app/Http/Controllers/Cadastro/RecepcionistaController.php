@@ -17,8 +17,13 @@ class RecepcionistaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('pesquisa.recep');
+    {   
+        $recep = DB::table('recepcionista as r')
+        ->where('r.deleted_at','=', NULL)
+        ->orderBy('r.created_at','desc')
+        ->paginate(15);
+        //return view('pesquisa.paciente',compact('paciente'));
+        return view('pesquisa.recep',compact('recep'));
     }
 
     /**

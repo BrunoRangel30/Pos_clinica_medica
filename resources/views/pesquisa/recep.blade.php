@@ -90,14 +90,18 @@
     
 <div class="container">
         <div class="row mb-5">
-            <div class="flash-message">
-                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                    @if(Session::has('alert-' . $msg))
-                        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a></p>
-                    @endif
-                @endforeach
+            <div class='row'>
+                <div class='col-md-12'>
+                    <div class="flash-message">
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                            @if(Session::has('alert-' . $msg))
+                                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a></p>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
+            <!--<div class="col-md-6">
                 <h3>Pesquise a Recepcionista</h3>
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
@@ -108,65 +112,118 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div class="row align-items-center">
+            </div>-->
+           <!-- <div class="row align-items-center">
                 <div class="col-md-6 mt-5 ">
                     <i class="fas fa-user-plus"></i>
                 </div>
-            </div>
+            </div>-->
         </div>
        <div class="row">
            <div class="col-lg-12">
             <table id="example" class="icone table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Nome do Paciente</th>
+                        <th>Nome</th>
                         <th>CPF</th>
                         <th>Data Nascimento</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Dafine de Castro</td>
-                        <td>834-334-3434-23</td>
-                        <td>23/03/1986</td>
-                        <td>
-                            <a href="{{route('realizarConsulta')}}"><i class="fas fa-edit"></i></a>
-                           
-                            <i class="fas fa-user-times"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Dafine de Castro</td>
-                        <td>834-334-3434-23</td>
-                        <td>23/03/1986</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                           
-                            <i class="fas fa-user-times"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Quinn Flynn</td>
-                        <td>112-345-2324-45</td>
-                        <td>223/11/1984</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                           
-                            <i class="fas fa-user-times"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Charde Marshall</td>
-                        <td>457-234-234-56</td>
-                        <td>31/05/1957</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                           
-                            <i class="fas fa-user-times"></i>
-                        </td>
-                    </tr>
+                    @foreach ($recep as $item)
+                        <tr>
+                            <td>{{$item->nome}}</td>
+                            <td>{{$item->cpf}}</td>
+                            <td>{{$item->data_nasc}}</td>
+                            <td>
+                                <i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->recep_id}}"></i>
+                                <i class="fas fa-user-times"></i>
+                            </td>
+                        </tr>
+                         <!-- Modal -->
+                        <div class="modal fade" id="modal-info-paciente-{{$item->recep_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Mais informações - ({{$item->nome}})</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                            <label>Sexo : <span>{{$item->sexo}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->rg)
+                                                <label>N° do RG : <span>{{$item->rg}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                            @if($item->org_emissor)
+                                                <label>Órgão emissor : <span>{{$item->org_emissor}}</span></label>
+                                            @endif
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->data_adm)
+                                                <label>Data de Admissão : <span>{{$item->data_adm}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                               <label>Telefone Celular : <span>{{$item->tele_cel}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->tele_fixo)
+                                                <label>Telefone Fixo : <span>{{$item->tele_fixo}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                               <label>Nome da Mãe : <span>{{$item->nome_mae}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->nome_pai)
+                                               <label>Nome da Pai : <span>{{$item->nome_pai}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                        <label>Rua : <span>{{$item->end_rua}} N° {{$item->end_nun_casa}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->end_bairro)
+                                               <label>Bairro : <span>{{$item->end_bairro}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                        <label>Cidade : <span>{{$item->end_cidade}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            @if($item->end_estado)
+                                                <label>Estado : <span>{{$item->end_estado}} - CEP: {{$item->cep}}</span></label>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-light"><a href="{{route('cadastro.recepcionista.edit',$item->recep_id)}}"><i class="fas fa-edit"></i></a></button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    @endforeach
+                   
                 </tbody>
             </table>  
            </div>
