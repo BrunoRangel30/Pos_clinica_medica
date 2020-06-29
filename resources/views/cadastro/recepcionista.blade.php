@@ -7,12 +7,13 @@
                 <h4> Cadastro Recepcionista </h4>
             </div>
         </div>
-        <form class="shadow p-3 mb-5 bg-white rounded">
+        <form class="shadow p-3 mb-5 bg-white rounded" method="POST" action="{{ route('cadastro.recepcionista.store')}}">
+            @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nomePaciente">Nome Completo</label>
-                    <input name="Nome_Recepcionista" type="text" value="{{ old('nome_Paciente') }}" class="form-control @error('nome_Paciente') is-invalid @enderror" id="nomePaciente" placeholder="">
-                    @error('nome_Paciente')
+                    <input name="Nome_Recepcionista" type="text" value="{{ old('Nome_Recepcionista') }}" class="form-control @error('Nome_Recepcionista') is-invalid @enderror" id="Nome_Recepcionista" placeholder="">
+                    @error('Nome_Recepcionista')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -187,7 +188,7 @@
             <div class='form-row'>
                 <div class="form-group col-md-10">
                     <label for="obervacao">Observação</label>
-                    <textarea  type="textArea" name="obervacao" value="{{ old('obervacao')}}" class="form-control" id="obervacao" placeholder=""></textarea>
+                    <textarea  type="textArea" name="obervacao"  class="form-control" id="obervacao" placeholder="">{{ old('obervacao')}}</textarea>
                 </div>
             </div>
             <button type="submit" class="sombraBotao">Salvar</button>

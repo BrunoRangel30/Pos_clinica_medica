@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Medico','user_med_id');
     }
 
+    public function recepcionista()
+    {
+        return $this->hasOne('App\Recepcionista','user_id');
+    }
+
      //pega o id passando o usuário
      public function getId($email){
         $user = User::select('id')
