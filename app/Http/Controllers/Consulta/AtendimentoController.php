@@ -130,6 +130,8 @@ class AtendimentoController extends Controller
         //cadastra no banco 
         $this->agenda->create($dataAgenda);
         //resgata para listar
+        //dd('passou por aqui');
+        $request->session()->flash('alert-success', 'Consulta agendada com sucesso!');
         return $dataAgenda['fk_medico'];
       
        

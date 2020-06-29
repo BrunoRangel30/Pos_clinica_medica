@@ -74,7 +74,12 @@
       color: #3c763d;
       background-color: #dff0d8;
       border-color: #d6e9c6;
+      text-align: center;
+      padding: 10px;
+      font-size: 1em;
+      font-weight: 700;
       display: none;
+      position: absolute;
   }
   .success-cadastro{
       color: #3c763d;
@@ -137,6 +142,9 @@
   .resulPac  ul li i{
       font-size:9px !important;
   }
+  .resulPacAdicao  ul li i{
+      font-size:9px !important;
+  }
 
   .resultadoMedicos #resultMed ul{
       padding: 0px;
@@ -150,7 +158,18 @@
       z-index: 0;
       position: relative;
   }
+  .modalCamposInsercaoAdicao{
+      z-index: 0;
+      position: relative;
+  }
   .resulPac{
+      z-index: 999999;
+      position: absolute !important;
+      border: solid 1px #183153;
+      margin-left: 17px !important;
+      display: none;
+  }
+  .resulPacAdicao{
       z-index: 999999;
       position: absolute !important;
       border: solid 1px #183153;
@@ -161,13 +180,24 @@
   .formAgendaSuperior .form-group{
       margin-bottom: 5px; 
   }
-
+  .formAgendaSuperiorAdicao .form-group{
+      margin-bottom: 5px; 
+  }
+ 
+  .resulPacAdicao ul li {
+      padding: 0px;
+      list-style-type: none;
+  }
   .resulPac ul li {
       padding: 0px;
       list-style-type: none;
   }
 
   .resulPac ul{
+      padding: 0px;
+  }
+  
+  .resulPacAdicao ul{
       padding: 0px;
   }
 
@@ -232,9 +262,15 @@
             <div id='resultMed'></div>
           </div>
         </div>
-        <div class='row mb-5'>
-            <div class="alert-box success col-md-6">Consulta excluída com sucesso!</div>
+        <!--espaços entre o resultado e o calendario-->
+        <br>
+        <br>
+        <br>
+        <div class='row'>
+            <div class="alert-box success col-md-12">Consulta agendada com sucesso!</div>
         </div>
+        <br>
+        <br>
         <!-------------Calendario--------------->
         <div class='cssCustomCalendar' id='wrap'>
                 <div id='external-events-list'></div>
@@ -247,12 +283,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                     <h5 class="modal-title" id="tituloAgenda">Agendar uma Consulta</h5>
+                     <h5 class="modal-title TitulosForm" id="tituloAgenda">Agendar uma Consulta</h5>
                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                           <span aria-hidden="true">&times;</span>
                      </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body formAgendaSuperiorAdicao">
                     <form class='formAgenda'>
                         <div class="form-group">
                             <div class='row'>
@@ -261,10 +297,10 @@
                             <div class='row'>
                               <div class="col-md-12" id='sucess'></div>
                             </div>
-                            <h5>Selecione o Paciente</h5>
+                            <label class='subtitulosForm'>Selecione o Paciente</label>
                             <div id="custom-search-input">
                                 <div class="input-group col-md-12" id="inputPesqPac">
-                                    <input name='nome' type="text"  class="form-control input-lg searchPacEdicao" placeholder="Buscar" />
+                                    <input name='nome' type="text"  class="form-control input-lg searchPacAdicao" placeholder="Buscar" />
                                     <span class="input-group-btn">
                                         <button class="btn btn-info btn-lg" type="button">
                                         </button>
@@ -273,33 +309,33 @@
                             </div>
                         </div>
                         <div class='row'>
-                            <div class='col-md-12'>
-                              <div class="resulPacEdicao"></div>
-                            </div>
+                              <div class="col-md-11 shadow-sm  mb-5 bg-white rounded resulPacAdicao"></div>
                         </div>
-                        <input type="hidden" name='fk_paciente'class="form-control">
-                        <input type="hidden" name='fk_medico'class="form-control">
-                        <input type="hidden" name='id_agenda'class="form-control">
-                        <div class="form-group">
-                            <label for="hora-inicial" class="col-form-label">Inicio da Consulta</label>
-                            <input type="text" name='inicio'class="form-control date-time" id="hora-inicial">
-                        </div>
-                        <div class="form-group">
-                            <label for="fim-consulta" class="col-form-label">Fim da Consulta</label>
-                            <input type="text" name='fim' class="form-control date-time" id="fim-consulta">
-                        </div>
-                        <div class="form-group">
-                            <label for="tipo-consulta" value="">Tipo da Consulta</label>
-                             <select name='tipo' id="tipo-consulta" class="form-control" >
-                                <option>Primeira Consulta</option>
-                                <option>Retorno</option>
-                              </select>
+                        <div class='modalCamposInsercaoAdicao'>
+                            <input type="hidden" name='fk_paciente'class="form-control">
+                            <input type="hidden" name='fk_medico'class="form-control">
+                            <input type="hidden" name='id_agenda'class="form-control">
+                              <div class="form-group">
+                                  <label for="hora-inicial" class="col-form-label subtitulosForm">Inicio da Consulta</label>
+                                  <input type="text" name='inicio'class="form-control date-time bordas" id="hora-inicial">
+                              </div>
+                              <div class="form-group">
+                                  <label for="fim-consulta" class="col-form-label subtitulosForm">Fim da Consulta</label>
+                                  <input type="text" name='fim' class="form-control date-time bordas" id="fim-consulta">
+                              </div>
+                              <div class="form-group">
+                                  <label for="tipo-consulta" class="subtitulosForm" value="">Tipo da Consulta</label>
+                                  <select name='tipo' id="tipo-consulta" class="form-control bordas" >
+                                      <option>Primeira Consulta</option>
+                                      <option>Retorno</option>
+                                    </select>
+                              </div>
                         </div>
                     </form>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary saveConsulta">Salvar</button>
+                    <button type="button" class="sombraBotao" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="sombraBotao saveConsulta">Salvar</button>
                   </div>
             </div>
         </div>

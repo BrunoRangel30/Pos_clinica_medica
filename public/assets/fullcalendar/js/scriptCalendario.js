@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $(`.${classe}`)[0].reset();
     }
 
-    //busca paciente
+    //Edicao paciente
     $(".searchPac").keyup(async function() {
 
         let keys = $('.searchPac').val()
@@ -232,30 +232,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
         })
     });
-    //Edicao  Agenda
-    $(".searchPacEdicao").keyup(async function() {
+    //Adicao  Agenda
+    $(".searchPacAdicao").keyup(async function() {
 
-        let keys = $('.searchPacEdicao').val()
+        let keys = $('.searchPacAdicao').val()
         data = {
             key: keys,
         };
         getDataAjax('../api/buscaPaciente', data).then(function(result) {
             let input = '';
+            input += `<ul id='listaPacientes'>`
             result.map(function(index) {
-                input += `<ul id='listaPacientes'>`
-                input += `<li value='${index.paciente_id}' id='${index.paciente_id}'>${index.nome}</li>`
-                input += `</ul>`
+                input += `<li value='${index.paciente_id}' id='${index.paciente_id}'> <i class="far fa-circle"></i> ${index.nome}</li>`
             })
-            $(".resulPacEdicao").html(input);
+            input += `</ul>`
+            $(".resulPacAdicao").html(input);
+            $(".resulPacAdicao").show();
             if (keys == '') {
-                $(".resulPacEdicao").html('');
+                $(".resulPacAdicao").html('');
+                $(".resulPacAdicao").hide();
             }
             $("#listaPacientes>li").click(function(e) {
                 let idPac = this.id;
                 $("#inputPesqPac input[name='nome']").val(e.target.innerText); //insere o resultado  no campo
                 $("#modalAgenda input[name='fk_paciente']").val(idPac);
+                $(".resulPacAdicao").hide();
                 //$('#searchPacEdicao').attr('data-paciente', idPac);
-                $(".resulPacEdicao").html(''); //limpa a div
+                $(".resulPacAdicao").html(''); //limpa a div
             })
 
         })
@@ -346,11 +349,12 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             $('#modalAgendaEdicao').modal('hide')
             atualizarCalendar(data);
-            $(".success").fadeIn(300).delay(1500).fadeOut(400);
+            $(".success").html("Consulta excluída com sucesso!")
+            $(".success").fadeIn(300).delay(1700).fadeOut(400);
         })
     })
 
-    //Salvar consulta
+    //Salvar consulta Agenda
     $(".saveConsulta").click(function() {
         let agenda = {
             title: '',
@@ -373,14 +377,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
                 atualizarCalendar(data);
                 $('#modalAgenda').modal('hide');
-                $(".success").fadeIn(300).delay(1500).fadeOut(400);
+                $(".success").html("Consulta agendada com sucesso!")
+                $(".success").fadeIn(300).delay(1700).fadeOut(400);
 
             })
             .catch(function(data) {
                 $('#messagem').html(loadErros('#sucess', data.responseJSON.errors));
             });
     });
-
+    //Edicao consulta Agenda
     $(".atualizarConsulta").click(function() {
         let id = $("#modalAgendaEdicao input[name='id_agenda']").val();
         let url;
@@ -406,11 +411,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 let data = {
                     id: resp,
                 };
+                $(".success").html("Consulta remarcada com sucesso!")
+                $(".success").fadeIn(300).delay(1700).fadeOut(400);
                 $('#modalAgendaEdicao').modal('hide')
                 atualizarCalendar(data);
             })
             .catch(function(data) {
-                console.log(data);
                 $('#messagemEdicao').html(loadErros('#sucessEdicao', data.responseJSON.errors));
             });
     })
