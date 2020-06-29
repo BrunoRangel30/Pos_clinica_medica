@@ -1,5 +1,11 @@
 @extends('layouts.app')
-
+<style>
+    .SelecaoDrop .form-control select option:hover{
+            color: #16181b;
+            text-decoration: none;
+            background-color:#ffd43b !important;
+        }
+</style>
 @section('content')
     <div class='container'>
         <div class='row'>
@@ -7,7 +13,7 @@
                 <h4> Cadastro Médico</h4>
             </div>
         </div>
-        <form  method="POST" action="{{ route('cadastro.medico.store') }}">
+        <form class='shadow p-3 mb-5 bg-white rounded' method="POST" action="{{ route('cadastro.medico.store') }}">
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -19,7 +25,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-2">
+                <div class="SelecaoDrop form-group col-md-2">
                     <label for="sexo" value="">Sexo</label>
                     <select id="sexo" name='sexo'class="form-control @error('sexo') is-invalid @enderror" value="{{ old('sexo') }}" >
                         <option>Feminino</option>
@@ -211,7 +217,7 @@
                     @enderror
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="sombraBotao">Salvar</button>
         </form>
     </div>
 @endsection

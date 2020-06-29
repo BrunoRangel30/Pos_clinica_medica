@@ -1,14 +1,17 @@
 @extends('layouts.app')
 <style>
+     .titulosPesquisas h4{
+      color: #183153;
+  }
 </style>
 @section('content')
     <div class='container'>
         <div class='row'>
-            <div class='col-md-6'>
+            <div class='col-md-6 titulosPesquisas'>
                     <h4>Cadastro Paciente </h4>
             </div>
         </div>
-        <form  method="POST" action="{{ route('cadastro.paciente.store') }}">
+        <form class="shadow p-3 mb-5 bg-white rounded" method="POST" action="{{ route('cadastro.paciente.store') }}">
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -196,7 +199,7 @@
                     <textarea  type="textArea" name="obervacao" value="{{ old('obervacao')}}" class="form-control" id="obervacao" placeholder=""></textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="sombraBotao">Salvar</button>
         </form>
     </div>
 @endsection

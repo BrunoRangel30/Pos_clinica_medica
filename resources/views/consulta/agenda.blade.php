@@ -215,26 +215,6 @@
      font-weight: 700;
   }
 
-  .sombraBotao{
-      padding-left:15px;
-      padding-right: 15px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      border: solid 1px #183153;
-      border-radius: 8px;
-      background-color:#ffd43b;
-      color: #214450;
-     /* font-family: 'roundproblackegular'; /* fonte */
-      font-weight: 700;
-      font-size: 1em;
-     /* text-transform: uppercase;*/
-      -webkit-box-shadow: 0 0.375em 0 currentColor !important;
-  }
-
-
-  
-
-  
 </style>
 @section('content')
     <div class='container'>

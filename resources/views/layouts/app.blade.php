@@ -5,6 +5,49 @@
         body{
             background-color: #fff !important;
         }
+        .MenuPrincipal .bg-light{
+            background-color: #183153 !important;
+            height: 12vh;
+        }
+
+        .MenuPrincipal li a{
+            color: #fff !important;
+            font-size: 1.2em;
+        }
+        .MenuPrincipal .dropdown-menu{
+            background-color: #183153 !important;
+        }
+
+        .MenuPrincipal .dropdown-item:hover, .dropdown-item:focus {
+            color: #16181b;
+            text-decoration: none;
+            background-color:#ffd43b;
+        }
+
+        .icone li i{
+            color:#ffd43b;
+            font-size: 3em;
+        }
+
+        /*botao*/
+       .sombraBotao{
+            padding-left:15px;
+            padding-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: solid 1px #183153;
+            border-radius: 8px;
+            background-color:#ffd43b;
+            color: #214450;
+            /* font-family: 'roundproblackegular'; /* fonte */
+            font-weight: 700;
+            font-size: 1em;
+            /* text-transform: uppercase;*/
+            -webkit-box-shadow: 0 0.375em 0 currentColor !important;
+        }
+       
+       
+
     </style>
      <!-- fullcalendar -->
     <meta charset="utf-8">
@@ -52,57 +95,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class='pt-1'>
+        <div class='MenuPrincipal'>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class='container'>
                     <a class="navbar-brand" href="#"></a>
@@ -110,6 +103,11 @@
                     <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto icone">
+                            <li>
+                                <i class='fas fa-user-md'></i>
+                            </li>
+                        </ul>
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -147,13 +145,45 @@
                                 <a class="nav-link" href="{{route('admin.users.index')}}">Atribruir Perfil</a>
                                 </li>
                             @endcan
+                            <!--parte de atentificação-->
+                           
                         </ul>
+                        <!--atentificação-->
+                        <ul class="navbar-nav">
+                        @guest
+                        <li class="nav-item form-control mr-sm-2">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item form-control mr-sm-2">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                        @else
+                             <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i>
+                                {{ __('Sair') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            @endguest
+                        </ul>
+
                     </div>
                 </div>
             </nav>
         </div>
 
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
     </div>
