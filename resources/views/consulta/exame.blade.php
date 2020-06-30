@@ -70,13 +70,13 @@
                 <div class="col-md-6">
                     <label class="sr-only" for="pesquisaExame">Pesquise o exame</label>
                     <div class="input-group">
-                        <div class="input-group-prepend">
+                        <div class="input-group-prepend iconePesquisa">
                             <div class="input-group-text"><i class="fas fa-search"></i></div>
                         </div>
                         <input type="text"  class="form-control" id="pesquisaExame" placeholder="Pesquise o exame">
                         </div> 
                         <div class='row'>
-                            <div class='col-md-12 shadow-sm  mb-5 bg-white rounded'>
+                            <div class='col-md-12'>
                                 <div id ="resultExames"></div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div id='salvarExame'>
-               <button type="submit" class="btn btn-primary">Finalizar Seleção</button>
+               <button type="submit" class="sombraBotao mt-5">Finalizar Seleção</button>
             </div>
         </form>
 @endsection
