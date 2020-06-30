@@ -13,30 +13,30 @@
 @section('content')
     <div class="container">
         
-    <h3 class="text-center">Listagem de Pacientes</h3>
-    <div class="container">
-        <div class="form-row">
+        <h3 class="text-center mb-3">Listagem de Pacientes</h3>
+   
+       <!-- <div class="form-row">
             <div class="col-md-2 botao-hj">
                 <button type="text" class="form-control" id="validationCustom01" placeholder="Nome" value="" required>Hoje</button>
               </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Data Inicial</label>
                 <input type="text" class="form-control" id="validationCustom01" placeholder="Nome" value="" required>
-                <!--<div class="valid-feedback">
+                    <div class="valid-feedback">
                   Tudo certo!
-                </div>-->
+                </div>
               </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Data Fim</label>
                 <input type="text" class="form-control" id="validationCustom01" placeholder="Nome" value="" required>
-                <!--<div class="valid-feedback">
+                    <div class="valid-feedback">
                   Tudo certo!
-                </div>-->
+                </div>
             </div>
-        </div>
+        </div>-->
        <div class="row">
            <div class="col-lg-12">
-            <table id="example" class="icone table table-striped table-bordered" style="width:100%">
+            <table id="example" class="icone table shadow p-3 mb-5 table-bordered table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>Horário</th>
@@ -53,7 +53,11 @@
                         <td>{{$item->nomePaciente}}</td>
                         <td>{{$item->start}} - {{$item->end}}</td>
                         <td>{{$item->cpf}}</td>
-                        <td>{{$item->data_nasc}}</td>
+                        @php
+                            $date = date_create(date($item->data_nasc));
+                            $dataAtual = date_format($date, 'd/m/Y');  
+                        @endphp
+                        <td>{{$dataAtual}}</td>
                      
                         <td>
                             <a href={{route('realizarConsulta',['pa'=>$item->paciente_id])}}><i class="far fa-play-circle"></i></a>
@@ -114,7 +118,7 @@
             </table>  
            </div>
        </div> 
-       <nav aria-label="Page navigation example">
+     <!--  <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -126,8 +130,8 @@
                 <a class="page-link" href="#">Next</a>
             </li>
             </ul>
-        </nav>
-    </div>
+        </nav>-->
+    
    
   
 @endsection

@@ -135,7 +135,11 @@
                         <tr>
                             <td>{{$item->nome}}</td>
                             <td>{{$item->cpf}}</td>
-                            <td>{{$item->data_nasc}}</td>
+                            @php
+                                $date = date_create(date($item->data_nasc));
+                                $dataAtual = date_format($date, 'd/m/Y');  
+                            @endphp
+                            <td>{{$dataAtual}}</td>
                             <td>
                                 <i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->recep_id}}"></i>
                                 <a href="{{route('cadastro.recepcionista.create')}}"><i class="fas fa-user-plus"></i></a>
@@ -147,13 +151,13 @@
                         <div class="modal fade" id="modal-info-paciente-{{$item->recep_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Mais informações - ({{$item->nome}})</h5>
+                                <div class="modal-header TitulomaisInfo">
+                                <h4 class="modal-title" id="exampleModalLabel">Mais informações - ({{$item->nome}})</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body subTitulomaisInfo">
                                     <div class='row'>
                                         <div class='col-md-6'>
                                             <label>Sexo : <span>{{$item->sexo}}</span></label>
@@ -218,8 +222,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-light"><a href="{{route('cadastro.recepcionista.edit',$item->recep_id)}}"><i class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="sombraBotao iconeModalMaisInfo"><a href="{{route('cadastro.recepcionista.edit',$item->recep_id)}}"><i class="fas fa-edit"></i></a></button>
+                                <button type="button" class="sombraBotao" data-dismiss="modal">Fechar</button>
                                 </div>
                             </div>
                             </div>

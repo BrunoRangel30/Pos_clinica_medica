@@ -1,7 +1,7 @@
-
-<ul class="nav">
+<div class='bordaGeral border-bottom rounded-bottom'>
+<ul class="nav MenuConsulta">
     <li class="nav-item">
-        <a class="nav-link active" href="{{route('consulta.receita.create')}}"><i class="fas fa-first-aid"></i> Receitar Medicação</a>
+        <a class="nav-link  MenuConsulta" href="{{route('consulta.receita.create')}}"><i class="fas fa-first-aid"></i> Receitar Medicação</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('consulta.exame.create')}}"><i class="fas fa-file-medical-alt"></i> Solicitar Exames</a>
@@ -16,5 +16,6 @@
         @endif
     </li>
 </ul>
+</div>
 
 

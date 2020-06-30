@@ -476,15 +476,17 @@ document.addEventListener('DOMContentLoaded', function() {
             getDataAjax('../../api/buscaMedicamento', data).then(function(result) {
 
                 let input = '';
+                input += `<ul id='listaMedicamentos'>`
                 result.map(function(index) {
-                    input += `<ul id='listaMedicamentos'>`
                     input += `<li value='${index.med_id}' id='${index.med_id}'>${index.nome_fabrica}</li>`
-                    input += `</ul>`
                 })
-
+                input += `</ul>`
                 $("#resultMedicamento").html(input);
+                $(".resultPesqMed").show();
+
                 if (keys == '') {
                     $("#resultMedicamento").html('')
+                    $(".resultPesqMed").hide();
                 }
                 $("#listaMedicamentos>li").click(function(e) {
                     let idMed = this.id;
@@ -494,6 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     $("#inputPesqMedicamento > #buscaMedicamento").val(e.target.innerText); //insere o resultado  no campo
                     $("#idMedicamento").val(idMed);
+                    $(".resultPesqMed").hide();
                     $("#resultMedicamento").html(''); //limpa a div
 
                     //atualizarCalendar(data);
@@ -547,6 +550,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 // li += `<div class='exclusao-exame'>`
+                li += `<h4>Exame(s) selecionado(s)</h4>`
                 listExames.map(function(item) {
 
                     li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
@@ -555,12 +559,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 li += '';
                 $('#examesSelect').html(li)
+                $('#examesSelect').show();
+                if (listExames == null || listExames.length == 0) {
+                    $('#examesSelect').hide();
+                }
                 listExames.map(function(item, i) {
-
                     $(`#examesrequest input[name='exames-${item.id}']`).val(item.id);
                 })
-
-
             })
         })
     });
@@ -572,10 +577,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 listExames.splice(i, 1);
             }
         })
+        li += `<h4>Exame(s) selecionado(s)</h4>`
         listExames.map(function(item) {
             li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
         })
         $('#examesSelect').html(li)
+        if (listExames == null || listExames.length == 0) {
+            $('#examesSelect').hide();
+        }
     });
 
 

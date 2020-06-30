@@ -132,7 +132,11 @@
                         <tr>
                             <td>{{$item->nome}}</td>
                             <td>{{$item->crm}}</td>
-                            <td>{{$item->data_nasc}}</td>
+                            @php
+                                $date = date_create(date($item->data_nasc));
+                                $dataAtual = date_format($date, 'd/m/Y');  
+                            @endphp
+                            <td>{{$dataAtual}}</td>
                                 <td>
                                 <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->medico_id}}"></i></a>
                                 <a href="{{route('cadastro.medico.create')}}"><i class="fas fa-user-plus"></i></a>

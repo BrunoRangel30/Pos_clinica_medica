@@ -89,7 +89,7 @@
                             <td>{{$item->nome}}</td>
                             <td>{{$item->cpf}}</td>
                             @php
-                                $date = date_create(date('Y-m-d'));
+                                $date = date_create(date($item->data_nasc));
                                 $dataAtual = date_format($date, 'd/m/Y');  
                             @endphp
                             <td>{{$dataAtual}}</td>

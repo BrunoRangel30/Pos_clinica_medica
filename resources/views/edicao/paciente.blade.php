@@ -3,11 +3,11 @@
 @section('content')
     <div class='container'>
         <div class='row'>
-            <div class='col-md-6'>
+            <div class='col-md-6 titulosPesquisas'>
                     <h4>Editar Paciente </h4>
             </div>
         </div>
-        <form  method="POST" action="{{route('cadastro.paciente.update',$paciente->paciente_id)}}">
+        <form  class="shadow p-3 mb-5 table-bordered" method="POST" action="{{route('cadastro.paciente.update',$paciente->paciente_id)}}">
             @method('PATCH')
             @csrf
             <div class="form-row">
@@ -176,7 +176,7 @@
                     <textarea  type="textArea" name="obervacao"  class="form-control" id="obervacao" placeholder="">{{$paciente->obervacao}}</textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <button type="submit" class="sombraBotao">Salvar Alterações</button>
         </form>
     </div>
 @endsection

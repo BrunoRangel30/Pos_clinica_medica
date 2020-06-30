@@ -78,6 +78,37 @@
             padding: 5px;
             font-size: 1em; 
         }
+        .bordaInfo{           
+            border-radius: 10px;
+        }
+        .bordaInfo p {           
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        /*menu Consulta*/
+        .MenuConsulta li a {
+            color:#183153;
+            font-weight: 500;
+            font-size: 1.2em;
+            padding: 10px;
+        }
+        .MenuConsulta li a i {
+            color:#459d93;
+        }
+        .bordaGeral{
+            margin-bottom: 10px;
+        }
+
+        /*icone busca*/
+        .iconePesquisa i{
+            color:#459d93;
+           
+        }
+        .iconePesquisa .input-group-text{
+            background-color:#183153 !important;
+        }
+      
 
 
     </style>

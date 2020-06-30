@@ -5,14 +5,50 @@
       height:200px;
       overflow-y: scroll;
       display: none;
+      border: solid 1px #183153;
+      border-radius: 10px;
+      
+  }
+
+  #resultExames ul li {
+      list-style-type: none;
+      padding-top: 5px;
+      padding-left: 10px;
+      font-size: 1.2em;
+      color:  #183153;
+      font-weight: 700;
+      text-transform:lowercase
+  }
+
+  #resultExames  ul {
+      padding: 0px !important;
   }
   #examesSelect{
-    border-width: medium;
-    border-style: solid;
-    border-color: #00f;;
-    height: auto;
-    width: 100%;
+      border-width: medium;
+      height: 231px;
+      margin-left: 30px;
+      width: 100%;
+      border: solid 1px #183153;
+      border-radius: 10px;
+      display: none;
+      overflow-y: scroll;
   }
+  #examesSelect  li{
+    list-style-type: none;
+      padding-top: 5px;
+      padding-left: 10px;
+      font-size: 1.2em;
+      color:  #183153;
+      font-weight: 700;
+      text-transform:lowercase
+  }
+  #examesSelect  h4{
+      color:  #183153;
+      font-weight: 800;
+      padding: 5px;
+  }
+
+   
 
 </style>
 
@@ -33,14 +69,16 @@
             <div class='row'>
                 <div class="col-md-6">
                     <label class="sr-only" for="pesquisaExame">Pesquise o exame</label>
-                    <div class="input-group mb-2">
+                    <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-search"></i></div>
                         </div>
                         <input type="text"  class="form-control" id="pesquisaExame" placeholder="Pesquise o exame">
-                        </div>
+                        </div> 
                         <div class='row'>
-                            <div class='col-md-12' id="resultExames"></div>
+                            <div class='col-md-12 shadow-sm  mb-5 bg-white rounded'>
+                                <div id ="resultExames"></div>
+                            </div>
                         </div>
                     </div>
                 <div class='row' id='examesrequest'>

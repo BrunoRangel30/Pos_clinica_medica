@@ -110,15 +110,15 @@
                     </div>
                 </div>
             </div>-->
-            <div class="row align-items-center">
+            <!--<div class="row align-items-center">
                 <div class="col-md-6 mt-5 ">
                 <a href="{{route('cadastro.paciente.create')}}"><i class="fas fa-user-plus"></i></a>
                 </div>
-            </div>
+            </div>-->
         </div>
        <div class="row">
            <div class="col-lg-12">
-            <table id="example" class="icone table table-striped table-bordered" style="width:100%">
+            <table id="example" class="icone table  table-bordered shadow p-3 mb-5 table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>Nome de Fábrica</th>
@@ -135,23 +135,24 @@
                             <td>{{$item->lote_med}}</td>
                                 <td>
                                 <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->med_id}}"></i></a>
-                                    <a href="{{route('cadastro.paciente.edit',$item->med_id)}}"><i class="fas fa-edit"></i></a>
-                                    <i class="fas fa-calendar-alt"></i>
+                                    <a href="{{route('cadastro.medicamento.create')}}"><i class="fas fa-user-plus"></i></a>
+                                    <a href=""><i class="fas fa-edit"></i></a>
+                                  <!--  <i class="fas fa-calendar-alt"></i>-->
                                     @method('DELETE')
-                                    <a href="{{route('cadastro.paciente.destroy',$item->med_id)}}"><i class="fas fa-user-times"></i></a>
+                                    <a href=""><i class="fas fa-user-times"></i></a>
                                 </td>
                         </tr>
                           <!-- Modal -->
                         <div class="modal fade" id="modal-info-paciente-{{$item->med_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header TitulomaisInfo">
                                 <h5 class="modal-title" id="exampleModalLabel">Mais informações - ({{$item->nome_fabrica}})</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body subTitulomaisInfo">
                                     <div class='row'>
                                         <div class='col-md-6'>
                                             <label>Tarja : <span>{{$item->tarja}}</span></label>
@@ -162,8 +163,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-light"><a href="{{route('cadastro.paciente.edit',$item->med_id)}}"><i class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="sombraBotao iconeModalMaisInfo"><a href="{{route('cadastro.paciente.edit',$item->med_id)}}"><i class="fas fa-edit"></i></a></button>
+                                <button type="button" class="sombraBotao" data-dismiss="modal">Fechar</button>
                                 </div>
                             </div>
                             </div>
@@ -174,7 +175,7 @@
            </div>
        </div> 
        <!--paginacao-->
-       <nav aria-label="Page navigation example">
+     <!--  <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -186,7 +187,7 @@
                 <a class="page-link" href="#">Next</a>
             </li>
             </ul>
-        </nav>
+        </nav>-->
     </div>
   
 @endsection

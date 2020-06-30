@@ -57,7 +57,9 @@ class ReceitaController extends Controller
      */
     public function store(Request $request)
     {
-        //grava a receita no banco
+        $validacao = $request->validate([
+            'fk_medicamento' => 'required|max:100',
+        ]);
         $receita= $request->all();
         $medicamento = new Medicamento;
         $med = $medicamento->getMedicamentoById($receita['fk_medicamento']);
