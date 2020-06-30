@@ -135,6 +135,7 @@
                             <td>{{$item->data_nasc}}</td>
                                 <td>
                                 <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->medico_id}}"></i></a>
+                                <a href="{{route('cadastro.medico.create')}}"><i class="fas fa-user-plus"></i></a>
                                 <a href="{{route('cadastro.medico.edit',$item->medico_id)}}"><i class="fas fa-edit"></i></a>
                                 @method('DELETE')
                                 <a href=""><i class="fas fa-user-times"></i></a>
