@@ -85,26 +85,34 @@
     #custom-search-input .glyphicon-search{
         font-size: 23px;
     }
+    
 </style>
 @section('content')
     
 <div class="container">
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a></p>
+                @endif
+            @endforeach
+        </div>
         <div class="row mb-5">
-            <div class="col-md-6">
-                <h3>Pesquise o Medicamento</h3>
+            <!--<div class="col-md-6">
+                <h3>Pesquise o Paciente</h3>
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
-                        <input type="text" class="form-control input-lg" placeholder="Buscar" />
+                        <input id="search" type="text" class="form-control input-lg" placeholder="Buscar" />
                         <span class="input-group-btn">
                             <button class="btn btn-info btn-lg" type="button">
                             </button>
                         </span>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="row align-items-center">
                 <div class="col-md-6 mt-5 ">
-                    <i class="far fa-plus-square"></i>
+                <a href="{{route('cadastro.paciente.create')}}"><i class="fas fa-user-plus"></i></a>
                 </div>
             </div>
         </div>
@@ -113,53 +121,59 @@
             <table id="example" class="icone table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Nome genérico</th>
-                        <th>Laboratório</th>
-                        <th>Lote do medicamento</th>
+                        <th>Nome de Fábrica</th>
+                        <th>Laboratorio</th>
+                        <th>Lote do Medicamento</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Dafine de Castro</td>
-                        <td>834-334-3434-23</td>
-                        <td>23/03/1986</td>
-                        <td>
-                            <a href="{{route('realizarConsulta')}}"><i class="fas fa-edit"></i></a>
-                           <i class="fas fa-trash-alt"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Dafine de Castro</td>
-                        <td>834-334-3434-23</td>
-                        <td>23/03/1986</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                           <i class="fas fa-trash-alt"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Quinn Flynn</td>
-                        <td>112-345-2324-45</td>
-                        <td>223/11/1984</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                           <i class="fas fa-trash-alt"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Charde Marshall</td>
-                        <td>457-234-234-56</td>
-                        <td>31/05/1957</td>
-                        <td>
-                            <i class="fas fa-edit"></i>
-                           <i class="fas fa-trash-alt"></i>
-                        </td>
-                    </tr>
+                    @foreach ($medicamento as $item)
+                        <tr>
+                            <td>{{$item->nome_fabrica}}</td>
+                            <td>{{$item->laboratorio}}</td>
+                            <td>{{$item->lote_med}}</td>
+                                <td>
+                                <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->med_id}}"></i></a>
+                                    <a href="{{route('cadastro.paciente.edit',$item->med_id)}}"><i class="fas fa-edit"></i></a>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    @method('DELETE')
+                                    <a href="{{route('cadastro.paciente.destroy',$item->med_id)}}"><i class="fas fa-user-times"></i></a>
+                                </td>
+                        </tr>
+                          <!-- Modal -->
+                        <div class="modal fade" id="modal-info-paciente-{{$item->med_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Mais informações - ({{$item->nome_fabrica}})</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                            <label>Tarja : <span>{{$item->tarja}}</span></label>
+                                        </div>
+                                        <div class='col-md-6'>
+                                                <label>Descrição: <span>{{$item->descricao}}</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-light"><a href="{{route('cadastro.paciente.edit',$item->med_id)}}"><i class="fas fa-edit"></i></a></button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </tbody>
             </table>  
            </div>
        </div> 
+       <!--paginacao-->
        <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
             <li class="page-item disabled">
@@ -174,4 +188,5 @@
             </ul>
         </nav>
     </div>
+  
 @endsection

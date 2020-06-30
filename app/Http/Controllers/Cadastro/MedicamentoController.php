@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cadastro;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use App\Medicamento;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -28,8 +29,12 @@ class MedicamentoController extends Controller
         $this->$medicamento = $medicamento; 
     }
     public function index()
-    {
-        return view('pesquisa.medicamento');
+    {    
+        $medicamento = DB::table('medicamento as m')
+            ->where('m.deleted_at','=', NULL)
+            ->orderBy('m.created_at','desc')
+            ->paginate(15);
+        return view('pesquisa.medicamento',compact('medicamento'));
     }
 
     /**
@@ -59,6 +64,13 @@ class MedicamentoController extends Controller
     public function store(Request $request)
     {
         $medicamentoDate= $request->all();
+
+        $validacao = $request->validate([
+            'nome_fabrica' => 'required|max:100',
+            'laboratorio' => 'required|max:100',
+            'lote_med' => 'required|max:100',
+        ]);
+
         $medicamentoDate['user_log'] = Auth::user()->id;
         //cadastra no banco 
         $medicamento = new Medicamento;

@@ -45,8 +45,40 @@
             /* text-transform: uppercase;*/
             -webkit-box-shadow: 0 0.375em 0 currentColor !important;
         }
-       
-       
+        /*configurações tabela*/
+        .icone i {
+            padding: 5px;
+            font-size: 1.5em; 
+            color:#183153;
+            cursor: pointer;
+        }
+
+        .icone td{
+            text-align: center
+
+        }
+        .icone th{
+            text-align: center
+        }
+
+        /*modal mais opçoes*/
+        .TitulomaisInfo h4{
+            color:#183153;
+            font-weight: 600;
+        }
+        .subTitulomaisInfo label{
+            color:#183153;
+            font-weight: 600;
+        }
+        .subTitulomaisInfo label span{
+            color:black ;
+            font-weight: 500;
+        }
+        .iconeModalMaisInfo i{
+            padding: 5px;
+            font-size: 1em; 
+        }
+
 
     </style>
      <!-- fullcalendar -->

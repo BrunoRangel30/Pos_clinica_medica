@@ -1,52 +1,7 @@
 @extends('layouts.app')
 <style>
-      body {
-      margin-top: 40px;
-      font-size: 14px;
-      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    }
-  
-   /* #wrap {
-      width: 1100px;
-      margin: 0 auto;
-    }*/
-  
-    #external-events {
-      float: left;
-      width: 150px;
-      padding: 0 10px;
-      border: 1px solid #ccc;
-      background: #eee;
-      text-align: left;
-    }
-  
-    #external-events h4 {
-      font-size: 16px;
-      margin-top: 0;
-      padding-top: 1em;
-    }
-  
-    #external-events .fc-event {
-      margin: 10px 0;
-      cursor: pointer;
-    }
-  
-    #external-events p {
-      margin: 1.5em 0;
-      font-size: 11px;
-      color: #666;
-    }
-  
-    #external-events p input {
-      margin: 0;
-      vertical-align: middle;
-    }
-
-    .icone i {
-      padding: 5px;
-      font-size: 1.5em;
-      text-align: center
-    }
+    
+   
   
     /*#calendar {
       float: right;
@@ -85,6 +40,7 @@
     #custom-search-input .glyphicon-search{
         font-size: 23px;
     }
+
     
 </style>
 @section('content')
@@ -98,7 +54,7 @@
             @endforeach
         </div>
         <div class="row mb-5">
-            <div class="col-md-6">
+            <!--<div class="col-md-6">
                 <h3>Pesquise o Paciente</h3>
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
@@ -109,16 +65,16 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div class="row align-items-center">
+            </div>-->
+            <!--<div class="row align-items-center">
                 <div class="col-md-6 mt-5 ">
-                <a href="{{route('cadastro.paciente.create')}}"><i class="fas fa-user-plus"></i></a>
+               
                 </div>
-            </div>
+            </div>-->
         </div>
-       <div class="row">
-           <div class="col-lg-12">
-            <table id="example" class="icone table table-striped table-bordered" style="width:100%">
+       <div class="row bordaTabela">
+           <div class="col-lg-12 ">
+            <table id="example" class="icone table  table-bordered shadow p-3 mb-5 bg-white rounded" style="width:100%">
                 <thead>
                     <tr>
                         <th>Nome do Paciente</th>
@@ -132,11 +88,16 @@
                         <tr>
                             <td>{{$item->nome}}</td>
                             <td>{{$item->cpf}}</td>
-                            <td>{{$item->data_nasc}}</td>
+                            @php
+                                $date = date_create(date('Y-m-d'));
+                                $dataAtual = date_format($date, 'd/m/Y');  
+                            @endphp
+                            <td>{{$dataAtual}}</td>
                                 <td>
-                                <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->paciente_id}}"></i></a>
+                                    <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->paciente_id}}"></i></a>
+                                    <a href="{{route('cadastro.paciente.create')}}"><i class="fas fa-user-plus"></i></a>
                                     <a href="{{route('cadastro.paciente.edit',$item->paciente_id)}}"><i class="fas fa-edit"></i></a>
-                                    <i class="fas fa-calendar-alt"></i>
+                                   <!-- <i class="fas fa-calendar-alt"></i>-->
                                     @method('DELETE')
                                     <a href="{{route('cadastro.paciente.destroy',$item->paciente_id)}}"><i class="fas fa-user-times"></i></a>
                                 </td>
@@ -144,14 +105,14 @@
                           <!-- Modal -->
                         <div class="modal fade" id="modal-info-paciente-{{$item->paciente_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Mais informações - ({{$item->nome}})</h5>
+                            <div class="modal-content shadow p-3 mb-5 bg-white rounde">
+                                <div class="modal-header TitulomaisInfo">
+                                <h4 class="modal-title" id="exampleModalLabel">Mais informações - ({{$item->nome}})</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body subTitulomaisInfo">
                                     <div class='row'>
                                         <div class='col-md-6'>
                                             <label>Sexo : <span>{{$item->sexo}}</span></label>
@@ -169,7 +130,7 @@
                                             @endif
                                         </div>
                                         <div class='col-md-6'>
-                                            @if($item->rg)
+                                            @if($item->n_plano)
                                                 <label>N° do Plano de saúde : <span>{{$item->n_plano}}</span></label>
                                             @endif
                                         </div>
@@ -217,14 +178,14 @@
                                         </div>
                                         <div class='col-md-6'>
                                             @if($item->end_estado)
-                                                <label>Estado : <span>{{$item->end_estado}} - CEP: {{$item->cep}}</span></label>
+                                                <label>Estado : <span>{{$item->end_estado}} - <label>CEP:</label> {{$item->cep}}</span></label>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-light"><a href="{{route('cadastro.paciente.edit',$item->paciente_id)}}"><i class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="sombraBotao iconeModalMaisInfo"><a href="{{route('cadastro.paciente.edit',$item->paciente_id)}}"><i class="fas fa-edit"></i></a></button>
+                                <button type="button" class="sombraBotao" data-dismiss="modal">Fechar</button>
                                 </div>
                             </div>
                             </div>
@@ -235,7 +196,7 @@
            </div>
        </div> 
        <!--paginacao-->
-       <nav aria-label="Page navigation example">
+     <!--  <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -247,7 +208,7 @@
                 <a class="page-link" href="#">Next</a>
             </li>
             </ul>
-        </nav>
+        </nav>-->
     </div>
   
 @endsection
