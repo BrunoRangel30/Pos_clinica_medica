@@ -168,7 +168,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto icone">
                             <li>
-                                <i class='fas fa-user-md'></i>
+                                <a href="{{route('home')}}">
+                                    <i class='fas fa-user-md'></i>
+                                </a>
                             </li>
                         </ul>
                         <ul class="navbar-nav mr-auto">
