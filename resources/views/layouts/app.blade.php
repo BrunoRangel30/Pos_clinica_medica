@@ -16,6 +16,7 @@
         }
         .MenuPrincipal .dropdown-menu{
             background-color: #183153 !important;
+            border: solid 1px #459d93 !important;
         }
 
         .MenuPrincipal .dropdown-item:hover, .dropdown-item:focus {
