@@ -122,7 +122,7 @@
                 <thead>
                     <tr>
                         <th>Nome do Medico</th>
-                        <th>CPF</th>
+                        <th>CRM</th>
                         <th>Data Nascimento</th>
                         <th>Ações</th>
                     </tr>
@@ -137,7 +137,7 @@
                                 $dataAtual = date_format($date, 'd/m/Y');  
                             @endphp
                             <td>{{$dataAtual}}</td>
-                                <td>
+                            <td>
                                 <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->medico_id}}"></i></a>
                                 <a href="{{route('cadastro.medico.create')}}"><i class="fas fa-user-plus"></i></a>
                                 <a href="{{route('cadastro.medico.edit',$item->medico_id)}}"><i class="fas fa-edit"></i></a>
@@ -161,7 +161,7 @@
                                                 <label>Sexo : <span>{{$item->sexo}}</span></label>
                                             </div>
                                             <div class='col-md-6'>
-                                                <label>CRM : <span>{{$item->crm}}</span></label>
+                                                <label>CPF : <span>{{$item->cpf}}</span></label>
                                             </div>
                                         </div>
                                         <div class='row'>

@@ -117,9 +117,15 @@ class MedicoController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
-    {
-        //
+    public function edit($id)
+    {   
+        $medico =  new medico;
+        $medicodate= $medico->getIdMedico($id);
+        $userDate = User::find($medicodate->user_med_id);
+        $dataResult= array();
+        $dataResult['user'] = $userDate;
+        $dataResult['medico'] = $medicodate;
+        return view('edicao.medico',$dataResult);
     }
 
     /**
@@ -129,9 +135,60 @@ class MedicoController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+       // dd($request);
+        $user = new User;
+        $MedData= Medico::find($id);
+        $validacao = $request->validate([
+            'nome' => 'required|max:100',
+            'email' => ['required','max:100',Rule::unique('users', 'email')->ignore($MedData->user_med_id)],
+            'sexo' => 'required|max:100',
+            'cpf' => 'required|max:100',
+            'crm' => 'required|max:100',
+            'data_nasc' => 'required|max:100',
+            'tele_fixo' => 'nullable|max:100',
+            'tele_cel' => 'required|max:100',
+            'espec' => 'required|max:100',
+            'espec_sec' => 'nullable|max:100',
+            'end_rua' => 'required|max:100',
+            'end_nun_casa' => 'required|max:100',
+            'end_bairro' => 'required|max:100',
+            'end_cidade' => 'required|max:100',
+            'end_estado' => 'required|max:100',
+            'cep' => 'nullable|max:100',
+            'obervacao' => 'nullable|max:300',
+        ]);
+       
+        $user = new User;
+        $data= array();
+        $data['name'] = $request->nome;
+        $data['email'] = $request->email;
+        $user->getUser($MedData->user_med_id)->update($data);
+
+        //cria objeto Medico
+        $MedData->nome = $request->nome;
+        $MedData->sexo = $request->sexo;
+        $MedData->cpf = $request->cpf;
+        $MedData->data_nasc = $request->data_nasc;
+        $MedData->tele_cel = $request->tele_cel;
+        $MedData->tele_fixo = $request->tele_fixo;
+        $MedData->espec = $request->espec;
+        $MedData->crm = $request->crm;
+        $MedData->espec_sec = $request->espec_sec;
+        $MedData->end_rua = $request->end_rua;
+        $MedData->end_nun_casa = $request->end_nun_casa;
+        $MedData->end_bairro = $request->end_bairro;
+        $MedData->end_cidade = $request->end_cidade;
+        $MedData->end_estado = $request->end_estado;
+        $MedData->cep = $request->cep;
+        $MedData->obervacao = $request->obervacao;
+        $MedData->user_log = Auth::user()->id;
+        //dd( $MedData->nome);
+        $MedData->save();
+
+        $request->session()->flash('alert-success', 'Médico atualizado com sucesso!');
+        return redirect()->route('cadastro.medico.index');
     }
 
     /**

@@ -20,5 +20,10 @@ class Medico extends Model
     public function agendaMedico(){
         return $this->hasMany('App\Agenda','fk_medico');
     }
+    public function getIdMedico($id){
+        $medico = Medico::where('medico_id', '=', $id)
+                    ->first();
+        return $medico;
+     }
  
 }
