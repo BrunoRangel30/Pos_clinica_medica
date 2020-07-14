@@ -50,7 +50,7 @@ class PacienteController extends Controller
             'sexo' => 'required|max:100',
             'rg' => 'nullable|max:50',
             'org_emissor' => 'nullable|max:50',
-            'CPF' => 'required|max:100',
+            'cpf' => 'required|max:100',
             'data_de_nascimento' => 'required|max:100',
             'telefone_celular' => 'required|max:100',
             'idFixo' => 'nullable|max:100',
@@ -80,7 +80,7 @@ class PacienteController extends Controller
             'sexo' => $request->sexo,
             'rg' => $request->rg,
             'org_emissor'=>$request->org_emissor,
-            'cpf' => $request->CPF,
+            'cpf' => $request->cpf,
             'data_nasc' => $request->data_de_nascimento,
             'tele_cel' => $request->telefone_celular,
             'tele_fixo' => $request->idFixo,
@@ -149,7 +149,7 @@ class PacienteController extends Controller
             'sexo' => 'required|max:100',
             'rg' => 'nullable|max:50',
             'org_emissor' => 'nullable|max:50',
-            'CPF' => 'required|max:100',
+            'cpf' => 'required|max:100',
             'data_de_nascimento' => 'required|max:100',
             'telefone_celular' => 'required|max:100',
             'idFixo' => 'nullable|max:100',
@@ -176,7 +176,7 @@ class PacienteController extends Controller
         $pacData->sexo = $request->sexo;
         $pacData->rg = $request->rg;
         $pacData->org_emissor = $request->org_emissor;
-        $pacData->cpf = $request->CPF;
+        $pacData->cpf = $request->cpf;
         $pacData->data_nasc = $request->data_de_nascimento;
         $pacData->tele_cel = $request->telefone_celular;
         $pacData->tele_fixo =  $request->idFixo;

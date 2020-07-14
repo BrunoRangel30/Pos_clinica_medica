@@ -58,10 +58,10 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="data_nasc">Data de Nascimento</label>
-                    <input type="date" name='data_nasc' class="form-control @error('data_nasc') is-invalid @enderror " id="data_nasc" value="{{ old('data_nasc') }}" placeholder="">
-                    @error('data_nasc')
+                <div class="form-group col-md-3">
+                    <label for="data_de_nascimento">Data de Nascimento</label>
+                    <input type="date" name='data_de_nascimento' class="form-control @error('data_de_nascimento') is-invalid @enderror " id="data_de_nascimento" value="{{ old('data_de_nascimento') }}" placeholder="">
+                    @error('data_de_nascimento')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -76,10 +76,10 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="tele_cel">Telefone Celular</label>
-                    <input type="" name="tele_cel" class="form-control @error('tele_cel') is-invalid @enderror" id="tele_cel" value="{{ old('tele_cel') }}" placeholder="">
-                    @error('tele_cel')
+                <div class="form-group col-md-2">
+                    <label for="telefone_celular">Telefone Celular</label>
+                    <input type="" name="telefone_celular" class="form-control @error('telefone_celular') is-invalid @enderror" id="telefone_celular" value="{{ old('telefone_cel') }}" placeholder="">
+                    @error('telefone_celular')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -88,23 +88,23 @@
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-3">
-                    <label for="tele_fixo">Telefone residencial</label>
-                    <input type=""name="tele_fixo" class="form-control @error('tele_fixo') is-invalid @enderror" id="tele_fixo" value="{{ old('tele_fixo') }}" placeholder="">
-                    @error('tele_fixo')
+                    <label for="telefone_fixo">Telefone residencial</label>
+                    <input type=""name="telefone_fixo" class="form-control @error('telefone_fixo') is-invalid @enderror" id="telefone_fixo" value="{{ old('telefone_fixo') }}" placeholder="">
+                    @error('telefone_fixo')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="espec" value="">Especialidade</label>
-                    <select id="espec" name='espec' class="form-control  @error('espec') is-invalid @enderror" value="{{ old('espec') }}">
+                    <label for="especialidade" value="">Especialidade</label>
+                    <select id="especialidade" name='especialidade' class="form-control  @error('especialidade') is-invalid @enderror" value="{{ old('especialidade') }}">
                         <option>Cardiologia</option>
                         <option>Cirurgia geral</option>
                         <option>Dermatologia</option>
                         <option selected></option>
                     </select>
-                    @error('espec')
+                    @error('especialidade')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -152,45 +152,45 @@
             </div>
             <div class='form-row'>
                 <div class="form-group col-md-3">
-                    <label for="end_rua">Rua</label>
-                    <input type="text" name="end_rua"class="form-control @error('end_rua') is-invalid @enderror" id="end_rua" value="{{ old('end_rua') }}" placeholder="">
-                    @error('end_rua')
+                    <label for="rua">Rua</label>
+                    <input type="text" name="rua"class="form-control @error('rua') is-invalid @enderror" id="rua" value="{{ old('rua') }}" placeholder="">
+                    @error('rua')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="end_nun_casa">N°</label>
-                    <input type="" name="end_nun_casa" class="form-control @error('end_nun_casa') is-invalid @enderror" id="idNum" value="{{ old('end_nun_casa') }}" placeholder="">
-                    @error('end_nun_casa')
+                    <label for="numero">N°</label>
+                    <input type="" name="numero" class="form-control @error('numero') is-invalid @enderror" id="idNum" value="{{ old('numero') }}" placeholder="">
+                    @error('numero')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="end_bairro">Bairro</label>
-                    <input type="text" name="end_bairro" class="form-control @error('end_bairro') is-invalid @enderror" id="end_bairro" value="{{ old('end_bairro') }}" placeholder="">
-                    @error('end_bairro')
+                    <label for="bairro">Bairro</label>
+                    <input type="text" name="bairro" class="form-control @error('bairro') is-invalid @enderror" id="bairro" value="{{ old('bairro') }}" placeholder="">
+                    @error('bairro')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="end_cidade">Cidade</label>
-                    <input type="text" name="end_cidade" class="form-control @error('end_cidade') is-invalid @enderror" id="end_cidade" value="{{ old('end_cidade') }}" placeholder="">
-                    @error('end_cidade')
+                    <label for="cidade">Cidade</label>
+                    <input type="text" name="cidade" class="form-control @error('cidade') is-invalid @enderror" id="cidade" value="{{ old('cidade') }}" placeholder="">
+                    @error('cidade')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="end_estado">Estado</label>
-                    <input type="" name="end_estado"class="form-control @error('end_estado') is-invalid @enderror" id="end_estado" value="{{ old('end_estado') }}" placeholder="">
-                    @error('end_estado')
+                    <label for="estado">Estado</label>
+                    <input type="" name="estado"class="form-control @error('estado') is-invalid @enderror" id="estado" value="{{ old('estado') }}" placeholder="">
+                    @error('estado')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
