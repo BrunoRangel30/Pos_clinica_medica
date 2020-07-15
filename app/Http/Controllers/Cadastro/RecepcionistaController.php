@@ -96,7 +96,7 @@ class RecepcionistaController extends Controller
             'obervacao' => $request->obervacao,
         ]);
         $user->getId($request->email)->recepcionista()->save($recp);
-        $request->session()->flash('alert-success', 'Recepcionista adicionado com sucesso!');
+        $request->session()->flash('alert-success', 'Cadastro adicionado com sucesso!');
         return redirect()->route('cadastro.recepcionista.index');
     }
 
@@ -195,8 +195,11 @@ class RecepcionistaController extends Controller
      * @param  \App\Recepcionista  $recepcionista
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recepcionista $recepcionista)
+    public function destroy( Request $request, $id)
     {
-        //
+        $recepData= Recepcionista::find($id);
+        $recepData->delete();
+        $request->session()->flash('alert-success', 'Cadastro excluído com sucesso!');
+        return redirect()->route('cadastro.recepcionista.index');
     }
 }

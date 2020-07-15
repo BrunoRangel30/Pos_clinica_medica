@@ -138,8 +138,9 @@
                             <td>
                                 <i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->recep_id}}"></i>
                                 <a href="{{route('cadastro.recepcionista.create')}}"><i class="fas fa-user-plus"></i></a>
-                                <a href="{{route('cadastro.recepcionista.edit',$item->recep_id)}}"><i class="fas fa-edit"></i></a>
-                                <i class="fas fa-user-times"></i>
+                                <a href="{{route('cadastro.recepcionista.edit',$item->recep_id)}}"> <i class="fas fa-edit"></i></a>
+                                @method('DELETE')
+                                <a href="{{route('cadastro.recepcionista.destroy',$item->recep_id)}}"> <i class="fas fa-user-times"></i></a>
                             </td>
                         </tr>
                          <!-- Modal -->
