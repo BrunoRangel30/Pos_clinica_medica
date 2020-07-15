@@ -10,7 +10,7 @@
     <div class='container'>
         <div class='row'>
             <div class='col-md-6 titulosPesquisas'>
-                <h4> Editar Médico</h4>
+                <h4> Editar Cadastro Médico</h4>
             </div>
         </div>
         <form class='shadow p-3 mb-5 bg-white rounded' method="POST" action="{{ route('cadastro.medico.update',$medico->medico_id)}}">
@@ -197,7 +197,7 @@
                     @enderror
                 </div>
             </div>
-            <button type="submit" class="sombraBotao">Salvar</button>
+            <button type="submit" class="sombraBotao">Salvar Alterações</button>
         </form>
     </div>
 @endsection

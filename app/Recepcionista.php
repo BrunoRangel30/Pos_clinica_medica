@@ -12,4 +12,10 @@ class Recepcionista extends Model
     protected $guarded = [];
     protected $primaryKey = 'recep_id';
     protected $table = 'recepcionista';
+
+    public function getIdRecp($id){
+        $recep = Recepcionista::where('recep_id', '=', $id)
+                    ->first();
+        return $recep;
+     }
 }

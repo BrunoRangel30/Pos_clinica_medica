@@ -89,18 +89,14 @@
 @section('content')
     
 <div class="container">
-        <div class="row mb-5">
-            <div class='row'>
-                <div class='col-md-12'>
-                    <div class="flash-message">
-                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                            @if(Session::has('alert-' . $msg))
-                                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a></p>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a></p>
+                @endif
+            @endforeach
+        </div>
             <!--<div class="col-md-6">
                 <h3>Pesquise a Recepcionista</h3>
                 <div id="custom-search-input">
@@ -118,7 +114,6 @@
                     <i class="fas fa-user-plus"></i>
                 </div>
             </div>-->
-        </div>
        <div class="row">
            <div class="col-lg-12">
             <table id="example" class="icone shadow p-3 mb-5 bg-white rounded table table-bordered" style="width:100%">
@@ -143,7 +138,7 @@
                             <td>
                                 <i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->recep_id}}"></i>
                                 <a href="{{route('cadastro.recepcionista.create')}}"><i class="fas fa-user-plus"></i></a>
-                                <a href=""><i class="fas fa-edit"></i></a>
+                                <a href="{{route('cadastro.recepcionista.edit',$item->recep_id)}}"><i class="fas fa-edit"></i></a>
                                 <i class="fas fa-user-times"></i>
                             </td>
                         </tr>

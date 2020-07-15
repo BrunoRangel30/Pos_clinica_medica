@@ -97,7 +97,7 @@ class PacienteController extends Controller
             'obervacao' => $request->obervacao,
         ]);
         $user->getId($request->email)->paciente()->save($paciente);
-        $request->session()->flash('alert-success', 'Paciente adicionado com sucesso!');
+        $request->session()->flash('alert-success', 'Cadastro adicionado com sucesso!');
         return redirect()->route('cadastro.paciente.index');
         
     }
@@ -192,7 +192,7 @@ class PacienteController extends Controller
         $pacData->cep = $request->cep;
         $pacData->obervacao =  $request->obervacao;
         $pacData->save(); //salva os dados
-        $request->session()->flash('alert-success', 'Paciente atualizado com sucesso!');
+        $request->session()->flash('alert-success', 'Cadastro atualizado com sucesso!');
         return redirect()->route('cadastro.paciente.index');
     }
 

@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class RecepcionistaController extends Controller
 {
@@ -116,9 +117,15 @@ class RecepcionistaController extends Controller
      * @param  \App\Recepcionista  $recepcionista
      * @return \Illuminate\Http\Response
      */
-    public function edit(Recepcionista $recepcionista)
+    public function edit( $id)
     {
-        //
+        $recep =  new Recepcionista;
+        $recepDate= $recep->getIdRecp($id);
+        $userDate = User::find($recepDate->user_id);
+        $dataResult= array();
+        $dataResult['user'] = $userDate;
+        $dataResult['recepcionista'] = $recepDate;
+        return view('edicao.recepcionista',$dataResult);
     }
 
     /**
@@ -128,9 +135,58 @@ class RecepcionistaController extends Controller
      * @param  \App\Recepcionista  $recepcionista
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recepcionista $recepcionista)
+    public function update(Request $request, $id)
     {
         //
+        $user = new User;
+        $recepData= Recepcionista::find($id);
+        $validacao = $request->validate([
+            'Nome_Recepcionista' => 'required|max:100',
+            'email' => ['required','max:100',Rule::unique('users', 'email')->ignore($recepData->user_id)],
+            'sexo' => 'required|max:100',
+            'cpf' => 'required|max:100',
+            'rg' => 'nullable|max:100',
+            'org_emissor'=>'nullable|max:100',
+            'data_de_nascimento' => 'required|max:100',
+            'nome_mae' => 'required|max:100',
+            'nome_pai' => 'nullable|max:100',
+            'telefone_fixo' => 'nullable|max:100',
+            'telefone_celular' => 'required|max:100',
+            'idAdmisssao' => 'nullable|max:100',
+            'rua' => 'required|max:100',
+            'numero' => 'required|max:100',
+            'bairro' => 'required|max:100',
+            'cidade' => 'required|max:100',
+            'estado' => 'required|max:100',
+            'cep' => 'nullable|max:100',
+            'obervacao' => 'nullable|max:300',
+        ]);
+      /// dd('inferno');
+        $user = new User;
+        $data= array();
+        $data['name'] = $request->Nome_Recepcionista;
+        $data['email'] = $request->email;
+        $user->getUser($recepData->user_id)->update($data);
+        $recepData->nome = $request->Nome_Recepcionista;
+        $recepData->sexo = $request->sexo;
+        $recepData->cpf = $request->cpf;
+        $recepData->data_nasc = $request->data_de_nascimento;
+        $recepData->nome_mae = $request->nome_mae;
+        $recepData->nome_pai = $request->nome_pai;
+        $recepData->tele_cel = $request->telefone_celular;
+        $recepData->tele_fixo = $request->telefone_fixo;
+        $recepData->data_adm = $request->idAdmisssao;
+        $recepData->end_rua = $request->rua;
+        $recepData->end_nun_casa = $request->numero;
+        $recepData->end_bairro = $request->bairro;
+        $recepData->end_cidade = $request->cidade;
+        $recepData->end_estado = $request->estado;
+        $recepData->cep = $request->cep;
+        $recepData->obervacao = $request->obervacao;
+        $recepData->save();
+        $request->session()->flash('alert-success', 'Cadastro atualizado com sucesso!');
+        return redirect()->route('cadastro.recepcionista.index');
+       // dd($recepData);
     }
 
     /**
