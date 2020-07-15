@@ -197,8 +197,11 @@ class MedicoController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Request $request,$id)
     {
-        //
+        $medicoDelete = Medico::find($id);
+        $medicoDelete->delete();
+        $request->session()->flash('alert-success', 'Cadastro excluído com sucesso!');
+        return redirect()->route('cadastro.medico.index');
     }
 }

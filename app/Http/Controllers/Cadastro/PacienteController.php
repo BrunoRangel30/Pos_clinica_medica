@@ -206,6 +206,7 @@ class PacienteController extends Controller
     {   
         $pacienteDelete = Paciente::find($id);
         $pacienteDelete->delete();
+        $request->session()->flash('alert-success', 'Cadastro excluído com sucesso!');
         return redirect()->route('cadastro.paciente.index');
     }
 }

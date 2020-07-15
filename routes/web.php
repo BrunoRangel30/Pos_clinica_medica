@@ -29,7 +29,8 @@ Route::namespace('Cadastro')->prefix('cadastro')->name('cadastro.')->middleware(
     Route::resource('/recepcionista', 'RecepcionistaController');
     Route::resource('/medicamento', 'MedicamentoController');
 });
-Route::get('paciente/{id}', 'Cadastro\PacienteController@destroy')->name('cadastro.paciente.destroy');
+Route::get('paciente/{id}', 'Cadastro\PacienteController@destroy')->name('cadastro.paciente.destroy');//excluir paciente
+Route::get('medico/{id}', 'Cadastro\MedicoController@destroy')->name('cadastro.medico.destroy'); //excluir medico
 //Rotas para exibição
 Route::namespace('Cadastro')->prefix('listar')->name('listar.')->middleware('can:admin')->group(function(){
     Route::resource('/paciente', 'PacienteController');

@@ -43,9 +43,9 @@
                     <input type="text" name="org_emissor" value="{{ old('org_emissor') }}" class="form-control" id="org_emissor" placeholder="">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="CPF">CPF</label>
-                    <input type="text" name="CPF" value="{{ old('CPF') }}" class="form-control @error('CPF') is-invalid @enderror" id="CPF" >
-                    @error('CPF')
+                    <label for="cpf">CPF</label>
+                    <input type="text" name="cpf" value="{{ old('cpf') }}" class="form-control @error('cpf') is-invalid @enderror" id="cpf" >
+                    @error('cpf')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
