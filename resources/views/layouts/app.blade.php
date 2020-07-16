@@ -9,6 +9,14 @@
             background-color: #183153 !important;
             height: 12vh;
         }
+        .campo .form-control:focus{
+            color: #183153;
+            background-color: #fff;
+            border-color: #183153 !;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0) !important;
+           /* box-shadow: 0 0 0 0.2rem #f8fafc !important;*/
+        }
 
         .MenuPrincipal li a{
             color: #fff !important;

@@ -136,10 +136,10 @@
                                 <td>
                                 <a><i class="fas fa-info" data-toggle="modal" data-target="#modal-info-paciente-{{$item->med_id}}"></i></a>
                                     <a href="{{route('cadastro.medicamento.create')}}"><i class="fas fa-user-plus"></i></a>
-                                    <a href=""><i class="fas fa-edit"></i></a>
+                                    <a href="{{route('cadastro.medicamento.edit',$item->med_id)}}"><i class="fas fa-edit"></i></a>
                                   <!--  <i class="fas fa-calendar-alt"></i>-->
                                     @method('DELETE')
-                                    <a href=""><i class="fas fa-user-times"></i></a>
+                                    <a href="{{route('cadastro.medicamento.destroy',$item->med_id)}}"><i class="fas fa-user-times"></i></a>
                                 </td>
                         </tr>
                           <!-- Modal -->

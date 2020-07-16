@@ -97,9 +97,13 @@ class MedicamentoController extends Controller
      * @param  \App\Medicamento  $medicamento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Medicamento $medicamento)
+    public function edit($id)
     {
-        //
+        $med =  new Medicamento;
+        $med= Medicamento::find($id);
+        $dataResult= array();
+        $dataResult['medicamento'] = $med;
+        return view('edicao.medicamento',$dataResult);
     }
 
     /**
@@ -109,9 +113,27 @@ class MedicamentoController extends Controller
      * @param  \App\Medicamento  $medicamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Medicamento $medicamento)
+    public function update(Request $request, $id)
     {
-        //
+        //dd('chamou');
+        $med= Medicamento::find($id);
+        $validacao = $request->validate([
+            'nome_fabrica' => 'required|max:100',
+            'laboratorio' => 'required|max:100',
+            'lote_med' => 'required|max:100',
+            'descricao' => 'nullable|max:100',
+        ]);
+
+        $med->nome_fabrica = $request->nome_fabrica;
+        $med->laboratorio = $request->laboratorio;
+        $med->lote_med = $request->lote_med;
+        $med->lote_med = $request->lote_med;
+        $med->tarja = $request->tarja;
+        $med->descricao = $request->descricao;
+        $med->save();
+        $request->session()->flash('alert-success', 'Cadastro atualizado com sucesso!');
+        return redirect()->route('cadastro.medicamento.index');
+       
     }
 
     /**
@@ -120,8 +142,12 @@ class MedicamentoController extends Controller
      * @param  \App\Medicamento  $medicamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Medicamento $medicamento)
+    public function destroy(Request $request, $id)
     {
         //
+        $med= Medicamento::find($id);
+        $med->delete();
+        $request->session()->flash('alert-success', 'Cadastro excluído com sucesso!');
+        return redirect()->route('cadastro.medicamento.index');
     }
 }

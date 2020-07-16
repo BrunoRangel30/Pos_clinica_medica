@@ -19,6 +19,7 @@
     .resultPesqMed  ul {
         padding: 0px !important;
     }
+  
  
 </style>
 @section('content')
@@ -36,9 +37,10 @@
         <!--consulta.receita.store-->
         <form  method="POST" action="{{route('consulta.receita.store')}}">
             @csrf
-            <div class='form-row'>
+            <div class='form-row campo'>
                 <div class="col-md-5">
                     <label class="sr-only" for="buscaMedicamento">Pesquise o medicamento</label>
+                    <label for="medicamento">Medicamento</label>
                     <div class="input-group">
                         <div class="input-group-prepend iconePesquisa">
                             <div class="input-group-text"><i class="fas fa-search"></i></div>
@@ -61,16 +63,19 @@
                     </div>
                 </div>
                 <div class="form-group col-md-2" id="qtd">
-                    <input name='qtd' type="number" class="form-control" id="idNum" placeholder="Quantidade">
+                    <label for="Quantidade">Quantidade</label>
+                    <input name='qtd' type="" class="form-control" id="idNum" placeholder="">
                 </div>
                 <div class="form-group col-md-2" id="unidade">
-                    <input name='unidade' type="" class="form-control" id="idNum" placeholder="Unidade">
+                    <label for="Unidade">Unidade</label>
+                    <input name='unidade' type="" class="form-control" id="idNum" placeholder="">
                 </div>
                 <div class="form-group col-md-2" id="via">
-                    <input name='via' type="" class="form-control" id="idNum" placeholder="Via">
+                    <label for="via">Via</label>
+                    <input name='via' type="" class="form-control" id="idNum" placeholder="">
                 </div>
             </div>
-            <div class='form-row divReceita'>
+            <div class='form-row divReceita campo'>
                 <div class="form-group col-md-11" id="procedimento">
                     <label for="idObservacao">Procedimento</label>
                     <textarea name="procedimento" rows="5" type="textArea" class="form-control" id="idObservacao" placeholder=""></textarea>
