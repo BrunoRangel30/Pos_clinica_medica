@@ -15,6 +15,7 @@
     .resultPesqMed ul li {
         list-style-type: none;
         padding-top: 5px;
+        cursor: pointer;
     }
     .resultPesqMed  ul {
         padding: 0px !important;
@@ -46,8 +47,13 @@
                             <div class="input-group-text"><i class="fas fa-search"></i></div>
                         </div>
                         <div id='inputPesqMedicamento'>
-                            <input style="width:184%" type="text" class="form-control" id="buscaMedicamento" placeholder="Pesquise o medicamento">
+                            <input style="width:184%" type="text" class="form-control @error('fk_medicamento') is-invalid @enderror" id="buscaMedicamento" placeholder="Pesquise o medicamento">
                             <input name='fk_medicamento' type="hidden" value="" class="form-control" id="idMedicamento">
+                            @error('fk_medicamento')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             @if(session('idMedico'))
                                  <input name='fk_medico' type="hidden" value="{{session('idMedico')}}" class="form-control">
                             @endif
@@ -64,21 +70,41 @@
                 </div>
                 <div class="form-group col-md-2" id="qtd">
                     <label for="Quantidade">Quantidade</label>
-                    <input name='qtd' type="" class="form-control" id="idNum" placeholder="">
+                    <input name='qtd' type="" class="form-control  @error('qtd') is-invalid @enderror" id="idNum" placeholder="">
+                    @error('qtd')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group col-md-2" id="unidade">
                     <label for="Unidade">Unidade</label>
-                    <input name='unidade' type="" class="form-control" id="idNum" placeholder="">
+                    <input name='unidade' type="" class="form-control @error('unidade') is-invalid @enderror" id="idNum" placeholder="">
+                    @error('unidade')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group col-md-2" id="via">
                     <label for="via">Via</label>
-                    <input name='via' type="" class="form-control" id="idNum" placeholder="">
+                    <input name='via' type="" class="form-control @error('via') is-invalid @enderror" id="idNum" placeholder="">
+                    @error('via')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                   @enderror
                 </div>
             </div>
             <div class='form-row divReceita campo'>
                 <div class="form-group col-md-11" id="procedimento">
                     <label for="idObservacao">Procedimento</label>
-                    <textarea name="procedimento" rows="5" type="textArea" class="form-control" id="idObservacao" placeholder=""></textarea>
+                    <textarea name="procedimento" rows="5" type="textArea" class="form-control  @error('procedimento') is-invalid @enderror" id="idObservacao" placeholder=""></textarea>
+                    @error('procedimento')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <button type="submit" id="salvarReceita"class="sombraBotao">Salvar</button>

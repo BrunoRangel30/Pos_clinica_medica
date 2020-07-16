@@ -34,13 +34,14 @@
       overflow-y: scroll;
   }
   #examesSelect  li{
-    list-style-type: none;
+      list-style-type: none;
       padding-top: 5px;
       padding-left: 10px;
       font-size: 1.2em;
       color:  #183153;
       font-weight: 700;
-      text-transform:lowercase
+      text-transform:lowercase;
+      cursor: pointer;
   }
   #examesSelect  h4{
       color:  #183153;
@@ -67,7 +68,7 @@
         <form method="POST" action="{{route('consulta.exame.store')}}">
             @csrf
             <div class='row'>
-                <div class="col-md-6">
+                <div class="col-md-6 campo">
                     <label class="sr-only" for="pesquisaExame">Pesquise o exame</label>
                     <div class="input-group">
                         <div class="input-group-prepend iconePesquisa">

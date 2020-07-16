@@ -46,6 +46,7 @@ class ReceitaController extends Controller
      */
     public function create()
     {
+     
         return view('consulta.receita');
     }
 
@@ -56,16 +57,31 @@ class ReceitaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $validacao = $request->validate([
+    {   
+        $messages=[
+            'fk_medicamento.required' => 'O campo nome medicamento é obrigatório',
+            'qtd.required' => 'O campo quantidade é obrigatório',
+            'via.required' => 'O campo via é obrigatório',
+            'procedimento.required' => 'O procedimento via é obrigatório',
+            'unidade.required' => 'O unidade via é obrigatório',
+        ];
+        $validacao = $request->validate(
+            [
             'fk_medicamento' => 'required|max:100',
-        ]);
+            'qtd' => 'required|max:100',
+            'unidade'=>'required|max:100',
+            'via' =>'required|max:100',
+            'procedimento' => 'required|max:100',
+            ],
+            $messages
+        );
         $receita= $request->all();
         $medicamento = new Medicamento;
         $med = $medicamento->getMedicamentoById($receita['fk_medicamento']);
         $receita['nome_fabrica']= $med[0]->nome;
         $request->session()->push('receita', $receita);
         //dd($receita);
+        $request->session()->flash('alert-success', 'Receita adicionada com sucesso!');
         return view('pesquisa.receitaListagem');
        
     }
@@ -124,6 +140,24 @@ class ReceitaController extends Controller
     public function update(Request $request)
     {
        // dd($request);
+        $messages=[
+            'fk_medicamento.required' => 'O campo nome medicamento é obrigatório',
+            'qtd.required' => 'O campo quantidade é obrigatório',
+            'via.required' => 'O campo via é obrigatório',
+            'procedimento.required' => 'O campo procedimento  é obrigatório',
+            'unidade.required' => 'O campo unidade  é obrigatório',
+        ];
+        $validacao = $request->validate(
+            [
+            'fk_medicamento' => 'required|max:100',
+            'qtd' => 'required|max:100',
+            'unidade'=>'required|max:100',
+            'via' =>'required|max:100',
+            'procedimento' => 'required|max:100',
+            ],
+            $messages
+        );
+        
         $receita = $request->session()->get('receita');
        
         for($i=0;$i<= count($receita);$i++) {
@@ -140,6 +174,7 @@ class ReceitaController extends Controller
         }
         $request->session()->forget('receita');
         Session::put('receita', $receita);
+        $request->session()->flash('alert-success', 'Receita atualizada com sucesso!');
         return view('pesquisa.receitaListagem');
        
     }
@@ -161,6 +196,7 @@ class ReceitaController extends Controller
         }
         $request->session()->forget('receita');
         Session::put('receita', $receita);
+        $request->session()->flash('alert-success', 'Receita excluída com sucesso!');
         return view('pesquisa.receitaListagem');
     }
 }
