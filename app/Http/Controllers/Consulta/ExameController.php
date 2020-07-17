@@ -87,7 +87,11 @@ class ExameController extends Controller
      */
     public function store(Request $request)
     {   
-       
+        $validacao = $request->validate(
+            [
+            'exame' => 'required|max:100',
+            ]
+        );
         $input = array();
         $input = $request->all();
         unset($input['_token']); //exlui o token

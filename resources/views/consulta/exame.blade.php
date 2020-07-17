@@ -73,7 +73,7 @@
      padding: 5px;
 
   }
-  
+
 </style>
 
 @section('content')
@@ -97,7 +97,12 @@
                         <div class="input-group-prepend iconePesquisa">
                             <div class="input-group-text"><i class="fas fa-search"></i></div>
                         </div>
-                        <input type="text"  class="form-control" id="pesquisaExame" placeholder="Pesquise o exame">
+                        <input name="exame" type="text"  class="form-control @error('exame') is-invalid @enderror" id="pesquisaExame" placeholder="Pesquise o exame">
+                        @error('exame')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </div> 
                         <div class='row'>
                             <div class='col-md-12'>

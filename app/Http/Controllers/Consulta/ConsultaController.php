@@ -40,7 +40,7 @@ class ConsultaController extends Controller
         //Receita
         $receitaArray = session()->get('receita'); //receita
         $data= array();
-        //Exemes
+        //Exames
         $examesArray = session()->get('exames');
         $dataEexames= array();
         //consulta

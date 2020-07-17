@@ -51,7 +51,8 @@ class AtendimentoController extends Controller
     {   
         
         if(!empty(Auth::user()->id)){
-            $date = date_create(date('Y/m/d'));
+            date_default_timezone_set('America/Sao_Paulo');
+            $date = date_create(date('Y/m/d',time()));
             $dataAtual = date_format($date, 'Y-m-d');
             $agenda= $this->agenda->getAgendaDiaro($dataAtual);
         }
@@ -97,12 +98,11 @@ class AtendimentoController extends Controller
     }
 
     public function atualizarAgenda(Request $request){
-       // dd($request);()
+       
         $start = (!empty($request->start)) ? ($request->start) : ('');
         $end = (!empty($request->end)) ? ($request->end) : ('');
         $idMed= $request->data;
         $agendaMed = $this->agenda->getAgenda($idMed,$start,$end);
-        //var_dump($agendaMed);
         return json_encode($agendaMed);
     }
 
@@ -129,8 +129,6 @@ class AtendimentoController extends Controller
         $dataAgenda['user_log'] = Auth::user()->id;
         //cadastra no banco 
         $this->agenda->create($dataAgenda);
-        //resgata para listar
-        //dd('passou por aqui');
         $request->session()->flash('alert-success', 'Consulta agendada com sucesso!');
         return $dataAgenda['fk_medico'];
       
