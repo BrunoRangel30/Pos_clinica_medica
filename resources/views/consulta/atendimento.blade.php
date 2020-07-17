@@ -33,9 +33,9 @@
                 </div>
             </div>
         </div>-->
-        <div class="row">
-            <div class="col-lg-12">
-                @if(isset($agenda))
+    <div class="row">
+        <div class="col-lg-12">
+            @if(isset($agenda))
                 <h3 class="text-center mb-3">Listagem de Pacientes</h3>
                 <table id="example" class="icone table shadow p-3 mb-5 table-bordered table-bordered" style="width:100%">
                     <thead>
