@@ -36,24 +36,20 @@ class ExameController extends Controller
     }
     
     public function listarResultadosExames(Request $request){
+
         $resultado_exames = new resultado_exames;
         $idpaciente = $request->session()->get('fk_paciente_exame');
         $resultado = $resultado_exames->getResultados($idpaciente);
-      //  dd( $idpaciente);
-      return view('pesquisa.resultadoExameListagem', compact('resultado'));
+        return view('pesquisa.resultadoExameListagem', compact('resultado'));
 
-        //dd($idpaciente);
+       
     }
     public function listarResultadosExamesMenu(Request $request){
-        $resultado_exames = new resultado_exames;
-       // $idpaciente = $request->session()->get('fk_paciente_exame');
-       //$exames = $this->exame->getExamePaciente($request['id']);
-    //   dd($request['id']);
-        $resultado = $resultado_exames->getResultados($request['id']);
-      //  dd( $idpaciente);
-      return view('consulta.componentes.resultadoExamesSubmenu', compact('resultado'));
 
-        //dd($idpaciente);
+        $resultado_exames = new resultado_exames;
+        $resultado = $resultado_exames->getResultados($request['id']);
+        return view('consulta.componentes.resultadoExamesSubmenu', compact('resultado'));
+
     }
 
     public function listagemResultados()

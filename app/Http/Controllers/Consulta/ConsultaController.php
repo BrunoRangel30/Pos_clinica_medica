@@ -73,7 +73,10 @@ class ConsultaController extends Controller
         //Exames
         if( !empty($examesArray)){
             foreach ($examesArray as $key => $value) {
+                //unset($examesArray[0]['exame']); //exlui o valor que foi inserido no dropdow da busca exame.
+                unset($value['exame']);
                 foreach ($value as $key) {
+                   // unset($examesArray['exame']); //exlui o valor que foi inserido no drop
                     $consulta->getConsultaExame()->attach(['fk_exame' =>$key],['fk_consulta'=> $idConsulta->consulta_id]);
                 }
             }

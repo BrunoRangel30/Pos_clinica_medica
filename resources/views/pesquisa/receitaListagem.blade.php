@@ -7,7 +7,11 @@
       text-align: left !important;
     }
     .itens-receita p{
-      text-align: left !important;
+       text-align: left !important;
+    }
+
+    .itens-exames {
+       text-transform:lowercase;
     }
 
 </style>
@@ -57,27 +61,25 @@
                 </table>  
             </div>
         </div>
+        <!--Exames-->
         <div class="row">
             <div class="col-lg-12">
-                <table id="example" class="icone table table-striped table-bordered" style="width:100%">
+                <table id="example" class="icone table  table-bordered shadow p-3 mb-5 bg-white rounded mt-3" style="width:100%">
                     @if(session('exames'))
-                    @inject('exame', 'App\Exame')
-                        <thead>
-                            <tr>
-                                
-                                <th>Relação de exames
-                                    <a href="{{route('editarExame',[ 'key'=> 1])}}"><i class="fas fa-edit"></i></a>
-                                </th>
-                                
-                            </tr>
+                        @inject('exame', 'App\Exame')
+                            <thead>
+                                <tr>
+                                    <th>Relação de exames Selecionados
+                                        <!--<a href="{{route('editarExame',[ 'key'=> 1])}}"><i class="fas fa-edit"></i></a>-->
+                                    </th>
+                                </tr>
                             </thead>
-                            <tbody>
+                            <tbody class='itens-exames'>
                                 @foreach (session('exames') as $item)
                                     @foreach ($item as $i)
                                         @foreach($exame->getExameId($i) as $key)
                                             <tr>
                                                 <td>{{$key->nome}}</td>
-            
                                             </tr>
                                         @endforeach
                                     @endforeach
