@@ -2,13 +2,43 @@
 <style>
 
   .botao-hj button{
-      margin-top: 30px;
+        margin-top: 30px;
   }
 
   .icone i {
-      padding: 5px;
-      font-size: 1.5em;
+        padding: 5px;
+        font-size: 1.5em;
   }
+  .titulo-consulta h4{
+        text-align: center !important;
+        color: #183153;
+        font-weight: 600;
+        border-bottom: solid 1px #183153;
+  }
+  .sub-consulta h4{
+        text-align: center;
+  }
+  .exame-item{
+         border-bottom: solid 1px #183153;
+         border-radius: 8px;
+         padding: 15px;
+  }
+ 
+  .exames{
+        border-top: solid 1px #183153;
+        border-left: solid 1px #183153;
+        border-right: solid 1px #183153;
+        border-radius: 8px;
+  }
+  .exames ul{
+        padding: 0px;
+  }
+  .exames li{
+        list-style-type: none;
+        padding-bottom: 10px; 
+        text-transform:lowercase;
+  }
+ 
 </style>
 @section('content')
     <div class="container">
@@ -69,27 +99,25 @@
                             
                         </tr>
                         <div class="modal fade" id="consulta-{{$item->fk_paciente}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                </div>
-                                <div class="modal-body">
+                                <div class="modal-body titulo-consulta">
                                     @if(sizeof($consulta->getExamePaciente($item->fk_paciente))!==0)
-                                        <div>
+                                    <div class='exames'>
+                                            <h4>Paciente: {{$item->nomePaciente}}</h4>
                                             <h4>Exames solicitados</h4>
                                             <ul>
                                                 @foreach ($consulta->getExamePaciente($item->fk_paciente) as $key)
-                                                    <h5>Data da consulta {{$key->created_at}}</h5>
-                                                    <hr/>
-                                                    @foreach ($consulta->nomeExame($key->fk_consulta) as $j)
-                                                        <li>{{$j->exame}}</li>
-                                                    @endforeach
-                                                    <hr/>
-                                                    <a target="_blank" href={{route('pdfExame',['idConsulta'=>$key->fk_consulta])}}><button type="button" class="btn btn-primary">Imprimir</button></a>
+                                                    <div class='exame-item'>
+                                                        <h5>Data da consulta {{$key->created_at}}</h5>
+                                                        @foreach ($consulta->nomeExame($key->fk_consulta) as $j)
+                                                            <li>{{$j->exame}}</li>
+                                                        @endforeach
+                                                        <a target="_blank" href={{route('pdfExame',['idConsulta'=>$key->fk_consulta])}}><button type="button" class="sombraBotao">Imprimir</button></a>
+                                                    </div>
                                                 @endforeach
                                             </ul>
-                                        </div>
-                                        <hr/>
+                                    </div>
                                     @endif
                                     @if(sizeof($consulta->getReceitaPaciente($item->fk_paciente))!==0)
                                         <div>
