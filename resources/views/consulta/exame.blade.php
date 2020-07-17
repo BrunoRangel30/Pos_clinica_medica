@@ -2,55 +2,78 @@
 <style>
 
   #resultExames{
-      height:200px;
-      overflow-y: scroll;
-      display: none;
-      border: solid 1px #183153;
-      border-radius: 10px;
-      
+     height:200px;
+     overflow-y: scroll;
+     display: none;
+     border: solid 1px #183153;
+     border-radius: 10px; 
+   }
+
+  #resultExames::-webkit-scrollbar-track {
+     background-color:  #f0f1f3;
+     border: solid 1px #183153;
+  }
+
+  #resultExames::-webkit-scrollbar {
+     width: 6px;
+     background: #F4F4F4;
+  }
+  #resultExames::-webkit-scrollbar-thumb {
+    background:  #183153;
+  }
+  #examesSelect::-webkit-scrollbar-track {
+     background-color:  #f0f1f3;
+     border: solid 1px #183153;
+  }
+  #examesSelect::-webkit-scrollbar {
+     width: 6px;
+     background: #F4F4F4;
+  }
+  #examesSelect::-webkit-scrollbar-thumb {
+    background:  #183153;
   }
 
   #resultExames ul li {
-      list-style-type: none;
-      padding-top: 5px;
-      padding-left: 10px;
-      font-size: 1.2em;
-      color:  #183153;
-      font-weight: 700;
-      text-transform:lowercase
+     list-style-type: none;
+     padding-top: 5px;
+     padding-left: 10px;
+     font-size: 1.2em;
+     color:  #183153;
+     font-weight: 700;
+     text-transform:lowercase;
+     cursor:pointer;
   }
 
   #resultExames  ul {
-      padding: 0px !important;
+     padding: 0px !important;
   }
   #examesSelect{
-      border-width: medium;
-      height: 231px;
-      margin-left: 30px;
-      width: 100%;
-      border: solid 1px #183153;
-      border-radius: 10px;
-      display: none;
-      overflow-y: scroll;
+     border-width: medium;
+     height: 231px;
+     margin-left: 30px;
+     width: 100%;
+     border: solid 1px #183153;
+     border-radius: 10px;
+     display: none;
+     overflow-y: scroll;
   }
   #examesSelect  li{
-      list-style-type: none;
-      padding-top: 5px;
-      padding-left: 10px;
-      font-size: 1.2em;
-      color:  #183153;
-      font-weight: 700;
-      text-transform:lowercase;
-      cursor: pointer;
+     list-style-type: none;
+     padding-top: 5px;
+     padding-left: 10px;
+     font-size: 1.2em;
+     color:  #183153;
+     font-weight: 700;
+     text-transform:lowercase;
+     cursor: pointer;
   }
   #examesSelect  h4{
-      color:  #183153;
-      font-weight: 800;
-      padding: 5px;
+     color:  #183153;
+     font-weight: 800;
+     padding: 5px;
+
   }
-
-   
-
+  
 </style>
 
 @section('content')

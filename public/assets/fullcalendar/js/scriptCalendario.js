@@ -552,10 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // li += `<div class='exclusao-exame'>`
                 li += `<h4>Exame(s) selecionado(s)</h4>`
                 listExames.map(function(item) {
-
-                    li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
-
-
+                    li += `<input  type='hidden' name='exames-${item.id}'><li id="${item.id}"> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
                 })
                 li += '';
                 $('#examesSelect').html(li)
@@ -571,9 +568,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById("examesSelect").addEventListener("click", function(e) {
+
         li = '';
         listExames.map(function(valor, i) {
-            if (valor.id == e.target.childNodes[1].id) {
+            if (valor.id == e.target.id) {
                 listExames.splice(i, 1);
             }
         })
