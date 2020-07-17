@@ -94,6 +94,7 @@ class ExameController extends Controller
         );
         $input = array();
         $input = $request->all();
+        //dd($input);
         unset($input['_token']); //exlui o token
         $request->session()->push('exames', $input);
         return view('pesquisa.receitaListagem');

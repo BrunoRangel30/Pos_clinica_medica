@@ -570,6 +570,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("examesSelect").addEventListener("click", function(e) {
 
         li = '';
+        alert('ahah');
         listExames.map(function(valor, i) {
             if (valor.id == e.target.id) {
                 listExames.splice(i, 1);
@@ -577,12 +578,17 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         li += `<h4>Exame(s) selecionado(s)</h4>`
         listExames.map(function(item) {
-            li += `<input  type='hidden' name='exames-${item.id}'><li> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
+            // li += `<input  type='hidden' name='exames-${item.id}'><li id="${item.id}"> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
+            li += `<input  type='hidden' name='exames-${item.id}'><li id="${item.id}"> <i id="${item.id}" class="fas fa-times-circle"></i> ${item.nome}</li></input>`
         })
         $('#examesSelect').html(li)
         if (listExames == null || listExames.length == 0) {
             $('#examesSelect').hide();
         }
+        //insere o valor dos input
+        listExames.map(function(item, i) {
+            $(`#examesrequest input[name='exames-${item.id}']`).val(item.id);
+        })
     });
 
 

@@ -110,10 +110,9 @@
                             </div>
                         </div>
                     </div>
-                <div class='row' id='examesrequest'>
-                    <div class='col-md-12' id="examesSelect">
+                    <div class='row' id='examesrequest'>
+                        <div class='col-md-12' id="examesSelect"></div>
                     </div>
-                </div>
             </div>
             <div id='salvarExame'>
                <button type="submit" class="sombraBotao mt-5">Finalizar Seleção</button>
