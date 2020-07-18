@@ -70,8 +70,8 @@
                 <table id="example" class="icone table shadow p-3 mb-5 table-bordered table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Horário</th>
                             <th>Nome do Paciente</th>
+                            <th>Horário</th>
                             <th>CPF</th>
                             <th>Data Nascimento</th>
                             <th>Ações</th>
@@ -80,9 +80,15 @@
                     <tbody>
                     @inject('consulta', 'App\Consulta')
                     @foreach ($agenda as $item)
+                        @php
+                            $dateStart = date_create(date($item->start));
+                            $dateStart = date_format($dateStart, 'd/m/Y  H:i:s');  
+                            $dateEnd = date_create(date($item->end));
+                            $dateEnd = date_format($dateEnd, 'd/m/Y  H:i:s'); 
+                        @endphp
                         <tr>
                             <td>{{$item->nomePaciente}}</td>
-                            <td>{{$item->start}} - {{$item->end}}</td>
+                            <td>{{$dateStart}} - {{$dateEnd}}</td>
                             <td>{{$item->cpf}}</td>
                             @php
                                 $date = date_create(date($item->data_nasc));
