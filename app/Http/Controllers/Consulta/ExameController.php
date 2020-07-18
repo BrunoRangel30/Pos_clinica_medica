@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Consulta;
 use Illuminate\Support\Facades\DB;
 use App\Consulta;
+use App\Paciente;
 use App\Exame;
 use App\resultado_exames;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,7 @@ class ExameController extends Controller
     protected $request;
     protected $exame;
     protected $consulta;
+    protected $paciente;
     
 
 
@@ -28,6 +30,8 @@ class ExameController extends Controller
         $this->exame = new Exame;
         $consulta = new Consulta;
         $this->consulta = $consulta;
+        $paciente = new Paciente;
+        $this->paciente = $paciente;
          
     }
     public function index()
@@ -126,9 +130,12 @@ class ExameController extends Controller
         return view('edicao.exame_edicao',compact('exames'));
     }
     public function ExamePdf(Request $request){
-        
+        $paciente = $this->paciente::find($request['idPa']);
         $exame = $this->consulta->nomeExame( $request['idConsulta']);
-        $pdf = PDF::loadView('consulta.componentes.examesPDF',compact('exame'));
+      //  $data['exame']=$exame;
+       // $data['paciente'] = $this->paciente::find($request['idPa']);
+       // dd($data);
+        $pdf = PDF::loadView('consulta.componentes.examesPDF',compact('exame'),compact('paciente'));
         return $pdf->setPaper('a5')->stream();
         
     }

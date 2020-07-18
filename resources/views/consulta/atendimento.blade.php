@@ -127,7 +127,7 @@
                                                         @foreach ($consulta->nomeExame($key->fk_consulta) as $j)
                                                             <li>{{$j->exame}}</li>
                                                         @endforeach
-                                                        <a target="_blank" href={{route('pdfExame',['idConsulta'=>$key->fk_consulta])}}><button type="button" class="sombraBotao">Imprimir</button></a>
+                                                        <a target="_blank" href={{route('pdfExame',['idConsulta'=>$key->fk_consulta,'idPa'=>$item->fk_paciente])}}><button type="button" class="sombraBotao">Imprimir</button></a>
                                                     </div>
                                                 @endforeach
                                             </ul>
