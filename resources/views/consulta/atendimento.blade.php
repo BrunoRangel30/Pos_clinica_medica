@@ -23,7 +23,16 @@
         border-radius: 8px;
         padding: 20px;
     }
+    .receita-item{
+        border-bottom: solid 1px #183153;
+        border-radius: 8px;
+        padding: 20px;
+    }
     .exame-item label{
+        font-size: 1.1em;
+        color: #183153;
+    }
+    .receita-item label{
         font-size: 1.1em;
         color: #183153;
     }
@@ -34,13 +43,27 @@
         border-right: solid 1px #183153;
         border-radius: 8px;
     }
+    .receitas{
+        border-top: solid 1px #183153;
+        border-left: solid 1px #183153;
+        border-right: solid 1px #183153;
+        border-radius: 8px;
+    }
     .exames ul{
+        padding: 0px;
+    }
+    .receitas ul{
         padding: 0px;
     }
     .exames li{
         list-style-type: none;
         padding-bottom: 10px; 
         text-transform:lowercase;
+    }
+    .receitas li{
+        list-style-type: none;
+        padding-bottom: 10px; 
+        
     }
     
 </style>
@@ -108,14 +131,14 @@
                             </td>
                             
                         </tr>
-                        <div class="modal fade" id="consulta-{{$item->fk_paciente}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal fade " id="consulta-{{$item->fk_paciente}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg shadow-sm  bg-white rounded" role="document">
                             <div class="modal-content">
                                 <div class="modal-body titulo-consulta">
                                     @if(sizeof($consulta->getExamePaciente($item->fk_paciente))!==0)
                                     <div class='exames'>
-                                            <h4>Paciente: {{$item->nomePaciente}}</h4>
-                                            <h4><i class="fas fa-file-medical-alt pr-2"></i>Exames solicitados</h4>
+                                            <h4 class='pt-2 pb-2'>Paciente: {{$item->nomePaciente}}</h4>
+                                            <h4><i class="fas fa-file-medical-alt pr-2 pt-2 pb-2"></i>Exames solicitados</h4>
                                             <ul>
                                                 @foreach ($consulta->getExamePaciente($item->fk_paciente) as $key)
                                                     <div class='exame-item'>
@@ -123,7 +146,7 @@
                                                            $date = date_create(date($key->created_at));
                                                            $date = date_format($date, 'd/m/Y  H:i:s');  
                                                         @endphp
-                                                        <label><i class="fas fa-calendar-check pr-2"></i>Data da consulta {{$date}}</label>
+                                                        <label><i class="fas fa-calendar-check pr-2"></i>Data da consulta: {{$date}}</label>
                                                         @foreach ($consulta->nomeExame($key->fk_consulta) as $j)
                                                             <li>{{$j->exame}}</li>
                                                         @endforeach
@@ -134,24 +157,30 @@
                                     </div>
                                     @endif
                                     @if(sizeof($consulta->getReceitaPaciente($item->fk_paciente))!==0)
-                                        <div>
-                                            <h4>Receitas</h4>
+                                        <div class='receitas'>
+                                            <h4><i class="fas fa-file-medical pr-2 pt-2 pb-2"></i>Receitas</h4>
                                             <ul>
                                                 @foreach ($consulta->getReceitaPaciente($item->fk_paciente) as $item)
-                                                    <li>Nome Medicamento: {{$item->nome_fabrica}}</li>
-                                                    <li>Quantidade: {{$item->qtd}}</li>
-                                                    <li>Unidade: {{$item->unidade}}</li>
-                                                    <li>Via: {{$item->via}}</li>
-                                                    <li>Procedimento: {{$item->procedimento}}</li>
-                                                    <a target="_blank" href={{route('pdfReceita',['idConsulta'=>$item->id])}}><button type="button" class="btn btn-primary">Imprimir</button></a>
-                                                    <hr/>
+                                                    <div class='receita-item'>
+                                                        @php
+                                                            $date = date_create(date($item->created_at));
+                                                            $date = date_format($date, 'd/m/Y  H:i:s');  
+                                                        @endphp
+                                                        <label><i class="fas fa-calendar-check pr-2"></i>Data da consulta: {{$date}}</label>
+                                                        <li><label>Nome Medicamento:</label> {{$item->nome_fabrica}}</li>
+                                                        <li><label>Quantidade:</label> {{$item->qtd}}</li>
+                                                        <li><label>Unidade:</label> {{$item->unidade}}</li>
+                                                        <li><label>Via:</label> {{$item->via}}</li>
+                                                        <li><label>Procedimento:</label> {{$item->procedimento}}</li>
+                                                        <a target="_blank" href={{route('pdfReceita',['idConsulta'=>$item->id])}}><button type="button" class="SombraBotao">Imprimir</button></a>
+                                                    </div>
                                                 @endforeach
                                             </ul>
                                         </div>
                                     @endif
                                 </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="sombraBotao" data-dismiss="modal">Fechar</button>
                                 </div>
                             </div>
                             </div>
