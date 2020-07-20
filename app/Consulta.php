@@ -42,7 +42,7 @@ class Consulta extends Model
                             ->join('receita as re','re.receita_id','=','rc.fk_receita')
                             ->join('medicamento as m','re.fk_medicamento','=','m.med_id')
                             ->where('c.fk_paciente','=',$id)
-                            ->select('re.qtd','m.nome_fabrica','re.via','re.procedimento','re.unidade','c.consulta_id as id','re.created_at')
+                            ->select('re.qtd','m.nome_fabrica','re.via','re.procedimento','re.unidade','c.consulta_id as id','re.created_at','c.fk_paciente')
                             ->get();
        return $pacienteConsulta;
     }

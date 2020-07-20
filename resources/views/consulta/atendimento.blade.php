@@ -172,7 +172,7 @@
                                                         <li><label>Unidade:</label> {{$item->unidade}}</li>
                                                         <li><label>Via:</label> {{$item->via}}</li>
                                                         <li><label>Procedimento:</label> {{$item->procedimento}}</li>
-                                                        <a target="_blank" href={{route('pdfReceita',['idConsulta'=>$item->id])}}><button type="button" class="SombraBotao">Imprimir</button></a>
+                                                        <a target="_blank" href={{route('pdfReceita',['idConsulta'=>$item->id,'idPa'=>$item->fk_paciente])}}><button type="button" class="SombraBotao">Imprimir</button></a>
                                                     </div>
                                                 @endforeach
                                             </ul>

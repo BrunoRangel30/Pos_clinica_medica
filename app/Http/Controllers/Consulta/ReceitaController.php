@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Consulta;
 
 use App\Http\Controllers\Controller;
 use App\Receita;
+use App\Paciente;
 use Illuminate\Http\Request;
 use App\Consulta;
 use App\Medicamento;
@@ -19,6 +20,7 @@ class ReceitaController extends Controller
      */
     protected $request;
     protected $consulta;
+    protected $paciente;
     
    
 
@@ -27,6 +29,8 @@ class ReceitaController extends Controller
         $this->request = $request;
         $consulta = new Consulta;
         $this->consulta = $consulta;
+        $paciente = new Paciente;
+        $this->paciente = $paciente;
         
     }
     public function index(Request $request)
@@ -124,9 +128,10 @@ class ReceitaController extends Controller
     }
 
     public function ReceitaPdf(Request $request){
-      
+
+        $paciente = $this->paciente::find($request['idPa']);
         $receita = $this->consulta->getReceita($request['idConsulta']);
-        $pdf = PDF::loadView('consulta.componentes.receitasPDF',compact('receita'));
+        $pdf = PDF::loadView('consulta.componentes.receitasPDF',compact('receita'),compact('paciente'));
         return $pdf->setPaper('a5')->stream();
     }
 
