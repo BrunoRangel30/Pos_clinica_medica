@@ -293,14 +293,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let data = {
             key: keys,
         };
+
         getDataAjax('api/buscaPaciente', data).then(function(result) {
 
             let input = '';
+            input += `<ul id='listaPacientesExame'>`
             result.map(function(index) {
-                input += `<ul id='listaPacientesExame'>`
-                input += `<li value='${index.paciente_id}' id='${index.paciente_id}'>${index.nome}</li>`
-                input += `</ul>`
+                input += `<li value='${index.paciente_id}' id='${index.paciente_id}'> <i class="far fa-circle"></i> ${index.nome} </li>`
             })
+            input += `</ul>`
             $("#resulPacExame").html(input);
             if (keys == '') {
                 $("#resulPacExame").html('');
@@ -403,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
         agenda.tipo_consulta = $("#modalAgendaEdicao select[name='tipo']").val();
         agenda.fk_paciente = $("#modalAgendaEdicao input[name='fk_paciente']").val();
         agenda.fk_medico = $("#modalAgendaEdicao input[name='fk_medico']").val();
-        console.log(id);
+        //console.log(id);
         agenda.agenda_id = id;
         agenda._method = "PUT";
         console.log(agenda)

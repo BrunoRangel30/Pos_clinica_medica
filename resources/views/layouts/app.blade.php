@@ -54,6 +54,10 @@
             /* text-transform: uppercase;*/
             -webkit-box-shadow: 0 0.375em 0 currentColor !important;
         }
+
+        .titulosPesquisas h4{
+             color: #183153;
+        }
         /*configurações tabela*/
         .icone i {
             padding: 5px;
