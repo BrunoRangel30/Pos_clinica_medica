@@ -65,7 +65,10 @@ class ExameController extends Controller
     public function getExamesPedidos(Request $request)
     {
        $exames = $this->exame->getExamePaciente($request['id']);
-       return view('consulta.componentes.resultadosExames', compact('exames'));
+      // getIdPaciente($id)
+       $paciente = $this->paciente->getIdPaciente($request['id']);
+     //  dd($exames);
+       return view('consulta.componentes.resultadosExames', compact('exames'), compact('paciente'));
     }
 
 

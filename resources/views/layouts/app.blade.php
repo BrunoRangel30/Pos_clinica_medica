@@ -83,6 +83,11 @@
             color:#183153;
             font-weight: 600;
         }
+        .subTitulomaisInfo {
+            color:#183153;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
         .subTitulomaisInfo label span{
             color:black ;
             font-weight: 500;

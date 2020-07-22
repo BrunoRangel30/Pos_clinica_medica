@@ -271,6 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         $("#inserirResultadosExames").click(function() {
             getDataAjax('buscaResultados', dados).then(function(result) {
+                console.log(result, 'resultexamesPacientes')
                 $('#resultadosExames').html(result);
                 $(`#fk_paciente_exame`).val(dados.id)
                 menuResultadoExame(dados.id);
@@ -278,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         $("#VisualizarResultadosExames").click(function() {
                 getDataAjax('VisualizarResultadosMenu', dados).then(function(result) {
+                    console.log(result, 'resultexamesPacientes')
                     $('#resultadosExames').html(result);
                     $(`#fk_paciente_exame`).val(dados.id)
                     menuResultadoExame(dados.id);
@@ -289,11 +291,10 @@ document.addEventListener('DOMContentLoaded', function() {
     $("#searchPacExame").keyup(async function() {
 
         let keys = $('#searchPacExame').val()
-
+        $(".buscaExamePaciente").show();
         let data = {
             key: keys,
         };
-
         getDataAjax('api/buscaPaciente', data).then(function(result) {
 
             let input = '';
@@ -305,13 +306,18 @@ document.addEventListener('DOMContentLoaded', function() {
             $("#resulPacExame").html(input);
             if (keys == '') {
                 $("#resulPacExame").html('');
+                $(".buscaExamePaciente").hide();
             }
-            $("#listaPacientesExame>li").click(function() {
+            $("#listaPacientesExame>li").click(function(e) {
                 let dados = {
                     id: this.id,
                 };
+                $(".buscaExamePaciente").hide();
                 $("#resulPacExame").html(''); //limpa a div
+                console.log(e.target.innerText, 'e')
+                $("#searchPacExame").val(e.target.innerText)
                 getDataAjax('buscaResultados', dados).then(function(result) {
+                    /// console.log(result, 'resultexames')
                     $('#resultadosExames').html(result);
                     $(`#fk_paciente_exame`).val(dados.id)
                     menuResultadoExame(dados.id)
@@ -323,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //Controle de erros da agenda
     function loadErros(div, response) {
         $(`${div}`).text('');
-        console.log(response);
+
         let boxAlert = `<div class="alert alert-danger error">`
         for (let field in response) {
 
