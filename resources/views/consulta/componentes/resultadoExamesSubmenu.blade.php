@@ -1,19 +1,17 @@
 <div class="container">
-    <ul class="nav">
-        <li class="nav-item">
-           
-            <a id='inserirResultadosExames' class="nav-link"><i class="fas fa-file-medical"></i>inserir Resultados</a>
-          
-        </li>
-        <li>
-           
-            <a id='VisualizarResultadosExames' class="nav-link" ><i class="fas fa-file-medical"></i>Visualizar Resultados</a>
-            
-        </li>
-    </ul> 
+    <div class='bordaGeral border-bottom rounded-bottom pt-5'>  
+        <ul class="nav MenuConsulta">
+            <li class="nav-item">
+                <a id='inserirResultadosExames' class="nav-link"><i class="fas fa-file-medical"></i>inserir Resultados</a>
+            </li>
+            <li>
+                <a id='VisualizarResultadosExames' class="nav-link" ><i class="fas fa-file-medical"></i>Visualizar Resultados</a>
+            </li>
+        </ul>
+    <div> 
     <div class="row">
        <div class="col-lg-12">
-        <table id="example" class="icone table table-striped table-bordered" style="width:100%">
+        <table id="example" class="icone table  table-bordered shadow p-3 mb-5 table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>Nome do Exame</th>
@@ -25,9 +23,13 @@
             <tbody>
                 @foreach ($resultado as $item)
                     <tr>
+                        @php
+                            $date = date_create(date($item->dataInclusao));
+                            $date = date_format($date, 'd/m/Y  H:i:s');  
+                        @endphp
                         <td>{{$item->nome_exame}}</td>
                         <td>{{$item->medico}} - {{$item->crm}}</td>
-                        <td>{{$item->dataInclusao}}</td>
+                        <td>{{$date}}</td>
                         <td>
                         <a target='_blank' href="{{ENV('APP_URL')}}/storage/{{$item->link}}"><i class="fas fa-file-pdf"></i></a>
                             <i class="fas fa-edit"></i>
@@ -38,7 +40,7 @@
         </table>  
        </div>
    </div> 
-   <nav aria-label="Page navigation example">
+  <!-- <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
         <li class="page-item disabled">
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -50,5 +52,5 @@
             <a class="page-link" href="#">Next</a>
         </li>
         </ul>
-    </nav>
+    </nav>-->
 </div>

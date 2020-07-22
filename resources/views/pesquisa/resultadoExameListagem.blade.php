@@ -44,8 +44,15 @@
 
     .icone i {
       padding: 5px;
-      font-size: 1.5em;
+      font-size: 1em;
       text-align: center
+    }
+    .icone a {
+      color: #183153;
+      font-size: 1.3em;
+      padding-left: 0px;
+      padding-right: 0px;
+     
     }
   
     /*#calendar {
@@ -89,41 +96,51 @@
 @section('content')
     
 <div class="container">
-    <ul class="nav">
-        <li class="nav-item">
-           
-            <a  class="nav-link"><i class="fas fa-search"></i></i>nova busca</a>
-          
-        </li>
-    </ul> 
+   
+      <div class="icone">
+            <a href="{{route('resultadosExames')}}" class="nav-link"><i class="fas fa-search"></i></i>Nova Busca</a>
+      </div> 
+   
         <div class="row">
-           <div class="col-lg-12">
-            <table id="example" class="icone table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Nome do Exame</th>
-                        <th>Medico que inseriu o resultado do Exame</th>
-                        <th>Data da Inclusão</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($resultado as $item)
-                        <tr>
-                            <td>{{$item->nome_exame}}</td>
-                            <td>{{$item->medico}} - {{$item->crm}}</td>
-                            <td>{{$item->dataInclusao}}</td>
-                            <td>
-                            <a target='_blank' href="{{ENV('APP_URL')}}/storage/{{$item->link}}"><i class="fas fa-file-pdf"></i></a>
-                                <i class="fas fa-edit"></i>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>  
-           </div>
-       </div> 
-       <nav aria-label="Page navigation example">
+            @if(!$resultado->isEmpty())
+                <div class="col-lg-12">
+                    <table id="example" class="icone table  table-bordered shadow p-3 mb-5 table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Nome do Exame</th>
+                                <th>Medico que inseriu o resultado do Exame</th>
+                                <th>Data da Inclusão</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($resultado as $item)
+                                @php
+                                    ///dd($item->dataInclusao);
+                                    $date = date_create(date($item->dataInclusao));
+                                    $date = date_format($date, 'd/m/Y');  
+                                @endphp
+                                <tr>
+                                    <td>{{$item->nome_exame}}</td>
+                                    <td>{{$item->medico}} - {{$item->crm}}</td>
+                                    <td>{{$date}}</td>
+                                    <td>
+                                    <a target='_blank' href="{{ENV('APP_URL')}}/storage/{{$item->link}}"><i class="fas fa-file-pdf"></i></a>
+                                        <i class="fas fa-edit"></i>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>  
+                </div>
+            @else
+            
+                <div class="alert alert-danger col-md-8" role="alert">
+                    Nenhum arquivo foi inserido!
+                </div>
+            @endif
+        </div> 
+       <!--<nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -135,6 +152,6 @@
                 <a class="page-link" href="#">Next</a>
             </li>
             </ul>
-        </nav>
+        </nav>-->
     </div>
 @endsection

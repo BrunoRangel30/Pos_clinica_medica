@@ -22,6 +22,7 @@ class ExameController extends Controller
     protected $exame;
     protected $consulta;
     protected $paciente;
+    protected $resultado;
     
 
 
@@ -32,6 +33,8 @@ class ExameController extends Controller
         $this->consulta = $consulta;
         $paciente = new Paciente;
         $this->paciente = $paciente;
+        $resultado = new resultado_exames;
+        $this->resultado = $resultado;
          
     }
     public function index()
@@ -45,7 +48,6 @@ class ExameController extends Controller
         $idpaciente = $request->session()->get('fk_paciente_exame');
         $resultado = $resultado_exames->getResultados($idpaciente);
         return view('pesquisa.resultadoExameListagem', compact('resultado'));
-
        
     }
     public function listarResultadosExamesMenu(Request $request){
@@ -64,10 +66,14 @@ class ExameController extends Controller
 
     public function getExamesPedidos(Request $request)
     {
-       $exames = $this->exame->getExamePaciente($request['id']);
-      // getIdPaciente($id)
+       $examesDados = $this->exame->getExamePaciente($request['id']);
        $paciente = $this->paciente->getIdPaciente($request['id']);
-     //  dd($exames);
+       $exames= array();
+      foreach ($examesDados as $item){
+          if($this->resultado->possuiExameCadastrado($item->exame_id,$item->id)->totalExame == 0 && $this->resultado->possuiExameCadastrado($item->exame_id,$item->id)->totalConsulta == 0){
+            array_push($exames, $item);
+          }
+      }
        return view('consulta.componentes.resultadosExames', compact('exames'), compact('paciente'));
     }
 
@@ -155,9 +161,10 @@ class ExameController extends Controller
                 $data['fk_paciente'] = $request->fk_paciente_exame;
                 $data['publicar'] = true;
                 $data['fk_consulta'] = $request->consulta[$i];
-                var_dump($data);
+               // var_dump($data);
                 session(['fk_paciente_exame' =>  $request->fk_paciente_exame]);
-                DB::table('resultado_exames')->insert($data);
+                $this->resultado->create($data);
+               // DB::table('resultado_exames')->insert($data);
             }else{
             };
         }

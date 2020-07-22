@@ -88,6 +88,9 @@
             font-weight: 600;
             font-size: 1.2em;
         }
+        .MenuConsulta li{
+            cursor: pointer;
+        }
         .subTitulomaisInfo label span{
             color:black ;
             font-weight: 500;
