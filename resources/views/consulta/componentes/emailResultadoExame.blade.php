@@ -30,10 +30,10 @@
         </tr>
     </table>
     <!--Dados do Paciente-->
-    <p>Olá {{$nome}}</p>
+    <p>Olá {{$nome}},</p>
     <p> Seu exame {{$exame}} já está disponível para consulta. </p>
     <p> Acesse o sistema com seu usuário e senha. </p>
     <p>Atenciosamente,</p>
-    <a href=""> Clínica Viver Mais </a>
+    <a href="https://sis-clinica-medica.herokuapp.com/"> Clínica Viver Mais </a>
     
 </div>

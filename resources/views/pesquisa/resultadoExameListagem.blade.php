@@ -109,7 +109,8 @@
    
         <div class="row">
             @if(!$resultado->isEmpty())
-                <div class="col-lg-12">
+            <div class="col-lg-12">
+                    <label class="subTitulomaisInfo pt-3 pb-3">Paciente: {{$paciente->nome}}</label>
                     <table id="example" class="icone table  table-bordered shadow p-3 mb-5 table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -132,9 +133,16 @@
                                     <td>{{$item->nome_exame}}</td>
                                     <td>{{$item->medico}} - {{$item->crm}}</td>
                                     <td>{{$date}}</td>
+                                    <td>{{$item->publicar}}</td>
                                     <td>
                                         <a target='_blank' href="{{ENV('APP_URL')}}/storage/{{$item->link}}"><i class="fas fa-file-pdf"></i></a>
-                                    <a href="{{route('enviarEmail',['idexame'=>$item->exame_id,'idPa'=>$paciente->paciente_id])}}"><i class="far fa-envelope"></i></a>
+                                    <a href="{{route('enviarEmail',['idexame'=>$item->exame_id,'idPa'=>$paciente->paciente_id])}}">
+                                        @if($item->publicar)
+                                            <i class="fas fa-envelope-open-text"></i>
+                                        @else
+                                            <i class="fas fa-envelope"></i>
+                                        @endif
+                                    </a>
                                     </td>
                                 </tr>
                             @endforeach

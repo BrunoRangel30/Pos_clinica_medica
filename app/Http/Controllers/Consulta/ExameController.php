@@ -48,7 +48,7 @@ class ExameController extends Controller
     {
         return view('pesquisa.exameListagem');
     }
-    
+    //Listagem quando salva algum resultado
     public function listarResultadosExames(Request $request){
 
         $resultado_exames = new resultado_exames;
@@ -58,6 +58,7 @@ class ExameController extends Controller
         return view('pesquisa.resultadoExameListagem', compact('resultado'),compact('paciente'));
        
     }
+    //Listagem pelo dos resultados dos exames pelo menu
     public function listarResultadosExamesMenu(Request $request){
 
         $resultado_exames = new resultado_exames;
@@ -70,12 +71,13 @@ class ExameController extends Controller
         $nomePaciente = $this->paciente->getIdPaciente($request['idPa']); //paciente
         $email = $this->user->getUser($nomePaciente->user_id); //email
         $exame = $this->exame->getExameId($request['idexame']); //exame
-         // Enviando o e-mail
-         Mail::to('sis.clinica.medica@gmail.com')->send(new sendEmailExames($nomePaciente, $email, $exame));
-         $request->session()->flash('alert-success', 'Sua mensagem foi enviada com sucesso!');
-         return redirect()->back();
-        
-
+        $idExame = $this->resultado::find($this->resultado->emailFoiEnviado($request['idexame'],$request['idPa'])->resul_id);
+        $idExame->publicar = 1;
+        $idExame->save();
+        // Enviando o e-mail
+        Mail::to('sis.clinica.medica@gmail.com')->send(new sendEmailExames($nomePaciente, $email, $exame));
+        $request->session()->flash('alert-success', 'Sua mensagem foi enviada com sucesso!');
+        return redirect()->back();
     }
 
     public function listagemResultados()
@@ -84,6 +86,7 @@ class ExameController extends Controller
        return view('consulta.consultaExameIndex');
     }
 
+    //Inserir resultados
     public function getExamesPedidos(Request $request)
     {
        $examesDados = $this->exame->getExamePaciente($request['id']);
@@ -159,19 +162,17 @@ class ExameController extends Controller
         return view('edicao.exame_edicao',compact('exames'));
     }
     public function ExamePdf(Request $request){
+
         $paciente = $this->paciente::find($request['idPa']);
         $exame = $this->consulta->nomeExame( $request['idConsulta']);
-      //  $data['exame']=$exame;
-       // $data['paciente'] = $this->paciente::find($request['idPa']);
-       // dd($data);
         $pdf = PDF::loadView('consulta.componentes.examesPDF',compact('exame'),compact('paciente'));
         return $pdf->setPaper('a5')->stream();
         
     }
 
     public function uploadArquivos(Request $request){
-         session()->forget('fk_paciente_exame');
-    //   dd($request->allfiles());
+
+        session()->forget('fk_paciente_exame');
         for($i=0 ; $i < count($request->id); $i++){
             if(isset($request->allfiles()['exames'][$i])){
                 $file = $request->allfiles()['exames'][$i];
@@ -179,7 +180,7 @@ class ExameController extends Controller
                 $data['fk_exame'] = $request->id[$i];
                 $data['fk_medico'] = $request->fk_medico; //tem que ser o medico autenticado  mudar
                 $data['fk_paciente'] = $request->fk_paciente_exame;
-                $data['publicar'] = true;
+                $data['publicar'] = 0;
                 $data['fk_consulta'] = $request->consulta[$i];
                // var_dump($data);
                 session(['fk_paciente_exame' =>  $request->fk_paciente_exame]);
@@ -211,23 +212,14 @@ class ExameController extends Controller
      */
     public function destroy(Request $request)
     {
-        $teste;
-       // dd($exames[1]);
-       //dd($exames);
-    //  dd($request['key']);
+        
        foreach($exames as $j => $item){
-          
           foreach($item as $i => $key){
-              //dd($i);
             if( (int) $item[$i] ==   (int) $request['key']){
-              //  dd($i);
               array_diff_key($item, $i);
-                //array_unshift($item);
-              
             }
           }
        }
-     //  dd($exames);
         $request->session()->forget('exames');
         Session::put('exames', $exames);
         return view('pesquisa.receitaListagem');

@@ -21,7 +21,7 @@ class resultado_exames extends Model
             ->join('exame as e', 'e.exame_id', '=', 're.fk_exame')
             ->where('re.fk_paciente','=',$idPaciente)
             ->select('e.nome_exame','m.nome as medico','m.crm',
-                  're.path as link','re.resul_id','re.created_at as dataInclusao','e.exame_id')
+                  're.path as link','re.resul_id','re.created_at as dataInclusao','e.exame_id','re.publicar')
             ->orderBy('re.created_at','desc')
             ->get();
         return $result;
@@ -32,6 +32,13 @@ class resultado_exames extends Model
         $exame = DB::table('resultado_exames as re')
                      ->where([['re.fk_exame','=',$idExame],['re.fk_consulta','=',$idConsulta]])
                      ->select(DB::raw('COUNT(re.fk_exame) as totalExame'),DB::raw('COUNT(re.fk_consulta) as totalConsulta'))
+                     ->first();
+                     return $exame;
+    }
+    public function emailFoiEnviado($idExame,$idPa){
+        $exame = DB::table('resultado_exames as re')
+                     ->where([['re.fk_exame','=',$idExame],['re.fk_paciente','=',$idPa ]])
+                     ->select('re.resul_id')
                      ->first();
                      return $exame;
     }
