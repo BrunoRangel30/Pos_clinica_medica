@@ -54,6 +54,23 @@
             /* text-transform: uppercase;*/
             -webkit-box-shadow: 0 0.375em 0 currentColor !important;
         }
+        .sombraBotaoEmail{
+            padding-left:10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-top:5px; 
+            border: solid 1px #183153;
+            border-radius: 8px;
+            background-color:#ffd43b;
+            color: #214450;
+            /* font-family: 'roundproblackegular'; /* fonte */
+            font-weight: 700;
+            font-size: 0.6em;
+            /* text-transform: uppercase;*/
+            -webkit-box-shadow: 0 0.375em 0 currentColor !important;
+        }
+  
 
         .titulosPesquisas h4{
              color: #183153;

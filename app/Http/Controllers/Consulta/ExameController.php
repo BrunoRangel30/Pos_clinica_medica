@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Consulta;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\sendEmailExames;
 use Illuminate\Support\Facades\DB;
 use App\Consulta;
+use App\User;
 use App\Paciente;
 use App\Exame;
 use App\resultado_exames;
@@ -23,6 +26,8 @@ class ExameController extends Controller
     protected $consulta;
     protected $paciente;
     protected $resultado;
+    protected $user;
+   
     
 
 
@@ -35,6 +40,8 @@ class ExameController extends Controller
         $this->paciente = $paciente;
         $resultado = new resultado_exames;
         $this->resultado = $resultado;
+        $user = new User;
+        $this->user = $user;
          
     }
     public function index()
@@ -47,7 +54,8 @@ class ExameController extends Controller
         $resultado_exames = new resultado_exames;
         $idpaciente = $request->session()->get('fk_paciente_exame');
         $resultado = $resultado_exames->getResultados($idpaciente);
-        return view('pesquisa.resultadoExameListagem', compact('resultado'));
+        $paciente = $this->paciente->getIdPaciente($idpaciente);
+        return view('pesquisa.resultadoExameListagem', compact('resultado'),compact('paciente'));
        
     }
     public function listarResultadosExamesMenu(Request $request){
@@ -55,6 +63,18 @@ class ExameController extends Controller
         $resultado_exames = new resultado_exames;
         $resultado = $resultado_exames->getResultados($request['id']);
         return view('consulta.componentes.resultadoExamesSubmenu', compact('resultado'));
+
+    }
+    public function enviarEmailExame(Request $request){
+
+        $nomePaciente = $this->paciente->getIdPaciente($request['idPa']); //paciente
+        $email = $this->user->getUser($nomePaciente->user_id); //email
+        $exame = $this->exame->getExameId($request['idexame']); //exame
+         // Enviando o e-mail
+         Mail::to('sis.clinica.medica@gmail.com')->send(new sendEmailExames($nomePaciente, $email, $exame));
+         $request->session()->flash('alert-success', 'Sua mensagem foi enviada com sucesso!');
+         return redirect()->back();
+        
 
     }
 

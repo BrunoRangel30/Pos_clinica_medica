@@ -96,7 +96,13 @@
 @section('content')
     
 <div class="container">
-   
+       <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a></p>
+                @endif
+            @endforeach
+      </div>
       <div class="icone">
             <a href="{{route('resultadosExames')}}" class="nav-link"><i class="fas fa-search"></i></i>Nova Busca</a>
       </div> 
@@ -107,6 +113,7 @@
                     <table id="example" class="icone table  table-bordered shadow p-3 mb-5 table-bordered" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Cod do Exame</th>
                                 <th>Nome do Exame</th>
                                 <th>Medico que inseriu o resultado do Exame</th>
                                 <th>Data da Inclusão</th>
@@ -121,12 +128,13 @@
                                     $date = date_format($date, 'd/m/Y');  
                                 @endphp
                                 <tr>
+                                    <td>{{$item->exame_id}}</td>
                                     <td>{{$item->nome_exame}}</td>
                                     <td>{{$item->medico}} - {{$item->crm}}</td>
                                     <td>{{$date}}</td>
                                     <td>
-                                    <a target='_blank' href="{{ENV('APP_URL')}}/storage/{{$item->link}}"><i class="fas fa-file-pdf"></i></a>
-                                        <i class="fas fa-edit"></i>
+                                        <a target='_blank' href="{{ENV('APP_URL')}}/storage/{{$item->link}}"><i class="fas fa-file-pdf"></i></a>
+                                    <a href="{{route('enviarEmail',['idexame'=>$item->exame_id,'idPa'=>$paciente->paciente_id])}}"><i class="far fa-envelope"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         $("#VisualizarResultadosExames").click(function() {
                 getDataAjax('VisualizarResultadosMenu', dados).then(function(result) {
-                    console.log(result, 'resultexamesPacientes')
+                    // console.log(result, 'resultexamesPacientes')
                     $('#resultadosExames').html(result);
                     $(`#fk_paciente_exame`).val(dados.id)
                     menuResultadoExame(dados.id);

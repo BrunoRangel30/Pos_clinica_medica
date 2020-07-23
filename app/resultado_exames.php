@@ -21,7 +21,8 @@ class resultado_exames extends Model
             ->join('exame as e', 'e.exame_id', '=', 're.fk_exame')
             ->where('re.fk_paciente','=',$idPaciente)
             ->select('e.nome_exame','m.nome as medico','m.crm',
-                  're.path as link','re.resul_id','re.created_at as dataInclusao')
+                  're.path as link','re.resul_id','re.created_at as dataInclusao','e.exame_id')
+            ->orderBy('re.created_at','desc')
             ->get();
         return $result;
 
