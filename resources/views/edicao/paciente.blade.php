@@ -34,7 +34,6 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="rg">N° do RG</label>
-                    {{$paciente->rg}}
                     <input type="text" name="rg" value="{{$paciente->rg}}" class="form-control" id="rg" placeholder="">
                 </div>
             </div>
