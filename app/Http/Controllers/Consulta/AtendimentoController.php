@@ -94,6 +94,10 @@ class AtendimentoController extends Controller
         $pala=$this->request->input('key');
         $pala = $this->removerAcentos($pala);
         $result = $this->paciente->getPaciente($pala);
+        //atualiza o id do usuario na sessão
+       // dd($result->paciente_id);
+       // session()->forget('res_pacienre');
+        //session('res_pacienre' ,  $result->paciente_id);
         return $result;
     }
 

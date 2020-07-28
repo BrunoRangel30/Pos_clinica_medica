@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PDF;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class ExameController extends Controller
 {
@@ -60,10 +61,11 @@ class ExameController extends Controller
     }
     //Listagem pelo dos resultados dos exames pelo menu
     public function listarResultadosExamesMenu(Request $request){
-
+        
         $resultado_exames = new resultado_exames;
         $resultado = $resultado_exames->getResultados($request['id']);
-        return view('consulta.componentes.resultadoExamesSubmenu', compact('resultado'));
+        $paciente = $this->paciente->getIdPaciente($request['id']);
+        return view('consulta.componentes.resultadoExamesSubmenu', compact('resultado'),compact('paciente'));
 
     }
     public function enviarEmailExame(Request $request){
@@ -178,7 +180,7 @@ class ExameController extends Controller
                 $file = $request->allfiles()['exames'][$i];
                 $data['path'] =  $file->store('exames');
                 $data['fk_exame'] = $request->id[$i];
-                $data['fk_medico'] = $request->fk_medico; //tem que ser o medico autenticado  mudar
+                $data['fk_medico'] =  Auth::user()->id; //tem que ser o medico autenticado  mudar//Alterado testar
                 $data['fk_paciente'] = $request->fk_paciente_exame;
                 $data['publicar'] = 0;
                 $data['fk_consulta'] = $request->consulta[$i];

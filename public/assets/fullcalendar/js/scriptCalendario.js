@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function menuResultadoExame(dadosId) {
-        console.log('aqui ja existe o meu')
+
         let dados = {
             id: dadosId,
         };

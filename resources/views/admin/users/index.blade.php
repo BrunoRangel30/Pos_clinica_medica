@@ -2,14 +2,12 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                <div class="card-header">Usuários</div>
-                    <div class="card-body">
+            <div class="col-md-10">
+                <label class="subTitulomaisInfo pt-2 pb-2">Usuários</label>
                         <!--<form method="POST" action="{{ route('login') }}">-->
                             @csrf
                             <div class="form-group row">
-                                <table class="table">
+                                <table class="icone table shadow p-3 mb-5 table-bordered table-bordered">
                                     <thead>
                                       <tr>
                                         <th scope="col">Nome</th>
@@ -25,12 +23,14 @@
                                                 <td>{{$item->email}}</td>
                                                 <td>{{ implode(',', $item->roles()->get()->pluck('nome')->toArray())}}</td>
                                                 <td>
-                                                    <a  href="{{route('admin.users.edit',$item->id)}}"><button type="button" class="btn btn-light float-left mr-2">Editar</button></a>
-                                                    <form class='float-left'method="POST" action="{{ route('admin.users.destroy', $item) }}">
+                                                    <a  href="{{route('admin.users.edit',$item->id)}}"> <i class="fas fa-edit"></i> </a>
+                                                    @method('DELETE')
+                                                    <a  href="{{route('excluirUser',['idPac'=> $item])}}"> <i class="fas fa-user-times"></i> </a>
+                                                   <!-- <form class='float-left'method="POST" action="{{ route('admin.users.destroy', $item) }}">
                                                         @csrf
                                                         {{ method_field('DELETE') }}
-                                                        <button type="submit" class="btn btn-light">Excluir</button>
-                                                    </form>
+                                                        <button type="submit" class="btn btn-light"><i class="fas fa-user-times"></i></button>
+                                                    </form>-->
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -38,10 +38,8 @@
                                 </table>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 @endsection
 

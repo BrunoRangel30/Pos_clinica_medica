@@ -27,38 +27,46 @@
     
 <div class='container'>
     <div class='row mt-5'>
-        <div class='col-md-4 p-3 tamanho '>
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title pl-3 pt-4 pb-3"> <i class="fas fa-id-card"></i> Cadastros</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{{route('cadastro.paciente.create')}}">Paciente</a></li>
-                    <li class="list-group-item"><a href="{{route('cadastro.medico.create')}}">Médico</a></li>
-                    <li class="list-group-item"><a href="{{route('cadastro.recepcionista.create')}}">Recepcionista</a></li>
-                    <li class="list-group-item"><a href="{{route('cadastro.medicamento.create')}}">Medicamento</a></li>
-                </ul>
+       @can('recep')
+            <div class='col-md-4 p-3 tamanho '>
+                <div class="card" style="width: 18rem;">
+                    <h5 class="card-title pl-3 pt-4 pb-3"> <i class="fas fa-id-card"></i> Cadastros</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="{{route('cadastro.paciente.create')}}">Paciente</a></li>
+                        <li class="list-group-item"><a href="{{route('cadastro.medico.create')}}">Médico</a></li>
+                        <li class="list-group-item"><a href="{{route('cadastro.recepcionista.create')}}">Recepcionista</a></li>
+                        <li class="list-group-item"><a href="{{route('cadastro.medicamento.create')}}">Medicamento</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        @endcan
         <div class='col-md-4 p-3 tamanho'>
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title pl-3 pt-4 pb-3"> <i class="fas fa-search"></i> Pesquisas </h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{{route('listar.paciente.index')}}">Paciente</a></li>
-                    <li class="list-group-item"><a href="{{route('listar.medico.index')}}">Médico</a></li>
-                    <li class="list-group-item"><a href="{{route('listar.recepcionista.index')}}">Recepcionista</a></li>
-                    <li class="list-group-item"><a href="{{route('listar.medicamento.index')}}">Medicamento</a></li>
-                </ul>
-            </div>
+            @can('recep')
+                <div class="card" style="width: 18rem;">
+                    <h5 class="card-title pl-3 pt-4 pb-3"> <i class="fas fa-search"></i> Pesquisas </h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="{{route('listar.paciente.index')}}">Paciente</a></li>
+                        <li class="list-group-item"><a href="{{route('listar.medico.index')}}">Médico</a></li>
+                        <li class="list-group-item"><a href="{{route('listar.recepcionista.index')}}">Recepcionista</a></li>
+                        <li class="list-group-item"><a href="{{route('listar.medicamento.index')}}">Medicamento</a></li>
+                    </ul>
+                </div>
+            @endcan
         </div>
         <div class='col-md-4 p-3 tamanho'>
             <div class="card" style="width: 18rem;">
                 <h5 class="card-title pl-3 pt-4 pb-3"> <i class="far fa-calendar-check"></i> Consultas</h5>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{{route('consulta.agenda.index')}}">Agendar Consulta</a></li>
-                    <li class="list-group-item"><a href="{{route('consulta.paciente.index')}}">Realizar Consulta</a></li>
-                    <li class="list-group-item"><a href="{{route('resultadosExames')}}">Resultado de Exame</a></li>
-                </ul>
+                    @can('recep')
+                        <li class="list-group-item"><a href="{{route('consulta.agenda.index')}}">Agendar Consulta</a></li>
+                    @endcan
+                    @can('medico')
+                        <li class="list-group-item"><a href="{{route('consulta.paciente.index')}}">Realizar Consulta</a></li>
+                        <li class="list-group-item"><a href="{{route('resultadosExames')}}">Resultado de Exame</a></li>
+                    @endcan
+                    </ul>
+                </div>
             </div>
-        </div>
     </div>
 </div>
   

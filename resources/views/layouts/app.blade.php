@@ -212,37 +212,45 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
+                            @can('recep')
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Cadastrar
+                                        </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{route('cadastro.paciente.create')}}">Cadastrar Paciente</a>
+                                        <a class="dropdown-item" href="{{route('cadastro.medico.create')}}">Cadastrar Médico</a>
+                                        <a class="dropdown-item" href="{{route('cadastro.recepcionista.create')}}">Cadastrar Recepcionista</a>
+                                        <a class="dropdown-item" href="{{route('cadastro.medicamento.create')}}">Cadastrar Medicamento</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Cadastrar
+                                    Pesquisar
                                     </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('cadastro.paciente.create')}}">Cadastrar Paciente</a>
-                                    <a class="dropdown-item" href="{{route('cadastro.medico.create')}}">Cadastrar Médico</a>
-                                    <a class="dropdown-item" href="{{route('cadastro.recepcionista.create')}}">Cadastrar Recepcionista</a>
-                                    <a class="dropdown-item" href="{{route('cadastro.medicamento.create')}}">Cadastrar Medicamento</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pesquisar
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('listar.paciente.index')}}"> Pacientes</a>
-                                    <a class="dropdown-item" href="{{route('listar.medico.index')}}"> Médicos</a>
-                                    <a class="dropdown-item" href="{{route('listar.recepcionista.index')}}"> Recepcionista</a>
-                                    <a class="dropdown-item" href="{{route('listar.medicamento.index')}}"> Medicamentos</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                    <a class="nav-link" href="{{route('consulta.agenda.index')}}">Agendar Consulta</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('consulta.paciente.index')}}">Realizar Consulta</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('resultadosExames')}}">Resultados de Exames</a>
-                            </li>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{route('listar.paciente.index')}}"> Pacientes</a>
+                                        <a class="dropdown-item" href="{{route('listar.medico.index')}}"> Médicos</a>
+                                        <a class="dropdown-item" href="{{route('listar.recepcionista.index')}}"> Recepcionista</a>
+                                        <a class="dropdown-item" href="{{route('listar.medicamento.index')}}"> Medicamentos</a>
+                                    </div>
+                                </li>
+                            @endcan
+                            @can('recep')
+                                <li class="nav-item">
+                                        <a class="nav-link" href="{{route('consulta.agenda.index')}}">Agendar Consulta</a>
+                                </li>
+                            @endcan
+                            @can('medico')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('consulta.paciente.index')}}">Realizar Consulta</a>
+                                </li>
+                            @endcan
+                            @can('medico')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('resultadosExames')}}">Resultados de Exames</a>
+                                </li>
+                            @endcan
                             @can('admin')
                                 <li class="nav-item">
                                 <a class="nav-link" href="{{route('admin.users.index')}}">Atribruir Perfil</a>

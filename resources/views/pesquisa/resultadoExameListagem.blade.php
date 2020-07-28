@@ -106,7 +106,6 @@
       <div class="icone">
             <a href="{{route('resultadosExames')}}" class="nav-link"><i class="fas fa-search"></i></i>Nova Busca</a>
       </div> 
-   
         <div class="row">
             @if(!$resultado->isEmpty())
             <div class="col-lg-12">

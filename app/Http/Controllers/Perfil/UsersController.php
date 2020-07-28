@@ -14,10 +14,15 @@ class UsersController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
+    protected $user;
     public function __construct(){
         
         $this->middleware('auth');
+        $user = new User;
+        $this->user = $user;
+
     }
     public function index()
     {
@@ -95,13 +100,14 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, Request $request)
     {
+        //Implementar a exclusão logica depois
         if (Gate::denies('admin')) {
             return redirect()->route('admin.users.index');
         }
-        $user->roles()->detach();
-        $user->delete();
+        $resutUser = $this->user::find($request['idPac']);
+        $resutUser->roles()->detach();
         return redirect()->route('admin.users.index');
     }
 }

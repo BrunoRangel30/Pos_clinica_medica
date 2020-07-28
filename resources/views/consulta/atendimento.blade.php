@@ -126,7 +126,7 @@
                             <td>
                                 <a href={{route('realizarConsulta',['pa'=>$item->paciente_id])}}><i class="far fa-play-circle"></i></a>
                                 @if($consulta->possuiConsulta($item->fk_paciente)->total > 0)
-                                    <a data-toggle="modal" data-target="#consulta-{{$item->fk_paciente}}"><i class="far fa-eye"></i></a>
+                                    <a data-toggle="modal" data-target="#consulta-{{$item->fk_paciente}}"> <i class="fas fa-book-medical"></i> </a>
                                 @endif
                             </td>
                             
