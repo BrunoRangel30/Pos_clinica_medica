@@ -212,6 +212,11 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav mr-auto">
+                            @can('user')
+                                <li class="nav-item">
+                                        <a class="nav-link" href="{{route('indexPaciente')}}">Visualizar Resultados</a>
+                                </li>
+                            @endcan
                             @can('recep')
                                 <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

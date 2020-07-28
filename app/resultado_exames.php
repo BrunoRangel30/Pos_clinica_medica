@@ -27,6 +27,19 @@ class resultado_exames extends Model
         return $result;
 
     }
+    public function getResultadosPaciente($idPaciente){
+        $result = DB::table('resultado_exames as re')
+           // ->join('pacientes as p', 'p.paciente_id', '=', 'rec.fk_paciente')
+            ->rightjoin('medicos as m', 'm.medico_id', '=', 're.fk_medico')
+            ->join('exame as e', 'e.exame_id', '=', 're.fk_exame')
+            ->where([['re.fk_paciente','=',$idPaciente],['re.publicar',true]])
+            ->select('e.nome_exame','m.nome as medico','m.crm',
+                  're.path as link','re.resul_id','re.created_at as dataInclusao','e.exame_id','re.publicar')
+            ->orderBy('re.created_at','desc')
+            ->get();
+        return $result;
+
+    }
     
     public function possuiExameCadastrado($idExame, $idConsulta){
         $exame = DB::table('resultado_exames as re')

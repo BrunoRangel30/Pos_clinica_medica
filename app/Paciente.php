@@ -17,6 +17,12 @@ class Paciente extends Model
                     ->first();
         return $paciente;
      }
+
+     public function getIdUserPaciente($id){
+        $paciente = Paciente::where('user_id', '=', $id)
+                    ->first();
+        return $paciente;
+     }
      
      public function getPaciente($key){
         $paciente = Paciente::where('nome', 'like', '%' . $key . '%')

@@ -55,19 +55,22 @@
         </div>
         <div class='col-md-4 p-3 tamanho'>
             <div class="card" style="width: 18rem;">
-                <h5 class="card-title pl-3 pt-4 pb-3"> <i class="far fa-calendar-check"></i> Consultas</h5>
-                <ul class="list-group list-group-flush">
-                    @can('recep')
-                        <li class="list-group-item"><a href="{{route('consulta.agenda.index')}}">Agendar Consulta</a></li>
-                    @endcan
-                    @can('medico')
-                        <li class="list-group-item"><a href="{{route('consulta.paciente.index')}}">Realizar Consulta</a></li>
-                        <li class="list-group-item"><a href="{{route('resultadosExames')}}">Resultado de Exame</a></li>
-                    @endcan
+                    <h5 class="card-title pl-3 pt-4 pb-3"> <i class="far fa-calendar-check"></i> Consultas</h5>
+                    <ul class="list-group list-group-flush">
+                        @can('recep')
+                            <li class="list-group-item"><a href="{{route('consulta.agenda.index')}}">Agendar Consulta</a></li>
+                        @endcan
+                        @can('medico')
+                            <li class="list-group-item"><a href="{{route('consulta.paciente.index')}}">Realizar Consulta</a></li>
+                            <li class="list-group-item"><a href="{{route('resultadosExames')}}">Resultado de Exame</a></li>
+                        @endcan
+                        @can('user')
+                        <li class="list-group-item"><a href="{{route('indexPaciente')}}">Resultado de Exame</a></li>
+                        @endcan
                     </ul>
-                </div>
             </div>
-    </div>
+        </div>
+        </div>
 </div>
   
 @endsection

@@ -226,4 +226,16 @@ class ExameController extends Controller
         Session::put('exames', $exames);
         return view('pesquisa.receitaListagem');
     }
+    public function getExames(){
+       
+        //Id do usuário
+        $iduser = Auth::user()->id;
+        //Id do paciente
+        $idPaciente = $this->paciente->getIdUserPaciente($iduser);
+        $resultado = $this->resultado->getResultadosPaciente($idPaciente->paciente_id);
+        //chamar um view
+        return view('consulta.componentes.examesPacienteUsuario', compact('resultado'), compact('idPaciente'));
+        //dd($resul);
+        //buscar resultados na tabela de exames
+    }
 }

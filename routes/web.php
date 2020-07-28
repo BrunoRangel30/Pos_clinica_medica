@@ -63,7 +63,7 @@ Route::get('consuta/resumoConsulta', 'Consulta\ConsultaController@show')->name('
 Route::get('consuta/salvarConsulta', 'Consulta\ConsultaController@store')->name('salvarConsulta');
 Route::post('consulta/InsereAgenda', 'Consulta\AtendimentoController@store')->middleware('can:recep');
 Route::put('consulta/AtualizarAgendaEdicao', 'Consulta\AtendimentoController@update')->middleware('can:recep');
-Route::get('/atualizarAgenda', 'Consulta\AtendimentoController@atualizarAgenda')->middleware('can:recep');;
+Route::get('/atualizarAgenda', 'Consulta\AtendimentoController@atualizarAgenda')->middleware('can:recep');
 Route::get('consuta/index/', 'Consulta\AtendimentoController@consulta')->name('realizarConsulta');
 Route::get('/paciente/historico', 'Historico\HistoricoPacienteController@index')->name('historico.paciente');
 Route::delete('/consulta/ExcluirAgenda', 'Consulta\AtendimentoController@destroy')->middleware('can:recep');
@@ -72,6 +72,8 @@ Route::namespace('Exame')->prefix('exame')->name('exame.')->middleware('can:medi
     Route::resource('/index', 'ExameListController');
     
 });
+//Resultados de exames Pacientes
+Route::get('/indexPaciente', 'Consulta\ExameController@getExames')->name('indexPaciente')->middleware('can:user');
 //Home
 Route::get('/home', 'HomeController@index')->name('home');
 //Impressão de PDF
