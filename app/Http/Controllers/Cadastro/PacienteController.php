@@ -21,7 +21,7 @@ class PacienteController extends Controller
         $paciente = DB::table('pacientes as p')
         ->where('p.deleted_at','=', NULL)
         ->orderBy('p.created_at','desc')
-        ->paginate(15);
+        ->paginate(20);
         return view('pesquisa.paciente',compact('paciente'));
     }
 
@@ -202,11 +202,12 @@ class PacienteController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {   
+       
         $pacienteDelete = Paciente::find($id);
         $pacienteDelete->delete();
-        $request->session()->flash('alert-success', 'Cadastro excluído com sucesso!');
+        $request->session()->flash('alert-success', 'Usuário excluído com sucesso!');
         return redirect()->route('cadastro.paciente.index');
     }
 }

@@ -139,7 +139,7 @@
                                     <a href="{{route('cadastro.medicamento.edit',$item->med_id)}}"><i class="fas fa-edit"></i></a>
                                   <!--  <i class="fas fa-calendar-alt"></i>-->
                                     @method('DELETE')
-                                    <a href="{{route('cadastro.medicamento.destroy',$item->med_id)}}"><i class="fas fa-user-times"></i></a>
+                                    <a href="{{route('cadastro.medicamento.destroy',$item->med_id)}}"> <i class="fas fa-trash-alt"></i> </a>
                                 </td>
                         </tr>
                           <!-- Modal -->
