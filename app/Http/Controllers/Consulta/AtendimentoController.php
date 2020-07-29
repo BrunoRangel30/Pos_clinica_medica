@@ -71,7 +71,7 @@ class AtendimentoController extends Controller
         'paciente' => $consulta->nomePaciente,
         'data_nasc'=> $consulta->data_nasc,
         'crm'=>$consulta->crm,
-        'idMedico'=> Auth::user()->id,
+        'idMedico'=> $id->medico_id,
         'Idpaciente'=>$this->request['pa']]);
         //limpa as receitas armazenadas na cache
         session()->forget('receita');
