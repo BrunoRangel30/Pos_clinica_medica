@@ -64,7 +64,8 @@ class AtendimentoController extends Controller
 
     public function consulta( Request $request)
     {   
-        $consulta = $this->agenda->getPacienteMedico(Auth::user()->id,$request['pa'])->first();
+        $id = $this->medico->getIdUserMedico(Auth::user()->id);
+        $consulta = $this->agenda->getPacienteMedico($id->medico_id,$request['pa'])->first();
         session(['medico' =>  $consulta->medico,
         'cpf'=> $consulta->cpf,
         'paciente' => $consulta->nomePaciente,
