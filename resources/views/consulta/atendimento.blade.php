@@ -70,7 +70,13 @@
 @section('content')
     <div class="container">
         
-        
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a></p>
+                @endif
+            @endforeach
+        </div>
         <!-- <div class="form-row">
             <div class="col-md-2 botao-hj">
                 <button type="text" class="form-control" id="validationCustom01" placeholder="Nome" value="" required>Hoje</button>
@@ -92,8 +98,8 @@
         </div>-->
     <div class="row">
         <div class="col-lg-12">
-            @if(isset($agenda))
-                <h3 class="text-center mb-3">Listagem de Pacientes</h3>
+            @if(!$agenda->isEmpty())
+                <h3 class="text-center mb-3 mt-3">Listagem de Pacientes</h3>
                 <table id="example" class="icone table shadow p-3 mb-5 table-bordered table-bordered" style="width:100%">
                     <thead>
                         <tr>

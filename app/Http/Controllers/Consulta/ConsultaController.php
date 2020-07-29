@@ -81,6 +81,7 @@ class ConsultaController extends Controller
                 }
             }
         }
+        $request->session()->flash('alert-success', 'A consulta foi concluida com sucesso!');
         return redirect()->route('consulta.paciente.index');
         
     }

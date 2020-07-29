@@ -194,6 +194,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Mascaras para os campos de formulario marcacao de consulta
     $('.date-time').mask('00 /00 / 0000 00:00');
+    $('.CPF').mask('000.000.000-00');
+    $('.celular').mask('(00) 00000-0009');
+    $('.fixo').mask('(00) 0000-0009');
 
 
     function resetForm(classe) {

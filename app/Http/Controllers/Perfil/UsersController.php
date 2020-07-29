@@ -7,6 +7,7 @@ use App\User;
 use App\Role;
 use Gate;
 use Illuminate\Http\Request;
+use Session;
 
 class UsersController extends Controller
 {
@@ -17,16 +18,20 @@ class UsersController extends Controller
      * 
      */
     protected $user;
+    protected $request;
     public function __construct(){
         
         $this->middleware('auth');
         $user = new User;
         $this->user = $user;
+        $request = new Request;
+        $this->request = $request;
 
     }
     public function index()
     {
-        $users= User::all();
+     //   Product::orderBy('created_at','desc')->get();
+        $users= User::orderBy('created_at','desc')->get();
         return view('admin.users.index')->with('users',$users);
     }
 
@@ -78,19 +83,20 @@ class UsersController extends Controller
         [
             'user' => $user,
             'roles' => $roles,
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+            ]);
+        }
+        
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {   
         $user->roles()->sync($request->roles);
+        $request->session()->flash('alert-success', 'O perfil foi atualizaco com sucesso!');
         return redirect()->route('admin.users.index');
     }
 

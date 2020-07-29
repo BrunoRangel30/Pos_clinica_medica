@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" value="{{$paciente->cpf}}" class="form-control @error('cpf') is-invalid @enderror" id="cpf" >
+                    <input type="text" name="cpf" value="{{$paciente->cpf}}" class="form-control  CPF @error('cpf') is-invalid @enderror" id="cpf" >
                     @error('cpf')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -68,7 +68,7 @@
             <div class='form-row'>
                 <div class="form-group col-md-3">
                     <label for="telefone_celular">Telefone Celular</label>
-                    <input type="" name="telefone_celular" value="{{$paciente->tele_cel}}" class="form-control @error('telefone_celular') is-invalid @enderror" id="telefone_celular" placeholder="" >
+                    <input type="" name="telefone_celular" value="{{$paciente->tele_cel}}" class="form-control celular @error('telefone_celular') is-invalid @enderror" id="telefone_celular" placeholder="" >
                     @error('telefone_celular')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="idFixo">Telefone residencial</label>
-                    <input type="" name="idFixo" value="{{$paciente->tele_fixo}}" class="form-control" id="idFixo" placeholder="">
+                    <input type="" name="idFixo" value="{{$paciente->tele_fixo}}" class="form-control fixo" id="idFixo" placeholder="">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="idPro">Profissão</label>

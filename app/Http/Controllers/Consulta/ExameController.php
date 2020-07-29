@@ -56,6 +56,7 @@ class ExameController extends Controller
         $idpaciente = $request->session()->get('fk_paciente_exame');
         $resultado = $resultado_exames->getResultados($idpaciente);
         $paciente = $this->paciente->getIdPaciente($idpaciente);
+        $request->session()->flash('alert-success', 'O exame foi inserido com sucesso!');
         return view('pesquisa.resultadoExameListagem', compact('resultado'),compact('paciente'));
        
     }
