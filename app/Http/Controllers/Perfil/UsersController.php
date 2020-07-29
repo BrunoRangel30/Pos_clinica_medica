@@ -31,7 +31,7 @@ class UsersController extends Controller
     public function index()
     {
      //   Product::orderBy('created_at','desc')->get();
-        $users= User::orderBy('created_at','desc')->get();
+        $users= User::orderBy('created_at','asc')->get();
         return view('admin.users.index')->with('users',$users);
     }
 
@@ -96,7 +96,7 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {   
         $user->roles()->sync($request->roles);
-        $request->session()->flash('alert-success', 'O perfil foi atualizaco com sucesso!');
+        $this->request->session()->flash('alert-success', 'O perfil foi atualizaco com sucesso!');
         return redirect()->route('admin.users.index');
     }
 

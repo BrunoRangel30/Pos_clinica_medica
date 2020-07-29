@@ -26,13 +26,13 @@ class Agenda extends Model
         return $agenda;
     }
 
-    public function getAgendaDiaro($dataAtual){
+    public function getAgendaDiaro($dataAtual,$id){
 
         $agenda = DB::table('agenda as ag')
                ->join('pacientes as p', 'p.paciente_id', '=', 'ag.fk_paciente')
                ->join('medicos as m', 'm.medico_id', '=', 'ag.fk_medico')
                ->leftjoin('consulta as c', 'c.fk_paciente', '=', 'ag.fk_paciente')
-               ->where([['ag.fk_medico','=','2'],['ag.deleted_at','=',NULL]])
+               ->where([['ag.fk_medico','=',$id],['ag.deleted_at','=',NULL]])
                ->whereDate('ag.start', $dataAtual)
                ->select('start','end','p.nome as nomePaciente','p.cpf','p.data_nasc','p.paciente_id','m.cpf','m.crm','m.nome as medico','ag.tipo_consulta','ag.agenda_id as id','ag.fk_medico','p.paciente_id as fk_paciente')
                ->orderBy('c.created_at','desc')

@@ -49,12 +49,13 @@ class AtendimentoController extends Controller
 
     public function index()
     {   
-        
+        dd('aqui');
         if(!empty(Auth::user()->id)){
             date_default_timezone_set('America/Sao_Paulo');
             $date = date_create(date('Y/m/d',time()));
             $dataAtual = date_format($date, 'Y-m-d');
-            $agenda= $this->agenda->getAgendaDiaro($dataAtual);
+            $idMedico = $this->medico->getIdUserMedico(Auth::user()->id);
+            $agenda= $this->agenda->getAgendaDiaro($dataAtual,$idMedico->id);
         }
         $consulta = new Consulta;
        

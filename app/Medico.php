@@ -25,5 +25,10 @@ class Medico extends Model
                     ->first();
         return $medico;
      }
+     public function getIdUserMedico($id){
+        $medico = Medico::where('user_med_id', '=', $id)
+                    ->first();
+        return $medico;
+     }
  
 }
