@@ -49,7 +49,7 @@ class AtendimentoController extends Controller
 
     public function index()
     {   
-        dd('aqui');
+        //dd('aqui');
         if(!empty(Auth::user()->id)){
             date_default_timezone_set('America/Sao_Paulo');
             $date = date_create(date('Y/m/d',time()));
