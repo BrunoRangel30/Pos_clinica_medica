@@ -96,7 +96,7 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {   
         $user->roles()->sync($request->roles);
-        $this->request->session()->flash('alert-success', 'O perfil foi atualizaco com sucesso!');
+       // $this->request->session()->flash('alert-success', 'O perfil foi atualizaco com sucesso!');
         return redirect()->route('admin.users.index');
     }
 
