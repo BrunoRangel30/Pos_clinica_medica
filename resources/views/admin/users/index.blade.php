@@ -32,7 +32,7 @@
                                                 <td>
                                                     <a  href="{{route('admin.users.edit',$item->id)}}"> <i class="fas fa-edit"></i> </a>
                                                     @method('DELETE')
-                                                    <a  href="{{route('excluirUser',['idPac'=> $item])}}"> <i class="fas fa-user-times"></i> </a>
+                                                   <!-- <a  href="{{route('excluirUser',['idPac'=> $item])}}"> <i class="fas fa-user-times"></i> </a>-->
                                                    <!-- <form class='float-left'method="POST" action="{{ route('admin.users.destroy', $item) }}">
                                                         @csrf
                                                         {{ method_field('DELETE') }}
