@@ -55,7 +55,7 @@ class AtendimentoController extends Controller
             $date = date_create(date('Y/m/d',time()));
             $dataAtual = date_format($date, 'Y-m-d');
             $idMedico = $this->medico->getIdUserMedico(Auth::user()->id);
-            $agenda= $this->agenda->getAgendaDiaro($dataAtual,$idMedico->id);
+            $agenda= $this->agenda->getAgendaDiaro($dataAtual,$idMedico->medico_id);
         }
         $consulta = new Consulta;
        
