@@ -195,7 +195,7 @@ class ExameController extends Controller
 
                     $url = $file->store('exames','s3'); //grava no s3
                     $data['path'] =  Storage::disk('s3')->url($url);
-                    $data['file_name'] =  basename($url);
+                  //  $data['file_name'] =  basename($url);
                     $data['fk_exame'] = $request->id[$i];
                     $data['fk_medico'] =  $idMedico->medico_id; //tem que ser o medico autenticado  mudar//Alterado testar
                     $data['fk_paciente'] = $request->fk_paciente_exame;
