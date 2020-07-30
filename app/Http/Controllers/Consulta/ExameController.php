@@ -185,6 +185,10 @@ class ExameController extends Controller
         for($i=0 ; $i < count($request->id); $i++){
             if(isset($request->allfiles()['exames'][$i])){
                 $file = $request->allfiles()['exames'][$i];
+                    if (empty($file)) {
+                        abort(400, 'Nenhum arquivo foi enviado.');
+                    }
+
                 $data['path'] =  $file->store('exames');
                 $data['fk_exame'] = $request->id[$i];
                 $data['fk_medico'] =  $idMedico->medico_id; //tem que ser o medico autenticado  mudar//Alterado testar
