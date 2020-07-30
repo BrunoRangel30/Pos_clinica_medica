@@ -34,7 +34,7 @@
                             <td>{{$item->medico}} - {{$item->crm}}</td>
                             <td>{{$date}}</td>
                             <td>
-                                <a target='_blank' href="{{ENV('APP_URL')}}/storage/{{$item->link}}"><i class="fas fa-file-pdf"></i></a>
+                                <a target='_blank' href="{{$item->link}}"><i class="fas fa-file-pdf"></i></a>
                                 <a href="{{route('enviarEmail',['idexame'=>$item->exame_id,'idPa'=>$paciente->paciente_id])}}">
                                     @if($item->publicar)
                                         <i class="fas fa-envelope-open-text"></i>
