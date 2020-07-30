@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Consulta;
 use App\User;
 use App\Paciente;
+use App\Medico;
 use App\Exame;
 use App\resultado_exames;
 use App\Http\Controllers\Controller;
@@ -28,6 +29,8 @@ class ExameController extends Controller
     protected $paciente;
     protected $resultado;
     protected $user;
+    protected $medico;
+   
    
     
 
@@ -43,6 +46,8 @@ class ExameController extends Controller
         $this->resultado = $resultado;
         $user = new User;
         $this->user = $user;
+        $medico = new Medico;
+        $this->medico = $medico;
          
     }
     public function index()
@@ -176,12 +181,13 @@ class ExameController extends Controller
     public function uploadArquivos(Request $request){
 
         session()->forget('fk_paciente_exame');
+        $idMedico = $this->medico->getIdUserMedico(Auth::user()->id);
         for($i=0 ; $i < count($request->id); $i++){
             if(isset($request->allfiles()['exames'][$i])){
                 $file = $request->allfiles()['exames'][$i];
                 $data['path'] =  $file->store('exames');
                 $data['fk_exame'] = $request->id[$i];
-                $data['fk_medico'] =  Auth::user()->id; //tem que ser o medico autenticado  mudar//Alterado testar
+                $data['fk_medico'] =  $idMedico->medico_id; //tem que ser o medico autenticado  mudar//Alterado testar
                 $data['fk_paciente'] = $request->fk_paciente_exame;
                 $data['publicar'] = 0;
                 $data['fk_consulta'] = $request->consulta[$i];
