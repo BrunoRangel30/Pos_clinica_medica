@@ -50,12 +50,17 @@ class AtendimentoController extends Controller
     public function index()
     {   
         //dd('aqui');
+       
         if(!empty(Auth::user()->id)){
             date_default_timezone_set('America/Sao_Paulo');
             $date = date_create(date('Y/m/d',time()));
             $dataAtual = date_format($date, 'Y-m-d');
             $idMedico = $this->medico->getIdUserMedico(Auth::user()->id);
-            $agenda= $this->agenda->getAgendaDiaro($dataAtual,$idMedico->medico_id);
+            if (isset($idMedico->medico_id)) {
+                $agenda= $this->agenda->getAgendaDiaro($dataAtual,$idMedico->medico_id);
+            }else{
+                $agenda = $this->agenda->getAgendaDiaro(null,null);
+            }
         }
         $consulta = new Consulta;
        
@@ -65,14 +70,19 @@ class AtendimentoController extends Controller
     public function consulta( Request $request)
     {   
         $id = $this->medico->getIdUserMedico(Auth::user()->id);
-        $consulta = $this->agenda->getPacienteMedico($id->medico_id,$request['pa'])->first();
-        session(['medico' =>  $consulta->medico,
-        'cpf'=> $consulta->cpf,
-        'paciente' => $consulta->nomePaciente,
-        'data_nasc'=> $consulta->data_nasc,
-        'crm'=>$consulta->crm,
-        'idMedico'=> $id->medico_id,
-        'Idpaciente'=>$this->request['pa']]);
+        if (isset($id->medico_id)) {
+            $consulta = $this->agenda->getPacienteMedico($id->medico_id,$request['pa'])->first();
+            session(['medico' =>  $consulta->medico,
+            'cpf'=> $consulta->cpf,
+            'paciente' => $consulta->nomePaciente,
+            'data_nasc'=> $consulta->data_nasc,
+            'crm'=>$consulta->crm,
+            'idMedico'=> $id->medico_id,
+            'Idpaciente'=>$this->request['pa']]);
+        }else{
+            $consulta = $this->agenda->getPacienteMedico(null)->first();
+        }
+        
         //limpa as receitas armazenadas na cache
         session()->forget('receita');
         session()->forget('exames');

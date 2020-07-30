@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Consulta;
+use Storage;
+use League\Flysystem\Filesystem;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\sendEmailExames;
 use Illuminate\Support\Facades\DB;
@@ -61,7 +63,7 @@ class ExameController extends Controller
         $idpaciente = $request->session()->get('fk_paciente_exame');
         $resultado = $resultado_exames->getResultados($idpaciente);
         $paciente = $this->paciente->getIdPaciente($idpaciente);
-        $request->session()->flash('alert-success', 'O exame foi inserido com sucesso!');
+       // $request->session()->flash('alert-success', 'O exame foi inserido com sucesso!');
         return view('pesquisa.resultadoExameListagem', compact('resultado'),compact('paciente'));
        
     }
@@ -84,6 +86,7 @@ class ExameController extends Controller
         $idExame->save();
         // Enviando o e-mail
         Mail::to('sis.clinica.medica@gmail.com')->send(new sendEmailExames($nomePaciente, $email, $exame));
+        session()->forget('alert-success');
         $request->session()->flash('alert-success', 'Sua mensagem foi enviada com sucesso!');
         return redirect()->back();
     }
@@ -182,25 +185,28 @@ class ExameController extends Controller
 
         session()->forget('fk_paciente_exame');
         $idMedico = $this->medico->getIdUserMedico(Auth::user()->id);
-        for($i=0 ; $i < count($request->id); $i++){
-            if(isset($request->allfiles()['exames'][$i])){
-                $file = $request->allfiles()['exames'][$i];
-                    if (empty($file)) {
-                        abort(400, 'Nenhum arquivo foi enviado.');
-                    }
+        if (isset($idMedico->medico_id)) {
+            for($i=0 ; $i < count($request->id); $i++){
+                if(isset($request->allfiles()['exames'][$i])){
+                    $file = $request->allfiles()['exames'][$i];
+                        if (empty($file)) {
+                            abort(400, 'Nenhum arquivo foi enviado.');
+                        }
 
-                $data['path'] =  $file->store('exames');
-                $data['fk_exame'] = $request->id[$i];
-                $data['fk_medico'] =  $idMedico->medico_id; //tem que ser o medico autenticado  mudar//Alterado testar
-                $data['fk_paciente'] = $request->fk_paciente_exame;
-                $data['publicar'] = 0;
-                $data['fk_consulta'] = $request->consulta[$i];
-               // var_dump($data);
-                session(['fk_paciente_exame' =>  $request->fk_paciente_exame]);
-                $this->resultado->create($data);
-               // DB::table('resultado_exames')->insert($data);
-            }else{
-            };
+                    $url = $file->store('exames','s3'); //grava no s3
+                    $data['path'] =  Storage::disk('s3')->url($url);
+                    $data['file_name'] =  basename($url);
+                    $data['fk_exame'] = $request->id[$i];
+                    $data['fk_medico'] =  $idMedico->medico_id; //tem que ser o medico autenticado  mudar//Alterado testar
+                    $data['fk_paciente'] = $request->fk_paciente_exame;
+                    $data['publicar'] = 0;
+                    $data['fk_consulta'] = $request->consulta[$i];
+                // var_dump($data);
+                    session(['fk_paciente_exame' =>  $request->fk_paciente_exame]);
+                    $this->resultado->create($data);
+                // DB::table('resultado_exames')->insert($data);
+                }
+            }
         }
        return redirect()->route('listarResultadosExames');
     }
