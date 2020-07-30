@@ -249,7 +249,12 @@ class ExameController extends Controller
         $iduser = Auth::user()->id;
         //Id do paciente
         $idPaciente = $this->paciente->getIdUserPaciente($iduser);
-        $resultado = $this->resultado->getResultadosPaciente($idPaciente->paciente_id);
+        if(isset($idPaciente->paciente_id)){
+            $resultado = $this->resultado->getResultadosPaciente($idPaciente->paciente_id);
+        }else{
+
+            $resultado = $this->resultado->getResultadosPaciente(null);
+        }
         //chamar um view
         return view('consulta.componentes.examesPacienteUsuario', compact('resultado'), compact('idPaciente'));
         //dd($resul);
