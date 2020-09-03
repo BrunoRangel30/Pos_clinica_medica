@@ -5,6 +5,13 @@
         body{
             background-color: #fff !important;
         }
+        @media (max-width:900px) { 
+            #navbarSupportedContent{
+                 background-color:#183153;
+                 z-index: 10;
+                 padding-left: 10px;
+            }
+        }
         .MenuPrincipal .bg-light{
             background-color: #183153 !important;
             height: 12vh;

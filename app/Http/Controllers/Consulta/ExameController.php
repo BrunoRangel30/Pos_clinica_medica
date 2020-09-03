@@ -257,7 +257,6 @@ class ExameController extends Controller
         }
         //chamar um view
         return view('consulta.componentes.examesPacienteUsuario', compact('resultado'), compact('idPaciente'));
-        //dd($resul);
-        //buscar resultados na tabela de exames
+        
     }
 }
